@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:realm_roller/custom_widgets/cards/entity_card.dart';
+import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
 void main() {
@@ -38,58 +38,23 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return Material(
+      child: SafeArea(
+        child: EntityPage(
+          title: "Names",
+          subtitle: "Mixed dwarfs",
+          imagePath: "assets/races/dwarf.webp",
+          children: List.generate(
+            30,
+            (index) => Column(
               children: const [
-                EntityCard(
-                  size: 120,
-                  title: "Ishle Bolanore",
-                  subtitle: "World",
-                  imagePath: "assets/worlds/world.webp",
-                ),
                 SizedBox(
-                  width: 20,
+                  height: 10,
                 ),
-                EntityCard(
-                  size: 120,
-                  title: "Arathorn Ocean",
-                  subtitle: "Ocean",
-                  imagePath: "assets/landscapes/ocean.webp",
-                ),
+                Text("test"),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                EntityCard(
-                  size: 120,
-                  title: "Nightriver",
-                  subtitle: "Elven village",
-                  imagePath: "assets/settlements/village.webp",
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                EntityCard(
-                  size: 120,
-                  title: "Kalcyra Reshoon",
-                  subtitle: "Female tiefling priestess",
-                  imagePath: "assets/races/tiefling.webp",
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );

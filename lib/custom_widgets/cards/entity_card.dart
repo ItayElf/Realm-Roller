@@ -43,9 +43,10 @@ class EntityCard extends StatelessWidget {
           child: Text(
             subtitle,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.white),
           ),
         ),
       );
@@ -60,9 +61,10 @@ class EntityCard extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               title,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Colors.white,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(color: Colors.white),
             ),
           ),
         ),

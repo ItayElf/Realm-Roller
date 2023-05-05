@@ -9,6 +9,7 @@
 - Added custom widgets:
   - Tile
   - EntityCard
+  - EntityPage
 
 ## 0.0.0
 

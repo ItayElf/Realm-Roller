@@ -31,9 +31,10 @@ class Tile extends StatelessWidget {
             child: getTextWidget(
               context: context,
               content: title,
-              textStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Colors.white,
-                  ),
+              textStyle: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(color: Colors.white),
             ),
           ),
           Positioned(
@@ -42,9 +43,10 @@ class Tile extends StatelessWidget {
             child: getTextWidget(
               context: context,
               content: subtitle,
-              textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: Colors.white,
-                  ),
+              textStyle: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.white),
             ),
           ),
         ],
