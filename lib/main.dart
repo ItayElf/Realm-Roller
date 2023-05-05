@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
+import 'custom_widgets/tiles/tile.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -52,13 +54,20 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          children: [
+            Tile(
+              title: "The Fuzzy Crab",
+              subtitle: "Tavern",
+              imagePath: "assets/locations/tavern.webp",
+              onClick: () => print("test"),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            const SizedBox(
+              height: 20,
+            ),
+            const Tile(
+              title: "Thungroick's General Shop",
+              subtitle: "General Shop",
+              imagePath: "assets/locations/general_shop.webp",
             ),
           ],
         ),
