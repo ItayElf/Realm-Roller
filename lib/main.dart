@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:realm_roller/custom_widgets/cards/entity_card.dart';
 import 'package:realm_roller/theme/theme_data.dart';
-
-import 'custom_widgets/tiles/tile.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,14 +36,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,27 +46,51 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Tile(
-              title: "The Fuzzy Crab",
-              subtitle: "Tavern",
-              imagePath: "assets/locations/tavern.webp",
-              onClick: () => print("test"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                EntityCard(
+                  size: 120,
+                  title: "Ishle Bolanore",
+                  subtitle: "World",
+                  imagePath: "assets/worlds/world.webp",
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                EntityCard(
+                  size: 120,
+                  title: "Arathorn Ocean",
+                  subtitle: "Ocean",
+                  imagePath: "assets/landscapes/ocean.webp",
+                ),
+              ],
             ),
             const SizedBox(
               height: 20,
             ),
-            const Tile(
-              title: "Thungroick's General Shop",
-              subtitle: "General Shop",
-              imagePath: "assets/locations/general_shop.webp",
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                EntityCard(
+                  size: 120,
+                  title: "Nightriver",
+                  subtitle: "Elven village",
+                  imagePath: "assets/settlements/village.webp",
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                EntityCard(
+                  size: 120,
+                  title: "Kalcyra Reshoon",
+                  subtitle: "Female tiefling priestess",
+                  imagePath: "assets/races/tiefling.webp",
+                ),
+              ],
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
