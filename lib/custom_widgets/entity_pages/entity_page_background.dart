@@ -18,9 +18,7 @@ class EntityPageBackground extends StatelessWidget {
   static const _buttonIconMultiplier = 0.09;
   static const _animationDuration = Duration(milliseconds: 200);
 
-  void onBack(BuildContext context) {
-    Navigator.pop(context);
-  }
+  void onBack(BuildContext context) => Navigator.pop(context);
 
   @override
   Widget build(BuildContext context) {

@@ -12,6 +12,7 @@
   - EntityPage
   - Dropdown
   - ExpandedParagraph
+  - GeneratorPage
 
 ## 0.0.0
 

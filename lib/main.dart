@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 import 'package:realm_roller/custom_widgets/expanded_paragraphs/expanded_paragraph.dart';
+import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
 import 'custom_widgets/dropdowns/dropdown.dart';
@@ -41,27 +42,25 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Material(
-      child: SafeArea(
-        child: EntityPage(
-          title: "Names",
-          subtitle: "Mixed dwarfs",
-          imagePath: "assets/races/dwarf.webp",
+    return SafeArea(
+      child: Material(
+        child: GeneratorPage(
+          title: "Settlement Generator",
           children: [
-            ExpandedParagraph(
-              title: "Special Features",
-              icon: Icons.stars,
-              child: Text(
-                "The Glorimumri is one of the smallest tundras in the continent. It is known for an important event that took place in it.\n\nFound in the north of the continent, The Glorimumri is subject to sudden and intense snow squalls, which can reduce visibility to mere meters, and is inconsistently traveled through.",
-              ),
+            Dropdown(
+              title: "Race",
+              icon: Icons.groups,
+              currentValue: "Random",
+              options: const ["Random", "Elf", "Dwarf"],
+              onChanged: (a) => {},
             ),
-            SizedBox(height: 24),
-            ExpandedParagraph(
-              title: "Special Features",
-              icon: Icons.stars,
-              child: Text(
-                "The Glorimumri is one of the smallest tundras in the continent. It is known for an important event that took place in it.\n\nFound in the north of the continent, The Glorimumri is subject to sudden and intense snow squalls, which can reduce visibility to mere meters, and is inconsistently traveled through.",
-              ),
+            const SizedBox(height: 28),
+            Dropdown(
+              title: "Race",
+              icon: Icons.groups,
+              currentValue: "Random",
+              options: const ["Random", "Elf", "Dwarf"],
+              onChanged: (a) => {},
             ),
           ],
         ),
