@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
-import 'package:realm_roller/custom_widgets/expanded_paragraphs/expanded_paragraph.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
