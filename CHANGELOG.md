@@ -1,6 +1,6 @@
 # Changelog 
 
-## 0.0.1
+## 0.1.0
 
 - Added custom theme
 
@@ -11,6 +11,7 @@
   - EntityCard
   - EntityPage
   - Dropdown
+  - ExpandedParagraph
 
 ## 0.0.0
 

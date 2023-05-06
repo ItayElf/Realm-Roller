@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
+import 'package:realm_roller/custom_widgets/expanded_paragraphs/expanded_paragraph.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
 import 'custom_widgets/dropdowns/dropdown.dart';
@@ -40,41 +41,27 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return const Material(
       child: SafeArea(
         child: EntityPage(
           title: "Names",
           subtitle: "Mixed dwarfs",
           imagePath: "assets/races/dwarf.webp",
           children: [
-            Dropdown(
-              title: "Settlement:",
-              icon: Icons.location_city,
-              currentValue: "Random",
-              onChanged: (value) => print(value),
-              options: const [
-                "Random",
-                "Hamlet",
-                "Village",
-                "Town",
-                "City",
-                "Metropolis"
-              ],
+            ExpandedParagraph(
+              title: "Special Features",
+              icon: Icons.stars,
+              child: Text(
+                "The Glorimumri is one of the smallest tundras in the continent. It is known for an important event that took place in it.\n\nFound in the north of the continent, The Glorimumri is subject to sudden and intense snow squalls, which can reduce visibility to mere meters, and is inconsistently traveled through.",
+              ),
             ),
-            const SizedBox(height: 24),
-            Dropdown(
-              title: "Dominant Race:",
-              icon: Icons.groups,
-              currentValue: "Random",
-              onChanged: (value) => print(value),
-              options: const [
-                "Random",
-                "Dragonborn",
-                "Dwarf",
-                "Elf",
-                "Orc",
-                "Tiefling",
-              ],
+            SizedBox(height: 24),
+            ExpandedParagraph(
+              title: "Special Features",
+              icon: Icons.stars,
+              child: Text(
+                "The Glorimumri is one of the smallest tundras in the continent. It is known for an important event that took place in it.\n\nFound in the north of the continent, The Glorimumri is subject to sudden and intense snow squalls, which can reduce visibility to mere meters, and is inconsistently traveled through.",
+              ),
             ),
           ],
         ),
