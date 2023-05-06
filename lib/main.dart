@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
+import 'custom_widgets/dropdowns/dropdown.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -44,17 +46,37 @@ class _MyHomePageState extends State<MyHomePage> {
           title: "Names",
           subtitle: "Mixed dwarfs",
           imagePath: "assets/races/dwarf.webp",
-          children: List.generate(
-            30,
-            (index) => Column(
-              children: const [
-                SizedBox(
-                  height: 10,
-                ),
-                Text("test"),
+          children: [
+            Dropdown(
+              title: "Settlement:",
+              icon: Icons.location_city,
+              currentValue: "Random",
+              onChanged: (value) => print(value),
+              options: const [
+                "Random",
+                "Hamlet",
+                "Village",
+                "Town",
+                "City",
+                "Metropolis"
               ],
             ),
-          ),
+            const SizedBox(height: 24),
+            Dropdown(
+              title: "Dominant Race:",
+              icon: Icons.groups,
+              currentValue: "Random",
+              onChanged: (value) => print(value),
+              options: const [
+                "Random",
+                "Dragonborn",
+                "Dwarf",
+                "Elf",
+                "Orc",
+                "Tiefling",
+              ],
+            ),
+          ],
         ),
       ),
     );

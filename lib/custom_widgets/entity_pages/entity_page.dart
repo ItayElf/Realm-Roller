@@ -70,7 +70,7 @@ class _EntityPageState extends State<EntityPage> {
               EntityPageCard(
                 title: widget.title,
                 subtitle: widget.subtitle,
-                minHeight: MediaQuery.of(context).size.height - _cardGap * 1.25,
+                minHeight: MediaQuery.of(context).size.height - _cardGap * 1.39,
                 children: widget.children,
               ),
             ],
