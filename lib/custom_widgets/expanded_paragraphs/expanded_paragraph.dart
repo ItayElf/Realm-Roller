@@ -29,19 +29,22 @@ class _ExpandedParagraphState extends State<ExpandedParagraph> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        InkWell(
-          onTap: onClick,
-          child: ExpandedParagraphTitle(
-            title: widget.title,
-            icon: widget.icon,
-            isExpanded: isExpanded,
+    return IntrinsicWidth(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: onClick,
+            child: ExpandedParagraphTitle(
+              title: widget.title,
+              icon: widget.icon,
+              isExpanded: isExpanded,
+            ),
           ),
-        ),
-        const SizedBox(height: 6),
-        if (widget.child != null) getExpandedChild(widget.child!),
-      ],
+          const SizedBox(height: 6),
+          if (widget.child != null) getExpandedChild(widget.child!),
+        ],
+      ),
     );
   }
 
@@ -52,6 +55,10 @@ class _ExpandedParagraphState extends State<ExpandedParagraph> {
           scale: animation,
           child: child,
         ),
-        child: isExpanded ? child : Container(),
+        child: isExpanded
+            ? child
+            : const SizedBox(
+                height: 1,
+              ),
       );
 }
