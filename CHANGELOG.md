@@ -10,6 +10,7 @@
   - Tile
   - EntityCard
   - EntityPage
+  - Dropdown
 
 ## 0.0.0
 

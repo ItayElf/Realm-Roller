@@ -73,11 +73,21 @@ class _EntityPageMenuState extends State<EntityPageMenu> {
           ),
         ),
         const SizedBox(width: 20),
-        getMenuButton(
-          onClick: onMenuClick,
-          backgroundColor: isOpen ? Colors.white : const Color(0xFFDF000B),
-          iconColor: isOpen ? Colors.black : Colors.white,
-          icon: isOpen ? Icons.close : Icons.menu,
+        AnimatedSwitcher(
+          duration: _animationDuration,
+          switchOutCurve: Curves.easeInOutCubic,
+          switchInCurve: Curves.fastLinearToSlowEaseIn,
+          transitionBuilder: (child, animation) => ScaleTransition(
+            scale: animation,
+            child: child,
+          ),
+          child: getMenuButton(
+            key: UniqueKey(),
+            onClick: onMenuClick,
+            backgroundColor: isOpen ? Colors.white : const Color(0xFFDF000B),
+            iconColor: isOpen ? Colors.black : Colors.white,
+            icon: isOpen ? Icons.close : Icons.menu,
+          ),
         ),
       ],
     );
@@ -88,8 +98,10 @@ class _EntityPageMenuState extends State<EntityPageMenu> {
     required Color backgroundColor,
     required Color iconColor,
     required IconData icon,
+    Key? key,
   }) =>
       InkWell(
+        key: key,
         onTap: onClick,
         child: Container(
           width: widget.buttonSize,
