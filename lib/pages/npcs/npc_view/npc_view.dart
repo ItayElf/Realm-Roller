@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:randpg/entities/npcs.dart';
-import 'package:randpg/enums/gender.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 import 'package:realm_roller/custom_widgets/expanded_paragraphs/expanded_paragraph.dart';

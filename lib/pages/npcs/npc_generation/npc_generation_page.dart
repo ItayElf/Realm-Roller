@@ -5,6 +5,7 @@ import 'package:randpg/generators.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/custom_widgets/dropdowns/dropdown.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
+import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/npcs/npc_view/npc_view.dart';
 
 /// A page used to generate npcs
@@ -34,7 +35,7 @@ class _NpcGenerationPageState extends State<NpcGenerationPage> {
     final npc = NpcGenerator(race).generate();
 
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => NpcView(npc: npc)),
+      buildRoute(NpcView(npc: npc)),
     );
   }
 
