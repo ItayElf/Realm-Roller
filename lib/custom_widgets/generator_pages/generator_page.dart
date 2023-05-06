@@ -1,11 +1,19 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page_background.dart';
 
 /// A page used for generating entities
 class GeneratorPage extends StatelessWidget {
-  const GeneratorPage({super.key, required this.title, this.children});
+  const GeneratorPage({
+    super.key,
+    required this.title,
+    this.onGenerate,
+    this.children,
+  });
 
   final String title;
+  final void Function()? onGenerate;
   final List<Widget>? children;
 
   static const _padding = 24.0;
@@ -13,6 +21,7 @@ class GeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GeneratorPageBackground(
+      onGenerate: onGenerate,
       children: [
         Positioned(
           top: 100,
