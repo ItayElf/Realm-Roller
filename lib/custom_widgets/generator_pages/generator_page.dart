@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page_background.dart';
 
