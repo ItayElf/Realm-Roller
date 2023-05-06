@@ -38,14 +38,16 @@ class EntityPageBackground extends StatelessWidget {
           ),
         ),
         ...(children ?? []),
-        Positioned(
+        AnimatedPositioned(
+          duration: _animationDuration,
           top: 32,
-          left: 24,
+          left: hideButtons ? -48 : 24,
           child: getBackButton(context, width),
         ),
-        Positioned(
+        AnimatedPositioned(
+          duration: _animationDuration,
           top: 32,
-          right: 24,
+          right: hideButtons ? -48 : 24,
           child: getHiddenWidget(
             widget: EntityPageMenu(
               buttonSize: width * _buttonSizeMultiplier,
@@ -78,9 +80,9 @@ class EntityPageBackground extends StatelessWidget {
   }
 
   Widget getHiddenWidget({required Widget widget}) {
-    return AnimatedScale(
+    return AnimatedOpacity(
       duration: _animationDuration,
-      scale: hideButtons ? 0 : 1,
+      opacity: hideButtons ? 0 : 1,
       child: widget,
     );
   }
