@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:realm_roller/pages/general/generators.dart';
 import 'package:realm_roller/pages/npcs/npc_generation/npc_generation_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Realm Roller',
       theme: themeData,
-      home: const NpcGenerationPage(),
+      home: const GeneratorsPage(),
     );
   }
 }
