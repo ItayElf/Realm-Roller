@@ -5,6 +5,8 @@ import 'package:randpg/generators.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/custom_icons.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
+import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/pages/names/names_view/names_view.dart';
 
 import '../../../custom_widgets/dropdowns/dropdown.dart';
 
@@ -22,22 +24,28 @@ class _NamesGenerationPageState extends State<NamesGenerationPage> {
 
   static const _numberOfNames = 10;
 
-  void onGenerate() {
+  void onGenerate(BuildContext context) {
     final race = currentRace == "Random"
         ? ListItemGenerator(RaceManager.activeRaces).generate()
         : RaceManager.getRaceByName(currentRace.toLowerCase());
 
-    final gender = currentGender == "Random"
-        ? ListItemGenerator(Gender.values).generate()
-        : Gender.values.byName(currentGender);
-
-    final names = UniqueGenerator(
-      race.getNameGenerator(gender),
+    final names = List.generate(
       _numberOfNames,
-    ).generate();
+      (index) => race.getNameGenerator(getGender()).generate(),
+    );
 
-    print(names);
+    Navigator.of(context).push(buildRoute(
+      NamesView(
+        gender: currentGender == "Random" ? null : getGender(),
+        race: race,
+        names: names,
+      ),
+    ));
   }
+
+  Gender getGender() => currentGender == "Random"
+      ? ListItemGenerator(Gender.values).generate()
+      : Gender.values.byName(currentGender);
 
   void onRaceChange(String? value) {
     setState(() {
@@ -57,7 +65,7 @@ class _NamesGenerationPageState extends State<NamesGenerationPage> {
       child: Material(
         child: GeneratorPage(
           title: "Names Generator",
-          onGenerate: onGenerate,
+          onGenerate: () => onGenerate(context),
           children: [
             Dropdown(
               title: "Race:",
