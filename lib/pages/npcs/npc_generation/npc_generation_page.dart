@@ -20,11 +20,9 @@ class _NpcGenerationPageState extends State<NpcGenerationPage> {
   String currentRace = "Random";
 
   void onRaceChange(String? value) {
-    if (value != null) {
-      setState(() {
-        currentRace = value;
-      });
-    }
+    setState(() {
+      currentRace = value ?? currentRace;
+    });
   }
 
   void onGenerate(BuildContext context) {
