@@ -12,5 +12,6 @@ An android app for generating random rpg entities like npcs, settlements and wor
 ## Features
 
 - [x] Generate npcs
+- [x] Generate names
 
 ## Screenshots
