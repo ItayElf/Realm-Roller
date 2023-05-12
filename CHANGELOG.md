@@ -1,5 +1,17 @@
 # Changelog 
 
+## 0.3.0
+
+- Added names generation
+
+- Added custom icons
+
+- Added temporary generator list page
+
+## 0.2.0
+
+- Added npc generation
+
 ## 0.1.0
 
 - Added custom theme

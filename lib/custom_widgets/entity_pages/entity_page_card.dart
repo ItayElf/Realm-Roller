@@ -38,6 +38,7 @@ class EntityPageCard extends StatelessWidget {
       ),
       decoration: decorations,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           getTitleText(context),
           const SizedBox(height: 5),
@@ -56,23 +57,31 @@ class EntityPageCard extends StatelessWidget {
   }
 
   Widget getTitleText(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: SelectableText(
-        title,
-        style: Theme.of(context)
-            .textTheme
-            .displaySmall!
-            .copyWith(color: Colors.black),
+    return Center(
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: SelectableText(
+          title,
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(color: Colors.black),
+        ),
       ),
     );
   }
 
   Widget getSubtitleText(BuildContext context) {
-    return SelectableText(
-      subtitle,
-      style:
-          Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.black),
+    return Center(
+      child: SelectableText(
+        subtitle,
+        textAlign: TextAlign.center,
+        style: Theme.of(context)
+            .textTheme
+            .titleLarge!
+            .copyWith(color: Colors.black),
+      ),
     );
   }
 }

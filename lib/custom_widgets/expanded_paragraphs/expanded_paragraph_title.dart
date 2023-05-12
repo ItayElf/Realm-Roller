@@ -14,23 +14,28 @@ class ExpandedParagraphTitle extends StatelessWidget {
   final bool isExpanded;
 
   static const _animationDuration = Duration(milliseconds: 250);
-  static const _iconSizeMultiplier = 0.06;
+  static const _iconSizeMultiplier = 0.07;
+
+  static const _padding = 20.0;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        getTitleText(context),
-        AnimatedRotation(
-          turns: isExpanded ? 0 : 0.5,
-          duration: _animationDuration,
-          child: Icon(
-            Icons.expand_more,
-            size: getIconSize(context),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width - _padding * 2,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          getTitleText(context),
+          AnimatedRotation(
+            turns: isExpanded ? 0 : 0.5,
+            duration: _animationDuration,
+            child: Icon(
+              Icons.expand_more,
+              size: getIconSize(context),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -49,7 +54,7 @@ class ExpandedParagraphTitle extends StatelessWidget {
               const SizedBox(width: 5),
               Text(
                 title,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.headlineSmall,
               )
             ],
           ),
