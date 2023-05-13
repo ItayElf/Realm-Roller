@@ -14,14 +14,16 @@ class Tile extends StatelessWidget {
   final String title;
   final String subtitle;
   final String imagePath;
-  final void Function()? onClick;
+  final void Function(BuildContext)? onClick;
 
   static const _textWidthRatio = 0.615;
 
   @override
   Widget build(BuildContext context) {
+    final clickFunction = onClick ?? (BuildContext context) {};
+
     return InkWell(
-      onTap: onClick,
+      onTap: () => clickFunction(context),
       child: TileBackground(
         imagePath: imagePath,
         children: [

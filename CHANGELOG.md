@@ -1,5 +1,9 @@
 # Changelog 
 
+## 0.4.0
+
+- Added locations generation
+
 ## 0.3.0
 
 - Added names generation

@@ -1,6 +1,6 @@
 # Realm Roller <!-- omit in toc -->
 
-[![version](https://img.shields.io/badge/version-0.3.0-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.4.0-green.svg)](https://semver.org)
 
 An android app for generating random rpg entities like npcs, settlements and worlds!
 
@@ -13,5 +13,6 @@ An android app for generating random rpg entities like npcs, settlements and wor
 
 - [x] Generate npcs
 - [x] Generate names
+- [x] Generate locations
 
 ## Screenshots
