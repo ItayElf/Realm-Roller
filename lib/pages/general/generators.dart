@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/locations/locations_generation/location_generation_page.dart';
-import 'package:realm_roller/pages/names/names_generation/names_generation_page.dart';
+import 'package:realm_roller/pages/names/names_generation/npc_names_generation_page.dart';
 import 'package:realm_roller/pages/npcs/npc_generation/npc_generation_page.dart';
 import 'package:realm_roller/pages/settlements/settlements_generation/settlement_generation_page.dart';
 
@@ -13,7 +13,7 @@ class GeneratorsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     const generators = {
       "Npc": NpcGenerationPage(),
-      "Names": NamesGenerationPage(),
+      "Names": NpcNamesGenerationPage(),
       "Locations": LocationGenerationPage(),
       "Settlements": SettlementGenerationPage(),
     };

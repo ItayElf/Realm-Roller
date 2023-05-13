@@ -9,13 +9,13 @@ import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 class NamesView extends StatelessWidget {
   const NamesView({
     super.key,
-    required this.gender,
-    required this.race,
+    required this.imagePath,
+    required this.subtitle,
     required this.names,
   });
 
-  final Gender? gender;
-  final Race race;
+  final String imagePath;
+  final String subtitle;
   final List<String> names;
 
   @override
@@ -25,7 +25,7 @@ class NamesView extends StatelessWidget {
         child: EntityPage(
           title: "Names",
           subtitle: subtitle,
-          imagePath: getRaceImage(race),
+          imagePath: imagePath,
           children: [
             const SizedBox(height: 28),
             ListView.separated(
@@ -50,6 +50,6 @@ class NamesView extends StatelessWidget {
         ),
       );
 
-  String get subtitle =>
-      titled("${gender?.name ?? "mixed"} ${race.getPluralName()}");
+  // String get subtitle =>
+  //     titled("${gender?.name ?? "mixed"} ${race.getPluralName()}");
 }
