@@ -1,3 +1,4 @@
+import 'package:randpg/entities/deities.dart';
 import 'package:randpg/entities/landscapes.dart';
 import 'package:randpg/entities/locations.dart';
 import 'package:randpg/entities/races.dart';
@@ -13,3 +14,6 @@ String getSettlementImage(SettlementType settlement) =>
 
 String getLandscapeImage(LandscapeType landscape) =>
     "assets/landscapes/${landscape.getLandscapeType()}.webp";
+
+String getDeityImage(DeityType deity) =>
+    "assets/deities/${deity.getDeityType()}.webp";

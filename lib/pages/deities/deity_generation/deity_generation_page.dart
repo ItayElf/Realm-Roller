@@ -9,18 +9,20 @@ import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/custom_icons.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:randpg/entities/npcs.dart' as Npcs;
+import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/pages/deities/deity_view/deity_view.dart';
 
 import '../../../custom_widgets/dropdowns/dropdown.dart';
 
 /// The page for generating names
-class DeitiesGenerationPage extends StatefulWidget {
-  const DeitiesGenerationPage({super.key});
+class DeityGenerationPage extends StatefulWidget {
+  const DeityGenerationPage({super.key});
 
   @override
-  State<DeitiesGenerationPage> createState() => _DeitiesGenerationPageState();
+  State<DeityGenerationPage> createState() => _DeityGenerationPageState();
 }
 
-class _DeitiesGenerationPageState extends State<DeitiesGenerationPage> {
+class _DeityGenerationPageState extends State<DeityGenerationPage> {
   String currentDeity = "Random";
   String currentAlignment = "Random";
   List<String> alignmentPool = ["Random"];
@@ -46,7 +48,7 @@ class _DeitiesGenerationPageState extends State<DeitiesGenerationPage> {
 
     final deity = DeityGenerator(deityType, alignment).generate();
 
-    print(deity);
+    Navigator.of(context).push(buildRoute(DeityView(deity: deity)));
   }
 
   Npcs.Alignment getCurrentAlignment() => Npcs.Alignment(
