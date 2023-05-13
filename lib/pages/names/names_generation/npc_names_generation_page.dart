@@ -4,6 +4,7 @@ import 'package:randpg/enums/gender.dart';
 import 'package:randpg/generators.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/custom_icons.dart';
+import 'package:realm_roller/assets_handlers/image_path_finders.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/names/names_view/names_view.dart';
@@ -11,14 +12,14 @@ import 'package:realm_roller/pages/names/names_view/names_view.dart';
 import '../../../custom_widgets/dropdowns/dropdown.dart';
 
 /// The page for generating names
-class NamesGenerationPage extends StatefulWidget {
-  const NamesGenerationPage({super.key});
+class NpcNamesGenerationPage extends StatefulWidget {
+  const NpcNamesGenerationPage({super.key});
 
   @override
-  State<NamesGenerationPage> createState() => _NamesGenerationPageState();
+  State<NpcNamesGenerationPage> createState() => _NpcNamesGenerationPageState();
 }
 
-class _NamesGenerationPageState extends State<NamesGenerationPage> {
+class _NpcNamesGenerationPageState extends State<NpcNamesGenerationPage> {
   String currentRace = "Random";
   String currentGender = "Random";
 
@@ -34,10 +35,13 @@ class _NamesGenerationPageState extends State<NamesGenerationPage> {
       (index) => race.getNameGenerator(getGender()).generate(),
     );
 
+    final gender = currentGender == "Random" ? null : getGender();
+
     Navigator.of(context).push(buildRoute(
       NamesView(
-        gender: currentGender == "Random" ? null : getGender(),
-        race: race,
+        imagePath: getRaceImage(race),
+        subtitle:
+            titled("${gender?.name ?? "mixed"} ${race.getAdjective()} names"),
         names: names,
       ),
     ));
@@ -64,7 +68,7 @@ class _NamesGenerationPageState extends State<NamesGenerationPage> {
     return SafeArea(
       child: Material(
         child: GeneratorPage(
-          title: "Names Generator",
+          title: "Npc Name Generator",
           onGenerate: () => onGenerate(context),
           children: [
             Dropdown(
