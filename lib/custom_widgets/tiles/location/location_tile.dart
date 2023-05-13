@@ -10,7 +10,7 @@ class LocationTile extends Tile {
   LocationTile({super.key, required Location location})
       : super(
           title: location.name,
-          imagePath: getLocationImage(location),
+          imagePath: getLocationImage(location.type),
           subtitle: titled(location.type.getLocationType()),
           onClick: (BuildContext context) =>
               Navigator.of(context).push(buildRoute(

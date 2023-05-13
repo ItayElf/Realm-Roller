@@ -23,7 +23,7 @@ class LocationView extends StatelessWidget {
       child: EntityPage(
         title: location.name,
         subtitle: titled(location.type.getLocationType()),
-        imagePath: getLocationImage(location),
+        imagePath: getLocationImage(location.type),
         children: [
           const SizedBox(height: 18),
           SelectableText(

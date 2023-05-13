@@ -5,6 +5,8 @@ import 'package:realm_roller/pages/names/names_generation/npc_names_generation_p
 import 'package:realm_roller/pages/npcs/npc_generation/npc_generation_page.dart';
 import 'package:realm_roller/pages/settlements/settlements_generation/settlement_generation_page.dart';
 
+import '../names/names_generation/settlement_name_generation.dart';
+
 /// A widget that lists all the available generators
 class GeneratorsPage extends StatelessWidget {
   const GeneratorsPage({super.key});
@@ -16,6 +18,7 @@ class GeneratorsPage extends StatelessWidget {
       "Names": NpcNamesGenerationPage(),
       "Locations": LocationGenerationPage(),
       "Settlements": SettlementGenerationPage(),
+      "Settlement Names": SettlementNamesGenerationPage(),
     };
     final titles = generators.keys.toList();
 
