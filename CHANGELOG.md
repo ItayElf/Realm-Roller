@@ -1,5 +1,9 @@
 # Changelog 
 
+## 0.7.0
+
+- Added deities generation
+
 ## 0.6.0
 
 - Added landscape generation
