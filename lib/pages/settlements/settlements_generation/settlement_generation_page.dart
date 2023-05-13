@@ -7,6 +7,7 @@ import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/locations/location_view/location_view.dart';
+import 'package:realm_roller/pages/settlements/settlement_view/settlement_view.dart';
 
 import '../../../custom_widgets/dropdowns/dropdown.dart';
 
@@ -37,7 +38,8 @@ class _SettlementGenerationPageState extends State<SettlementGenerationPage> {
 
     final settlement = SettlementGenerator(settlementType, race).generate();
 
-    print(settlement);
+    Navigator.of(context)
+        .push(buildRoute(SettlementView(settlement: settlement)));
   }
 
   void onSettlementChange(String? value) {
