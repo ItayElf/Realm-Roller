@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:randpg/entities/races.dart';
-import 'package:randpg/enums/gender.dart';
-import 'package:randpg/string_manipulations.dart';
-import 'package:realm_roller/assets_handlers/image_path_finders.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 
 /// A view for generated names
 class NamesView extends StatelessWidget {
   const NamesView({
     super.key,
-    required this.gender,
-    required this.race,
+    required this.imagePath,
+    required this.subtitle,
     required this.names,
   });
 
-  final Gender? gender;
-  final Race race;
+  final String imagePath;
+  final String subtitle;
   final List<String> names;
 
   @override
@@ -25,7 +21,7 @@ class NamesView extends StatelessWidget {
         child: EntityPage(
           title: "Names",
           subtitle: subtitle,
-          imagePath: getRaceImage(race),
+          imagePath: imagePath,
           children: [
             const SizedBox(height: 28),
             ListView.separated(
@@ -50,6 +46,6 @@ class NamesView extends StatelessWidget {
         ),
       );
 
-  String get subtitle =>
-      titled("${gender?.name ?? "mixed"} ${race.getPluralName()}");
+  // String get subtitle =>
+  //     titled("${gender?.name ?? "mixed"} ${race.getPluralName()}");
 }

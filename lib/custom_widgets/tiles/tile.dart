@@ -40,7 +40,7 @@ class Tile extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 32,
+            bottom: 8,
             left: 12,
             child: getTextWidget(
               context: context,

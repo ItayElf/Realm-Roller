@@ -1,5 +1,11 @@
 # Changelog 
 
+## 0.5.0
+
+- Added settlements generation
+
+- Added settlement names generation
+
 ## 0.4.0
 
 - Added locations generation

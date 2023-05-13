@@ -12,8 +12,7 @@ class TileBackground extends StatelessWidget {
   final String imagePath;
   final List<Widget>? children;
 
-  // static const _tileWidth = 320.0;
-  static const _tileHeight = 56.0;
+  static const _tileHeight = 58.0;
   static const _tilePadding = 20.0;
   static const _gradientStartAlignment = Alignment(0.16, 0);
   static const _gradientEndAlignment = Alignment(1, 0);
