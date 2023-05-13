@@ -1,5 +1,9 @@
 # Changelog 
 
+## 0.6.0
+
+- Added landscape generation
+
 ## 0.5.0
 
 - Added settlements generation
