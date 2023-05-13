@@ -41,7 +41,7 @@ class _ExpandedParagraphState extends State<ExpandedParagraph> {
               isExpanded: isExpanded,
             ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 12),
           if (widget.child != null) getExpandedChild(widget.child!),
         ],
       ),

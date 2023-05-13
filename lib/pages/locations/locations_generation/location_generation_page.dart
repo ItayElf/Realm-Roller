@@ -8,6 +8,7 @@ import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/custom_icons.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/pages/locations/location_view/location_view.dart';
 import 'package:realm_roller/pages/names/names_view/names_view.dart';
 
 import '../../../custom_widgets/dropdowns/dropdown.dart';
@@ -34,7 +35,12 @@ class _LocationGenerationPageState extends State<LocationGenerationPage> {
         : RaceManager.getRaceByName(currentRace.toLowerCase());
 
     final location = LocationGenerator(locationType, race).generate();
-    print(location);
+
+    Navigator.of(context).push(buildRoute(
+      LocationView(
+        location: location,
+      ),
+    ));
   }
 
   void onLocationChange(String? value) {
