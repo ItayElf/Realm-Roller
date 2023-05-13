@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:randpg/entities/custom/custom_races.dart';
 import 'package:randpg/entities/deities.dart';
-import 'package:randpg/entities/races.dart';
+import 'package:randpg/entities/npcs.dart' as npcs;
 import 'package:randpg/enums/alignment.dart';
-import 'package:randpg/enums/gender.dart';
 import 'package:randpg/generators.dart';
 import 'package:randpg/string_manipulations.dart';
+
 import 'package:realm_roller/assets_handlers/custom_icons.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
-import 'package:randpg/entities/npcs.dart' as Npcs;
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/deities/deity_view/deity_view.dart';
 
@@ -51,7 +50,7 @@ class _DeityGenerationPageState extends State<DeityGenerationPage> {
     Navigator.of(context).push(buildRoute(DeityView(deity: deity)));
   }
 
-  Npcs.Alignment getCurrentAlignment() => Npcs.Alignment(
+  npcs.Alignment getCurrentAlignment() => npcs.Alignment(
         ethical: EthicalAlignment.fromName(
           currentAlignment.split(" ").first.toLowerCase(),
         ),
