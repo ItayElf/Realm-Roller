@@ -21,7 +21,7 @@ class ExpandedParagraph extends StatefulWidget {
 class _ExpandedParagraphState extends State<ExpandedParagraph> {
   bool isExpanded = true;
 
-  static const _animationDuration = Duration(milliseconds: 250);
+  static const _animationDuration = Duration(milliseconds: 150);
 
   void onClick() => setState(() {
         isExpanded = !isExpanded;

@@ -4,6 +4,8 @@
 
 - Added locations generation
 
+- Reduced animation duration for menu and expanded paragraphs
+
 ## 0.3.0
 
 - Added names generation
