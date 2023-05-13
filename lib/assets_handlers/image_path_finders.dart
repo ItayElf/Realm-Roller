@@ -1,3 +1,4 @@
+import 'package:randpg/entities/landscapes.dart';
 import 'package:randpg/entities/locations.dart';
 import 'package:randpg/entities/races.dart';
 import 'package:randpg/entities/settlements.dart';
@@ -9,3 +10,6 @@ String getLocationImage(LocationType location) =>
 
 String getSettlementImage(SettlementType settlement) =>
     "assets/settlements/${settlement.getSettlementType()}.webp";
+
+String getLandscapeImage(LandscapeType landscape) =>
+    "assets/landscapes/${landscape.getLandscapeType()}.webp";

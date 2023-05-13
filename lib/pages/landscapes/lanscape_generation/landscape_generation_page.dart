@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:randpg/entities/landscapes.dart';
-import 'package:randpg/entities/npcs.dart';
-import 'package:randpg/entities/races.dart';
 import 'package:randpg/generators.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/custom_widgets/dropdowns/dropdown.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
-import 'package:realm_roller/pages/npcs/npc_view/npc_view.dart';
+import 'package:realm_roller/pages/landscapes/landscape_view/landscape_view.dart';
 
 /// A page used to generate landscapes
 class LandscapeGenerationPage extends StatefulWidget {
@@ -35,7 +33,7 @@ class _LandscapeGenerationPageState extends State<LandscapeGenerationPage> {
 
     final landscape = LandscapeGenerator(landscapeType).generate();
 
-    print(landscape);
+    Navigator.of(context).push(buildRoute(LandscapeView(landscape: landscape)));
   }
 
   @override
