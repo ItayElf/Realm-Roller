@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:randpg/entities/locations.dart';
 import 'package:randpg/entities/races.dart';
 import 'package:randpg/entities/settlements.dart';
-import 'package:randpg/enums/gender.dart';
 import 'package:randpg/generators.dart';
 import 'package:randpg/string_manipulations.dart';
-import 'package:realm_roller/assets_handlers/custom_icons.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/locations/location_view/location_view.dart';
-import 'package:realm_roller/pages/names/names_view/names_view.dart';
 
 import '../../../custom_widgets/dropdowns/dropdown.dart';
 
