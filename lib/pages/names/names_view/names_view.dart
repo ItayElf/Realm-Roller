@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:randpg/entities/races.dart';
-import 'package:randpg/enums/gender.dart';
-import 'package:randpg/string_manipulations.dart';
-import 'package:realm_roller/assets_handlers/image_path_finders.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 
 /// A view for generated names

@@ -7,7 +7,6 @@ import 'package:realm_roller/assets_handlers/image_path_finders.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/names/names_view/names_view.dart';
-import 'package:realm_roller/pages/settlements/settlement_view/settlement_view.dart';
 
 import '../../../custom_widgets/dropdowns/dropdown.dart';
 
