@@ -1,5 +1,11 @@
 # Changelog 
 
+## 0.4.0
+
+- Added locations generation
+
+- Reduced animation duration for menu and expanded paragraphs
+
 ## 0.3.0
 
 - Added names generation

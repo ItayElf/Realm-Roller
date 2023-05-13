@@ -25,7 +25,7 @@ class _EntityPageMenuState extends State<EntityPageMenu> {
   late bool isLiked;
   bool isOpen = false;
 
-  static const _animationDuration = Duration(milliseconds: 200);
+  static const _animationDuration = Duration(milliseconds: 150);
 
   void onMenuClick() => setState(() {
         isOpen = !isOpen;
