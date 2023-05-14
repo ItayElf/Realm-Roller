@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:jovial_svg/jovial_svg.dart';
 import 'package:randpg/entities/guilds.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/image_path_finders.dart';
+import 'package:realm_roller/custom_widgets/emblem_painter/emblem_viewer.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 import 'package:realm_roller/custom_widgets/expanded_paragraphs/expanded_paragraph.dart';
 import 'package:realm_roller/custom_widgets/tiles/npc/npc_tile.dart';
@@ -16,9 +15,6 @@ class GuildView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(guild.emblem.buildSvg());
-    Clipboard.setData(ClipboardData(text: guild.emblem.buildSvg()));
-
     return SafeArea(
       child: Material(
         child: EntityPage(
@@ -35,7 +31,10 @@ class GuildView extends StatelessWidget {
             const SizedBox(height: 16),
             getKnownForText(context),
             const SizedBox(height: 24),
-            const Placeholder(),
+            EmblemViewer(
+              emblem: guild.emblem,
+              fileName: guild.name,
+            ),
             const SizedBox(height: 8),
             SizedBox(
               width: MediaQuery.of(context).size.width,
