@@ -40,7 +40,10 @@ class GuildView extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: SelectableText(
                 "\"${titled(guild.motto)}\"",
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontStyle: FontStyle.italic),
                 textAlign: TextAlign.center,
               ),
             ),
