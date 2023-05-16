@@ -17,69 +17,86 @@ class GuildView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
-        child: EntityPage(
-          title: guild.name,
-          subtitle: titled(guild.guildType.getGuildType()),
-          imagePath: getGuildImage(guild.guildType),
-          children: [
-            const SizedBox(height: 18),
-            SelectableText(
-              guild.history.replaceAll("\n", "\n\n"),
-              style: Theme.of(context).textTheme.bodyLarge,
-              textAlign: TextAlign.justify,
-            ),
-            const SizedBox(height: 16),
-            getKnownForText(context),
-            const SizedBox(height: 24),
-            EmblemViewer(
-              emblem: guild.emblem,
-              fileName: guild.name,
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: SelectableText(
-                "\"${titled(guild.motto)}\"",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(fontStyle: FontStyle.italic),
-                textAlign: TextAlign.center,
+        child: SelectionArea(
+          child: EntityPage(
+            title: guild.name,
+            subtitle: titled(guild.guildType.getGuildType()),
+            imagePath: getGuildImage(guild.guildType),
+            children: [
+              const SizedBox(height: 18),
+              Text(
+                guild.history.replaceAll("\n", "\n\n"),
+                style: Theme.of(context).textTheme.bodyLarge,
+                textAlign: TextAlign.justify,
               ),
-            ),
-            const SizedBox(height: 24),
-            ExpandedParagraph(
-              title: "Specialties",
-              icon: Icons.stars,
-              child: Column(
-                children: guild.specialties
-                    .map((specialty) => getListEntry(context, specialty))
-                    .toList(),
+              const SizedBox(height: 16),
+              getKnownForText(context),
+              const SizedBox(height: 24),
+              EmblemViewer(
+                emblem: guild.emblem,
+                fileName: guild.name,
               ),
-            ),
-            const SizedBox(height: 24),
-            ExpandedParagraph(
-              title: "Quests",
-              icon: Icons.quiz,
-              child: Column(
-                children: guild.quests
-                    .map((quest) => getListEntry(context, quest))
-                    .toList(),
-              ),
-            ),
-            const SizedBox(height: 24),
-            ExpandedParagraph(
-              title: "Leader",
-              icon: Icons.person,
-              child: NpcTile(
-                npc: guild.leader,
-              ),
-            ),
-            const SizedBox(height: 24),
-            getNotableMembers(),
-            const SizedBox(height: 12),
-          ],
+              const SizedBox(height: 8),
+              getMottoText(context),
+              const SizedBox(height: 24),
+              getSpecialties(context),
+              const SizedBox(height: 24),
+              getQuests(context),
+              const SizedBox(height: 24),
+              getLeader(),
+              const SizedBox(height: 24),
+              getNotableMembers(),
+              const SizedBox(height: 12),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  ExpandedParagraph getLeader() {
+    return ExpandedParagraph(
+      title: "Leader",
+      icon: Icons.person,
+      child: NpcTile(
+        npc: guild.leader,
+      ),
+    );
+  }
+
+  ExpandedParagraph getQuests(BuildContext context) {
+    return ExpandedParagraph(
+      title: "Quests",
+      icon: Icons.quiz,
+      child: Column(
+        children:
+            guild.quests.map((quest) => getListEntry(context, quest)).toList(),
+      ),
+    );
+  }
+
+  ExpandedParagraph getSpecialties(BuildContext context) {
+    return ExpandedParagraph(
+      title: "Specialties",
+      icon: Icons.stars,
+      child: Column(
+        children: guild.specialties
+            .map((specialty) => getListEntry(context, specialty))
+            .toList(),
+      ),
+    );
+  }
+
+  SizedBox getMottoText(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: Text(
+        "\"${titled(guild.motto)}\"",
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(fontStyle: FontStyle.italic),
+        textAlign: TextAlign.center,
       ),
     );
   }
@@ -101,8 +118,8 @@ class GuildView extends StatelessWidget {
     );
   }
 
-  SelectableText getKnownForText(BuildContext context) {
-    return SelectableText.rich(
+  Text getKnownForText(BuildContext context) {
+    return Text.rich(
       TextSpan(
         text: "Known For: ",
         style: Theme.of(context).textTheme.titleMedium,
@@ -127,7 +144,7 @@ class GuildView extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             Flexible(
-              child: SelectableText(
+              child: Text(
                 titled(item),
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
