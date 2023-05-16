@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:randpg/entities/guilds.dart';
-import 'package:randpg/entities/landscapes.dart';
 import 'package:randpg/generators.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/custom_widgets/dropdowns/dropdown.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/guilds/guild_view/guild_view.dart';
-import 'package:realm_roller/pages/landscapes/landscape_view/landscape_view.dart';
 
 /// A page used to generate landscapes
 class GuildGenerationPage extends StatefulWidget {

@@ -1,11 +1,14 @@
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:drop_shadow/drop_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:randpg/entities/emblems.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:widget_mask/widget_mask.dart';
+
+import 'emblem_saver.dart';
 
 class EmblemViewer extends StatelessWidget {
   const EmblemViewer({super.key, required this.emblem, required this.fileName});
@@ -23,13 +26,19 @@ class EmblemViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final globalKey = GlobalKey();
+
     return Center(
       child: InkWell(
-        child: Stack(
-          children: [
-            getEmblemShape(),
-            ...emblem.icons.map(getIconFromData),
-          ],
+        onLongPress: () => saveEmblem(context, emblem, fileName),
+        child: RepaintBoundary(
+          key: globalKey,
+          child: Stack(
+            children: [
+              getEmblemShape(),
+              ...emblem.icons.map(getIconFromData),
+            ],
+          ),
         ),
       ),
     );
