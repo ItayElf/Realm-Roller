@@ -1,4 +1,5 @@
 import 'package:randpg/entities/deities.dart';
+import 'package:randpg/entities/guilds.dart';
 import 'package:randpg/entities/landscapes.dart';
 import 'package:randpg/entities/locations.dart';
 import 'package:randpg/entities/races.dart';
@@ -17,3 +18,6 @@ String getLandscapeImage(LandscapeType landscape) =>
 
 String getDeityImage(DeityType deity) =>
     "assets/deities/${deity.getDeityType()}.webp";
+
+String getGuildImage(GuildType guild) =>
+    "assets/guilds/${guild.getGuildType()}.webp";
