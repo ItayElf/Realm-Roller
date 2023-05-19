@@ -6,9 +6,11 @@ import 'package:realm_roller/assets_handlers/image_path_finders.dart';
 import 'package:realm_roller/custom_widgets/emblem_viewer/emblem_viewer.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 import 'package:realm_roller/custom_widgets/expanded_paragraphs/expanded_paragraph.dart';
+import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/custom_widgets/tiles/guild/guild_tile.dart';
 import 'package:realm_roller/custom_widgets/tiles/npc/npc_tile.dart';
 import 'package:realm_roller/custom_widgets/tiles/settlement/settlement_tile.dart';
+import 'package:realm_roller/pages/emblem/emblem_view/emblem_view.dart';
 
 class KingdomView extends StatelessWidget {
   const KingdomView({super.key, required this.kingdom});
@@ -49,7 +51,7 @@ class KingdomView extends StatelessWidget {
               kingdom.trouble,
             ),
             const SizedBox(height: 4),
-            EmblemViewer(emblem: kingdom.emblem),
+            getEmblemPreview(context),
             getCaptionText(context),
             const SizedBox(height: 24),
             ExpandedParagraph(
@@ -88,6 +90,16 @@ class KingdomView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  InkWell getEmblemPreview(BuildContext context) {
+    return InkWell(
+      child: EmblemViewer(emblem: kingdom.emblem),
+      onTap: () => Navigator.of(context).push(buildRoute(EmblemView(
+        emblem: kingdom.emblem,
+        fileName: kingdom.name,
+      ))),
     );
   }
 
