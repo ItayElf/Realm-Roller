@@ -6,7 +6,8 @@ import 'package:randpg/entities/emblems.dart';
 
 const downloadsPath = "/storage/emulated/0/Download/";
 
-void saveEmblem(BuildContext context, Emblem emblem, String fileName) async {
+Future<void> saveEmblem(
+    BuildContext context, Emblem emblem, String fileName) async {
   if (!await Permission.storage.request().isGranted) {
     return;
   }

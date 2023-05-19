@@ -1,4 +1,5 @@
 import 'package:randpg/entities/deities.dart';
+import 'package:randpg/entities/emblems.dart';
 import 'package:randpg/entities/guilds.dart';
 import 'package:randpg/entities/kingdoms.dart';
 import 'package:randpg/entities/landscapes.dart';
@@ -25,3 +26,5 @@ String getGuildImage(GuildType guild) =>
 
 String getKingdomImage(GovernmentType government) =>
     "assets/kingdoms/${government.getGovernmentType()}.webp";
+
+String getEmblemImage(Emblem emblem) => "assets/emblems/background.webp";
