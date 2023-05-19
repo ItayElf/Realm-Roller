@@ -7,10 +7,16 @@ import 'package:widget_mask/widget_mask.dart';
 import 'emblem_saver.dart';
 
 class EmblemViewer extends StatelessWidget {
-  const EmblemViewer({super.key, required this.emblem, required this.fileName});
+  const EmblemViewer({
+    super.key,
+    required this.emblem,
+    this.fileName,
+    this.saveable = false,
+  });
 
   final Emblem emblem;
-  final String fileName;
+  final bool saveable;
+  final String? fileName;
 
   static const scale = 1.2;
   static const double _width = 120 * scale;
@@ -22,13 +28,13 @@ class EmblemViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final globalKey = GlobalKey();
+    assert(!saveable || (saveable && fileName != null));
 
     return Center(
       child: InkWell(
-        onLongPress: () => saveEmblem(context, emblem, fileName),
+        onLongPress: () =>
+            saveable ? saveEmblem(context, emblem, fileName!) : null,
         child: RepaintBoundary(
-          key: globalKey,
           child: Stack(
             children: [
               getEmblemShape(),
