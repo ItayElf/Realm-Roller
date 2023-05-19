@@ -12,15 +12,16 @@ class EmblemViewer extends StatelessWidget {
     required this.emblem,
     this.fileName,
     this.saveable = false,
+    this.scale = 1.2,
   });
 
   final Emblem emblem;
   final bool saveable;
   final String? fileName;
+  final double scale;
 
-  static const scale = 1.2;
-  static const double _width = 120 * scale;
-  static const double _height = 150 * scale;
+  static const double _width = 120;
+  static const double _height = 150;
 
   static const _baseIconsColor = "red";
   static const _basePrimaryColor = "#000";
@@ -30,6 +31,9 @@ class EmblemViewer extends StatelessWidget {
   Widget build(BuildContext context) {
     assert(!saveable || (saveable && fileName != null));
 
+    final width = _width * scale;
+    final height = _height * scale;
+
     return Center(
       child: InkWell(
         onLongPress: () =>
@@ -37,7 +41,7 @@ class EmblemViewer extends StatelessWidget {
         child: RepaintBoundary(
           child: Stack(
             children: [
-              getEmblemShape(),
+              getEmblemShape(width, height),
               ...emblem.icons.map(getIconFromData),
             ],
           ),
@@ -59,7 +63,7 @@ class EmblemViewer extends StatelessWidget {
     );
   }
 
-  Widget getEmblemShape() {
+  Widget getEmblemShape(double width, double height) {
     return DropShadow(
       blurRadius: 2,
       color: Colors.black.withOpacity(0.25),
@@ -68,16 +72,16 @@ class EmblemViewer extends StatelessWidget {
         blendMode: BlendMode.dstIn,
         mask: SvgPicture.string(
           emblem.shape.content,
-          width: _width,
-          height: _height,
+          width: width,
+          height: height,
         ),
         child: SvgPicture.string(
           emblem.pattern.recolored({
             _basePrimaryColor: toRgb(emblem.primaryColor),
             _baseSecondaryColor: toRgb(emblem.secondaryColor),
           }).content,
-          width: _width,
-          height: _height,
+          width: width,
+          height: height,
         ),
       ),
     );
