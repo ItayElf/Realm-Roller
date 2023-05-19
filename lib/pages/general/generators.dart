@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/deities/deity_generation/deity_generation_page.dart';
+import 'package:realm_roller/pages/emblem/emblem_generation/emblem_generation_page.dart';
 import 'package:realm_roller/pages/guilds/guild_generation/guild_generation_page.dart';
 import 'package:realm_roller/pages/kingdoms/kingdom_generation/kingdom_generation_page.dart';
 import 'package:realm_roller/pages/landscapes/landscape_generation/landscape_generation_page.dart';
@@ -27,6 +28,7 @@ class GeneratorsPage extends StatelessWidget {
       "Deities": DeityGenerationPage(),
       "Guilds": GuildGenerationPage(),
       "Kingdoms": KingdomGenerationPage(),
+      "Emblems": EmblemGenerationPage(),
     };
     final titles = generators.keys.toList();
 
