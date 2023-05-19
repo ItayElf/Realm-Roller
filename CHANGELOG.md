@@ -4,6 +4,8 @@
 
 - Added kingdom generation
 
+- Added emblem generation
+
 ## 0.8.0
 
 - Added guild generation

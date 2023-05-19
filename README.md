@@ -19,5 +19,6 @@ An android app for generating random rpg entities like npcs, settlements and wor
 - [x] Generate deities
 - [x] Generate guilds
 - [x] Generate kingdoms
+- [x] Generate emblems
 
 ## Screenshots
