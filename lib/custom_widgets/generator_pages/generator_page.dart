@@ -55,6 +55,7 @@ class GeneratorPage extends StatelessWidget {
               .textTheme
               .displaySmall!
               .copyWith(color: Colors.black),
+          textAlign: TextAlign.center,
         ),
       ),
     );
