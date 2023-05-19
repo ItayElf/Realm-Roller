@@ -4,6 +4,8 @@ import 'package:randpg/entities/races.dart';
 import 'package:randpg/generators.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
+import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/pages/kingdoms/kingdom_view/kingdom_view.dart';
 
 import '../../../custom_widgets/dropdowns/dropdown.dart';
 
@@ -34,7 +36,7 @@ class _KingdomGenerationPageState extends State<KingdomGenerationPage> {
         KingdomGenerator(const DefaultKingdomType(), race, governmentType)
             .generate();
 
-    print(kingdom);
+    Navigator.of(context).push(buildRoute(KingdomView(kingdom: kingdom)));
   }
 
   void onSettlementChange(String? value) {
