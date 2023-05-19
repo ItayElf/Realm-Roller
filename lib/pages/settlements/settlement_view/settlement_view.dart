@@ -23,9 +23,10 @@ class SettlementView extends StatelessWidget {
           imagePath: getSettlementImage(settlement.settlementType),
           children: [
             const SizedBox(height: 18),
-            SelectableText(
+            Text(
               settlement.description.replaceAll("\n", "\n\n"),
               style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 16),
             getPopulationText(context),
@@ -76,8 +77,8 @@ class SettlementView extends StatelessWidget {
     );
   }
 
-  SelectableText getTroubleText(BuildContext context) {
-    return SelectableText.rich(
+  Text getTroubleText(BuildContext context) {
+    return Text.rich(
       TextSpan(
         text: "Trouble: ",
         style: Theme.of(context).textTheme.titleLarge,
@@ -91,8 +92,8 @@ class SettlementView extends StatelessWidget {
     );
   }
 
-  SelectableText getPopulationText(BuildContext context) {
-    return SelectableText.rich(
+  Text getPopulationText(BuildContext context) {
+    return Text.rich(
       TextSpan(
         text: "Population: ",
         style: Theme.of(context).textTheme.titleLarge,

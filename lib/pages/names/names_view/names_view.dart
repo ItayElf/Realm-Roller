@@ -39,7 +39,7 @@ class NamesView extends StatelessWidget {
   }
 
   Widget getNameText(BuildContext context, String name) => Center(
-        child: SelectableText(
+        child: Text(
           name,
           style: Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,

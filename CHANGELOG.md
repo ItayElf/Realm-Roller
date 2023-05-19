@@ -1,5 +1,13 @@
 # Changelog 
 
+## 0.8.0
+
+- Added guild generation
+
+- Fixed all views to be justified
+
+- Made all views selectable with `SelectionArea` rather than `SelectableText`
+
 ## 0.7.0
 
 - Added deities generation

@@ -37,21 +37,23 @@ class EntityPageCard extends StatelessWidget {
         minHeight: minHeight,
       ),
       decoration: decorations,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          getTitleText(context),
-          const SizedBox(height: 5),
-          getSubtitleText(context),
-          const SizedBox(height: 5),
-          Container(
-            height: 1,
-            width: MediaQuery.of(context).size.width,
-            color: Theme.of(context).primaryColor,
-          ),
-          const SizedBox(height: 5),
-          ...(children ?? []),
-        ],
+      child: SelectionArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            getTitleText(context),
+            const SizedBox(height: 5),
+            getSubtitleText(context),
+            const SizedBox(height: 5),
+            Container(
+              height: 1,
+              width: MediaQuery.of(context).size.width,
+              color: Theme.of(context).primaryColor,
+            ),
+            const SizedBox(height: 5),
+            ...(children ?? []),
+          ],
+        ),
       ),
     );
   }

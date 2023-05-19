@@ -19,13 +19,14 @@ class LocationGoodsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SelectableText(
+          Text(
             titledEach(goods.name),
             style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
           if (goods.description != null && goods.description!.isNotEmpty) ...[
-            SelectableText(
+            Text(
               description,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium,
@@ -33,7 +34,7 @@ class LocationGoodsCard extends StatelessWidget {
             const SizedBox(height: 8),
           ],
           if (goods.price != null && goods.price!.isNotEmpty)
-            SelectableText(
+            Text(
               "Price: ${goods.price}",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
