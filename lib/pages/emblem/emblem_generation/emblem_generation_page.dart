@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:randpg/entities/emblems.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
+import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/pages/emblem/emblem_view/emblem_view.dart';
 
 class EmblemGenerationPage extends StatelessWidget {
   const EmblemGenerationPage({super.key});
@@ -8,7 +10,7 @@ class EmblemGenerationPage extends StatelessWidget {
   void onGenerate(BuildContext context) {
     final emblem = EmblemGenerator(const DefaultEmblemType()).generate();
 
-    print(emblem);
+    Navigator.of(context).push(buildRoute(EmblemView(emblem: emblem)));
   }
 
   @override
