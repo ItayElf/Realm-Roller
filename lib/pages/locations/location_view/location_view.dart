@@ -26,17 +26,19 @@ class LocationView extends StatelessWidget {
         imagePath: getLocationImage(location.type),
         children: [
           const SizedBox(height: 18),
-          SelectableText(
+          Text(
             location.buildingDescription.replaceAll("\n", "\n\n"),
             style: Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.justify,
           ),
           const SizedBox(height: 24),
           ExpandedParagraph(
             title: "Location",
             icon: Icons.location_on,
-            child: SelectableText(
+            child: Text(
               "${location.name} is located in ${location.zone}. It ${location.outsideDescription.join(" and ")}.",
               style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.justify,
             ),
           ),
           const SizedBox(height: 24),

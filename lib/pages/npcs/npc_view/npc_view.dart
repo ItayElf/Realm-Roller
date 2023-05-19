@@ -23,7 +23,7 @@ class NpcView extends StatelessWidget {
           imagePath: getRaceImage(npc.race),
           children: [
             const SizedBox(height: 18),
-            SelectableText(
+            Text(
               getNpcDescription(npc),
               style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.justify,
@@ -35,7 +35,7 @@ class NpcView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: npc.physicalDescription.specialFeatures
-                    .map((e) => SelectableText(
+                    .map((e) => Text(
                           "\u2022 ${titled(e)}\n",
                           style: Theme.of(context).textTheme.bodyLarge,
                         ))
@@ -46,7 +46,7 @@ class NpcView extends StatelessWidget {
             ExpandedParagraph(
               title: "Personality",
               icon: Icons.psychology_alt,
-              child: SelectableText(
+              child: Text(
                 getNpcPersonality(npc),
                 style: Theme.of(context).textTheme.bodyLarge,
                 textAlign: TextAlign.justify,

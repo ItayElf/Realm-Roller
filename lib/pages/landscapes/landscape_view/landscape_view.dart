@@ -22,9 +22,10 @@ class LandscapeView extends StatelessWidget {
           imagePath: getLandscapeImage(landscape.landscapeType),
           children: [
             const SizedBox(height: 18),
-            SelectableText(
+            Text(
               description,
               style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 24),
             ExpandedParagraph(
@@ -71,7 +72,7 @@ class LandscapeView extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             Flexible(
-              child: SelectableText(
+              child: Text(
                 titled(item),
                 style: Theme.of(context).textTheme.bodyLarge,
               ),

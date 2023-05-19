@@ -22,9 +22,10 @@ class DeityView extends StatelessWidget {
           imagePath: getDeityImage(deity.deityType),
           children: [
             const SizedBox(height: 18),
-            SelectableText(
+            Text(
               description,
               style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 24),
             ExpandedParagraph(
@@ -46,7 +47,7 @@ class DeityView extends StatelessWidget {
   Column getDomainText(String domain, BuildContext context) {
     return Column(
       children: [
-        SelectableText(
+        Text(
           "\u2022\t${titled(domain)}",
           style: Theme.of(context).textTheme.bodyLarge,
         ),
