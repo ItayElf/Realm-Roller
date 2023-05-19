@@ -43,8 +43,10 @@ class EntityPageCard extends StatelessWidget {
           children: [
             getTitleText(context),
             const SizedBox(height: 5),
-            getSubtitleText(context),
-            const SizedBox(height: 5),
+            if (subtitle.isNotEmpty) ...[
+              getSubtitleText(context),
+              const SizedBox(height: 5)
+            ],
             Container(
               height: 1,
               width: MediaQuery.of(context).size.width,

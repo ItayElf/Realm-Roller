@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:randpg/entities/guilds.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/image_path_finders.dart';
-import 'package:realm_roller/custom_widgets/emblem_painter/emblem_viewer.dart';
+import 'package:realm_roller/custom_widgets/emblem_viewer/emblem_viewer.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
 import 'package:realm_roller/custom_widgets/expanded_paragraphs/expanded_paragraph.dart';
+import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/custom_widgets/tiles/npc/npc_tile.dart';
+import 'package:realm_roller/pages/emblem/emblem_view/emblem_view.dart';
 
 /// A view that features a guild
 class GuildView extends StatelessWidget {
@@ -32,10 +34,7 @@ class GuildView extends StatelessWidget {
               const SizedBox(height: 16),
               getKnownForText(context),
               const SizedBox(height: 24),
-              EmblemViewer(
-                emblem: guild.emblem,
-                fileName: guild.name,
-              ),
+              getEmblemPreview(context),
               const SizedBox(height: 8),
               getMottoText(context),
               const SizedBox(height: 24),
@@ -51,6 +50,16 @@ class GuildView extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  InkWell getEmblemPreview(BuildContext context) {
+    return InkWell(
+      child: EmblemViewer(emblem: guild.emblem),
+      onTap: () => Navigator.of(context).push(buildRoute(EmblemView(
+        emblem: guild.emblem,
+        fileName: guild.name,
+      ))),
     );
   }
 
