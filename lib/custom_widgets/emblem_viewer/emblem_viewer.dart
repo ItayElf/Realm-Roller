@@ -4,20 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:randpg/entities/emblems.dart';
 import 'package:widget_mask/widget_mask.dart';
 
-import 'emblem_saver.dart';
-
 class EmblemViewer extends StatelessWidget {
   const EmblemViewer({
     super.key,
     required this.emblem,
-    this.fileName,
-    this.saveable = false,
     this.scale = 1.2,
   });
 
   final Emblem emblem;
-  final bool saveable;
-  final String? fileName;
   final double scale;
 
   static const double _width = 120;
@@ -29,23 +23,15 @@ class EmblemViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    assert(!saveable || (saveable && fileName != null));
-
     final width = _width * scale;
     final height = _height * scale;
 
     return Center(
-      child: InkWell(
-        onLongPress: () =>
-            saveable ? saveEmblem(context, emblem, fileName!) : null,
-        child: RepaintBoundary(
-          child: Stack(
-            children: [
-              getEmblemShape(width, height),
-              ...emblem.icons.map(getIconFromData),
-            ],
-          ),
-        ),
+      child: Stack(
+        children: [
+          getEmblemShape(width, height),
+          ...emblem.icons.map(getIconFromData),
+        ],
       ),
     );
   }

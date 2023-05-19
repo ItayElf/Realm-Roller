@@ -49,10 +49,7 @@ class KingdomView extends StatelessWidget {
               kingdom.trouble,
             ),
             const SizedBox(height: 4),
-            EmblemViewer(
-              emblem: kingdom.emblem,
-              fileName: kingdom.name,
-            ),
+            EmblemViewer(emblem: kingdom.emblem),
             getCaptionText(context),
             const SizedBox(height: 24),
             ExpandedParagraph(
