@@ -1,5 +1,9 @@
 # Changelog 
 
+## 0.9.0
+
+- Added kingdom generation
+
 ## 0.8.0
 
 - Added guild generation
