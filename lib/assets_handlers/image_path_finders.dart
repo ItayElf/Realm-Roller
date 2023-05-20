@@ -6,6 +6,7 @@ import 'package:randpg/entities/landscapes.dart';
 import 'package:randpg/entities/locations.dart';
 import 'package:randpg/entities/races.dart';
 import 'package:randpg/entities/settlements.dart';
+import 'package:randpg/entities/worlds.dart';
 
 String getRaceImage(Race race) => "assets/races/${race.getName()}.webp";
 
@@ -28,3 +29,5 @@ String getKingdomImage(GovernmentType government) =>
     "assets/kingdoms/${government.getGovernmentType()}.webp";
 
 String getEmblemImage(Emblem emblem) => "assets/emblems/background.webp";
+
+String getWorldImage(World world) => "assets/worlds/world.webp";
