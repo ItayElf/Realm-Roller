@@ -1,5 +1,9 @@
 # Changelog 
 
+## 0.10.0
+
+- Added world generation
+
 ## 0.9.0
 
 - Added kingdom generation

@@ -16,14 +16,14 @@ class EntityCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String imagePath;
-  final void Function()? onClick;
+  final void Function(BuildContext)? onClick;
 
   static const _textPadding = 8.0;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onClick,
+      onTap: onClick != null ? () => onClick!(context) : null,
       child: EntityCardBackground(
         size: size,
         imagePath: imagePath,
@@ -40,13 +40,17 @@ class EntityCard extends StatelessWidget {
         left: _textPadding,
         child: SizedBox(
           width: size - _textPadding * 2,
-          child: Text(
-            subtitle,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.white),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.center,
+            child: Text(
+              subtitle,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.white),
+            ),
           ),
         ),
       );
@@ -58,7 +62,7 @@ class EntityCard extends StatelessWidget {
           width: size - _textPadding * 2,
           child: FittedBox(
             fit: BoxFit.scaleDown,
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             child: Text(
               title,
               style: Theme.of(context)
