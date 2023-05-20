@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:randpg/entities/worlds.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
+import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/pages/worlds/world_view/world_view.dart';
 
 class WorldGenerationPage extends StatelessWidget {
   const WorldGenerationPage({super.key});
@@ -8,7 +10,7 @@ class WorldGenerationPage extends StatelessWidget {
   void onGenerate(BuildContext context) {
     final world = WorldGenerator(const DefaultWorldSettings()).generate();
 
-    print(world);
+    Navigator.of(context).push(buildRoute(WorldView(world: world)));
   }
 
   @override

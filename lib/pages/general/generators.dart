@@ -9,7 +9,7 @@ import 'package:realm_roller/pages/locations/locations_generation/location_gener
 import 'package:realm_roller/pages/names/names_generation/npc_names_generation_page.dart';
 import 'package:realm_roller/pages/npcs/npc_generation/npc_generation_page.dart';
 import 'package:realm_roller/pages/settlements/settlements_generation/settlement_generation_page.dart';
-import 'package:realm_roller/pages/worlds/world_generatio/world_generation_page.dart';
+import 'package:realm_roller/pages/worlds/world_generation/world_generation_page.dart';
 
 import '../names/names_generation/settlement_name_generation.dart';
 
