@@ -12,6 +12,7 @@ class MainPage extends StatelessWidget {
         getPageTitle(context),
         const SizedBox(height: 36),
         const FavoriteGenerators(),
+        const SizedBox(height: 36),
       ],
     );
   }

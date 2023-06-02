@@ -20,8 +20,7 @@ class EntityCardBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    assert((alternativeBackground != null && imagePath == null) ||
-        (alternativeBackground == null && imagePath != null));
+    assert(!(alternativeBackground != null && imagePath != null));
 
     return Stack(
       children: [
