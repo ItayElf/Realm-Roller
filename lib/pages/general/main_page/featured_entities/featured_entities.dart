@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:randpg/entities/emblems.dart';
-import 'package:randpg/entities/locations.dart';
-import 'package:randpg/entities/npcs.dart';
-import 'package:randpg/entities/races.dart';
-import 'package:randpg/entities/settlements.dart';
-import 'package:randpg/entities/worlds.dart';
 import 'package:realm_roller/custom_widgets/cards/card_factory.dart';
+
+import 'random_entities_generation.dart';
 
 class FeaturedEntities extends StatefulWidget {
   const FeaturedEntities({super.key});
@@ -17,28 +13,19 @@ class FeaturedEntities extends StatefulWidget {
 class _FeaturedEntitiesState extends State<FeaturedEntities> {
   late List entities;
 
+  static const randomEntitiesCount = 5;
   static const cardSize = 150.0;
 
   void onGenerate() {
     setState(() {
-      entities = [
-        NpcGenerator(const Elf()).generate(),
-        EmblemGenerator(const DefaultEmblemType()).generate(),
-        LocationGenerator(const Tavern(), const Dwarf()).generate(),
-        WorldGenerator(const DefaultWorldSettings()).generate(),
-      ];
+      entities = getRandomEntities(randomEntitiesCount);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    entities = [
-      NpcGenerator(const Elf()).generate(),
-      EmblemGenerator(const DefaultEmblemType()).generate(),
-      LocationGenerator(const Tavern(), const Dwarf()).generate(),
-      WorldGenerator(const DefaultWorldSettings()).generate(),
-    ];
+    entities = getRandomEntities(randomEntitiesCount);
   }
 
   @override
