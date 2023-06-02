@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/menu/main_menu_item.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
-import 'package:realm_roller/pages/general/generators.dart';
+import 'package:realm_roller/pages/general/generators_page/generators_page.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/assets_handlers/generators_data.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/pages/general/main_page/background/main_page_background.dart';
 
 /// A widget that lists all the available generators
 class GeneratorsPage extends StatelessWidget {
@@ -10,23 +11,23 @@ class GeneratorsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final titles = generatorsData.keys.toList();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Generators"),
-        centerTitle: true,
-      ),
-      body: ListView.separated(
-        itemBuilder: (context, i) =>
-            _getGeneratorButton(context, generatorsData[titles[i]]!),
-        separatorBuilder: (context, i) => const SizedBox(
-          height: 24,
+    return MainPageBackground(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            "Generators",
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium!
+                .copyWith(color: Colors.black),
+          ),
         ),
-        itemCount: titles.length,
-      ),
+      ],
     );
   }
 
-  Widget _getGeneratorButton(
+  Widget getGeneratorButton(
           BuildContext context, GeneratorData generatorData) =>
       ElevatedButton(
           onPressed: () => Navigator.of(context)
