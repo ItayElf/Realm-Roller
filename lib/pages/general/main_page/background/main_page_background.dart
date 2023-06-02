@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realm_roller/custom_widgets/menu/main_menu.dart';
 
 class MainPageBackground extends StatelessWidget {
   const MainPageBackground({super.key});
@@ -14,6 +15,7 @@ class MainPageBackground extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        drawer: const MainMenu(),
         body: Builder(builder: (context) {
           return Stack(
             children: [
