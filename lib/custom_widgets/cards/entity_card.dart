@@ -8,14 +8,16 @@ class EntityCard extends StatelessWidget {
     required this.size,
     required this.title,
     required this.subtitle,
-    required this.imagePath,
+    this.imagePath,
+    this.alternativeBackground,
     this.onClick,
   });
 
   final double size;
   final String title;
   final String subtitle;
-  final String imagePath;
+  final String? imagePath;
+  final Widget? alternativeBackground;
   final void Function(BuildContext)? onClick;
 
   static const _textPadding = 8.0;
@@ -27,6 +29,7 @@ class EntityCard extends StatelessWidget {
       child: EntityCardBackground(
         size: size,
         imagePath: imagePath,
+        alternativeBackground: alternativeBackground,
         children: [
           getTitleText(context),
           getSubtitleText(context),
