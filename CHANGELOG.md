@@ -4,6 +4,8 @@
 
 - Added main page
 
+- Made generator page look better
+
 ## 0.10.0
 
 - Added world generation

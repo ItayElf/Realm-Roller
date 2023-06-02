@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:realm_roller/custom_widgets/menu/main_menu_item.dart';
+import 'package:realm_roller/custom_widgets/main_menu/main_menu_item.dart';
+import 'package:realm_roller/custom_widgets/main_menu/menu_paged.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
-import 'package:realm_roller/pages/general/generators.dart';
+import 'package:realm_roller/pages/general/generators_page/generators_page.dart';
+import 'package:realm_roller/pages/general/main_page/main_page.dart';
 
 class MainMenu extends StatelessWidget {
-  const MainMenu({super.key});
+  const MainMenu({super.key, this.currentPage});
+
+  final MenuPage? currentPage;
+
+  void navigate(BuildContext context, Widget widget) {
+    Scaffold.of(context).closeDrawer();
+    Navigator.of(context).push(buildRoute(widget));
+  }
+
+  void onHome(BuildContext context) => navigate(context, const MainPage());
 
   void onGenerators(BuildContext context) =>
-      Navigator.of(context).push(buildRoute(const GeneratorsPage()));
+      navigate(context, const GeneratorsPage());
 
   void onDiceRoller(BuildContext context) {}
   void onOracle(BuildContext context) {}
@@ -49,34 +60,40 @@ class MainMenu extends StatelessWidget {
   Iterable<Widget> getMenuItems() {
     return [
       MainMenuItem(
+        title: "Home",
+        icon: Icons.home,
+        onClick: currentPage != MenuPage.home ? onHome : null,
+      ),
+      const SizedBox(height: 24),
+      MainMenuItem(
         title: "Generators",
         icon: Icons.auto_awesome,
-        onClick: onGenerators,
+        onClick: currentPage != MenuPage.generators ? onGenerators : null,
       ),
       const SizedBox(height: 24),
       MainMenuItem(
         title: "Dice Roller",
         icon: Icons.casino,
-        onClick: onDiceRoller,
+        onClick: currentPage != MenuPage.diceRoller ? onDiceRoller : null,
       ),
       const SizedBox(height: 24),
       MainMenuItem(
         title: "Oracle",
         icon: Icons.self_improvement,
-        onClick: onDiceRoller,
+        onClick: currentPage != MenuPage.oracle ? onOracle : null,
       ),
       const SizedBox(height: 24),
       MainMenuItem(
         title: "Saved",
         icon: Icons.favorite,
-        onClick: onDiceRoller,
+        onClick: currentPage != MenuPage.saved ? onSaved : null,
       ),
       const SizedBox(height: 24),
       Expanded(child: Container()),
       MainMenuItem(
         icon: Icons.settings,
         title: "Settings",
-        onClick: onSettings,
+        onClick: currentPage != MenuPage.settings ? onSettings : null,
       ),
       const SizedBox(height: 16),
     ].map((e) => e is Expanded

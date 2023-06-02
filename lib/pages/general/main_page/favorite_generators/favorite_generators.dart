@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realm_roller/assets_handlers/generators_data.dart';
 import 'package:realm_roller/custom_widgets/generator_card/generator_card.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
-import 'package:realm_roller/pages/general/generators.dart';
+import 'package:realm_roller/pages/general/generators_page/generators_page.dart';
 
 class FavoriteGenerators extends StatelessWidget {
   const FavoriteGenerators({super.key});

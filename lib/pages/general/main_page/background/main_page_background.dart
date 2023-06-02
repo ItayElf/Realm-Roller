@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:realm_roller/custom_widgets/menu/main_menu.dart';
+import 'package:realm_roller/custom_widgets/main_menu/main_menu.dart';
+import 'package:realm_roller/custom_widgets/main_menu/menu_paged.dart';
 
 class MainPageBackground extends StatelessWidget {
-  const MainPageBackground({super.key, this.children});
+  const MainPageBackground({super.key, this.children, this.currentPage});
 
   final List<Widget>? children;
+  final MenuPage? currentPage;
 
   static const _buttonSizeMultiplier = 0.12;
   static const _buttonIconMultiplier = 0.09;
@@ -21,7 +23,9 @@ class MainPageBackground extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        drawer: const MainMenu(),
+        drawer: MainMenu(
+          currentPage: currentPage,
+        ),
         body: Builder(builder: (context) {
           return Stack(
             children: [
