@@ -46,7 +46,7 @@ final Map<String, GeneratorData> generatorsData = {
   ),
   "Settlement Names": const GeneratorData(
     title: "Settlement Names",
-    icon: Icons.location_city,
+    icon: Icons.directions,
     generatorPage: SettlementNamesGenerationPage(),
   ),
   "Landscapes": const GeneratorData(
@@ -76,7 +76,7 @@ final Map<String, GeneratorData> generatorsData = {
   ),
   "Worlds": const GeneratorData(
     title: "Worlds",
-    icon: Icons.shield,
+    icon: Icons.public,
     generatorPage: WorldGenerationPage(),
   ),
 };
