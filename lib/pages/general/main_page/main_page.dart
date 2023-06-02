@@ -6,6 +6,33 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MainPageBackground();
+    return MainPageBackground(
+      children: [
+        getPageTitle(context),
+      ],
+    );
+  }
+
+  Padding getPageTitle(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Welcome!",
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium!
+                .copyWith(color: Colors.black),
+          ),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text("What would you like to generate?",
+                maxLines: 1, style: Theme.of(context).textTheme.headlineSmall),
+          ),
+        ],
+      ),
+    );
   }
 }

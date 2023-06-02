@@ -14,6 +14,10 @@ class MainPageBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final buttonSize = width * _buttonSizeMultiplier;
+    final columnLocation = buttonSize + 65;
+    final columnHeight =
+        MediaQuery.of(context).size.height - columnLocation - 157;
 
     return SafeArea(
       child: Scaffold(
@@ -26,9 +30,9 @@ class MainPageBackground extends StatelessWidget {
               getEllipse(right: -124, bottom: -214),
               getMenuButton(context, width),
               Positioned(
-                top: 100,
+                top: columnLocation,
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height - 248,
+                  height: columnHeight,
                   child: Column(
                     children: children ?? [],
                   ),
