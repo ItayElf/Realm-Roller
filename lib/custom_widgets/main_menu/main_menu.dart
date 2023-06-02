@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/main_menu/main_menu_item.dart';
+import 'package:realm_roller/custom_widgets/main_menu/menu_paged.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/general/generators_page/generators_page.dart';
 
 class MainMenu extends StatelessWidget {
-  const MainMenu({super.key});
+  const MainMenu({super.key, this.currentPage});
+
+  final MenuPage? currentPage;
 
   void onGenerators(BuildContext context) {
     Scaffold.of(context).closeDrawer();
@@ -53,32 +56,32 @@ class MainMenu extends StatelessWidget {
       MainMenuItem(
         title: "Generators",
         icon: Icons.auto_awesome,
-        onClick: onGenerators,
+        onClick: currentPage != MenuPage.generators ? onGenerators : null,
       ),
       const SizedBox(height: 24),
       MainMenuItem(
         title: "Dice Roller",
         icon: Icons.casino,
-        onClick: onDiceRoller,
+        onClick: currentPage != MenuPage.diceRoller ? onDiceRoller : null,
       ),
       const SizedBox(height: 24),
       MainMenuItem(
         title: "Oracle",
         icon: Icons.self_improvement,
-        onClick: onDiceRoller,
+        onClick: currentPage != MenuPage.oracle ? onOracle : null,
       ),
       const SizedBox(height: 24),
       MainMenuItem(
         title: "Saved",
         icon: Icons.favorite,
-        onClick: onDiceRoller,
+        onClick: currentPage != MenuPage.saved ? onSaved : null,
       ),
       const SizedBox(height: 24),
       Expanded(child: Container()),
       MainMenuItem(
         icon: Icons.settings,
         title: "Settings",
-        onClick: onSettings,
+        onClick: currentPage != MenuPage.settings ? onSettings : null,
       ),
       const SizedBox(height: 16),
     ].map((e) => e is Expanded
