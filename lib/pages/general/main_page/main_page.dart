@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/pages/general/main_page/background/main_page_background.dart';
 import 'package:realm_roller/pages/general/main_page/favorite_generators/favorite_generators.dart';
+import 'package:realm_roller/pages/general/main_page/featured_entities/featured_entities.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -13,6 +14,7 @@ class MainPage extends StatelessWidget {
         const SizedBox(height: 36),
         const FavoriteGenerators(),
         const SizedBox(height: 36),
+        const FeaturedEntities()
       ],
     );
   }

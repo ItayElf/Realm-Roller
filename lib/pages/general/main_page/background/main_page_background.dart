@@ -33,8 +33,10 @@ class MainPageBackground extends StatelessWidget {
                 top: columnLocation,
                 child: SizedBox(
                   height: columnHeight,
-                  child: Column(
-                    children: children ?? [],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: children ?? [],
+                    ),
                   ),
                 ),
               )
