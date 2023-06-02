@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/menu/main_menu.dart';
 
 class MainPageBackground extends StatelessWidget {
-  const MainPageBackground({super.key});
+  const MainPageBackground({super.key, this.children});
+
+  final List<Widget>? children;
 
   static const _buttonSizeMultiplier = 0.12;
   static const _buttonIconMultiplier = 0.09;
@@ -23,6 +25,15 @@ class MainPageBackground extends StatelessWidget {
               getEllipse(left: -161, bottom: -161),
               getEllipse(right: -124, bottom: -214),
               getMenuButton(context, width),
+              Positioned(
+                top: 100,
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height - 248,
+                  child: Column(
+                    children: children ?? [],
+                  ),
+                ),
+              )
             ],
           );
         }),
