@@ -19,7 +19,7 @@ class MainMenu extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final imageHeight = height * 0.1875;
-    final drawerWidth = width * 3 / 4;
+    final drawerWidth = width * 4 / 5;
 
     return Drawer(
       backgroundColor: const Color(0xFFFB4236),
@@ -37,7 +37,8 @@ class MainMenu extends StatelessWidget {
                     fontSize: drawerWidth * 0.15,
                   ),
             ),
-            const SizedBox(height: 32),
+            SizedBox(
+                height: Theme.of(context).textTheme.displayMedium!.fontSize),
             ...getMenuItems()
           ],
         ),

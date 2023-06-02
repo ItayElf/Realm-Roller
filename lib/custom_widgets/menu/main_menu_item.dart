@@ -20,7 +20,7 @@ class MainMenuItem extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: Theme.of(context).textTheme.headlineSmall!.fontSize,
+            size: Theme.of(context).textTheme.headlineMedium!.fontSize,
             color: Colors.white,
           ),
           const SizedBox(width: 12),
@@ -28,7 +28,7 @@ class MainMenuItem extends StatelessWidget {
             title,
             style: Theme.of(context)
                 .textTheme
-                .headlineSmall!
+                .headlineMedium!
                 .copyWith(color: Colors.white),
           )
         ],
