@@ -19,10 +19,11 @@ class MainMenu extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final imageHeight = height * 0.1875;
-    final drawerWidth = width * 2 / 3;
+    final drawerWidth = width * 3 / 4;
 
     return Drawer(
       backgroundColor: const Color(0xFFFB4236),
+      width: drawerWidth,
       child: SizedBox(
         height: height,
         child: Column(
@@ -31,7 +32,7 @@ class MainMenu extends StatelessWidget {
             Text(
               "RealmRoller",
               textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.displaySmall!.copyWith(
+              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                     color: Colors.white,
                     fontSize: drawerWidth * 0.15,
                   ),
