@@ -49,7 +49,7 @@ class _NpcNamesGenerationPageState extends State<NpcNamesGenerationPage> {
 
   Gender getGender() => currentGender == "Random"
       ? ListItemGenerator(Gender.values).generate()
-      : Gender.values.byName(currentGender);
+      : Gender.values.byName(currentGender.toLowerCase());
 
   void onRaceChange(String? value) {
     setState(() {
