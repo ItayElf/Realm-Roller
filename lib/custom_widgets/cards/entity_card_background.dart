@@ -5,12 +5,14 @@ class EntityCardBackground extends StatelessWidget {
   const EntityCardBackground({
     super.key,
     required this.size,
-    required this.imagePath,
+    this.imagePath,
+    this.alternativeBackground,
     this.children,
   });
 
   final double size;
-  final String imagePath;
+  final String? imagePath;
+  final Widget? alternativeBackground;
   final List<Widget>? children;
 
   static const _gradientStartAlignment = Alignment(0, 0.1);
@@ -18,12 +20,43 @@ class EntityCardBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    assert((alternativeBackground != null && imagePath == null) ||
+        (alternativeBackground == null && imagePath != null));
+
     return Stack(
       children: [
-        getImageBackground(),
+        getBackground(),
         getGradientBackground(),
         ...(children ?? []),
       ],
+    );
+  }
+
+  Widget getBackground() {
+    Widget background;
+    if (imagePath != null) {
+      background = getImage();
+    } else {
+      background = alternativeBackground!;
+    }
+
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            blurRadius: 4,
+            offset: Offset(0, 4),
+            color: Color(0x40000000),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: background,
+      ),
     );
   }
 
@@ -43,25 +76,8 @@ class EntityCardBackground extends StatelessWidget {
         ),
       );
 
-  Container getImageBackground() => Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: const [
-            BoxShadow(
-              blurRadius: 4,
-              offset: Offset(0, 4),
-              color: Color(0x40000000),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.cover,
-          ),
-        ),
+  Widget getImage() => Image.asset(
+        imagePath!,
+        fit: BoxFit.cover,
       );
 }
