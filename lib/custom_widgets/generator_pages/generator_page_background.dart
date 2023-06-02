@@ -73,48 +73,32 @@ class GeneratorPageBackground extends StatelessWidget {
     );
   }
 
-  Positioned getRightEllipse() {
-    return Positioned(
-      bottom: -153,
-      right: -139,
-      child: Container(
-        width: 266,
-        height: 266,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Color(0xfffb4236),
-        ),
-      ),
-    );
+  Widget getRightEllipse() {
+    return getEllipse(bottom: -153, right: -139);
   }
 
-  Positioned getLeftEllipse() {
-    return Positioned(
-      bottom: -101,
-      left: -146,
-      child: Container(
-        width: 311,
-        height: 266,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.elliptical(311, 266)),
-          color: Color(0xfffb4236),
-        ),
-      ),
-    );
+  Widget getLeftEllipse() {
+    return getEllipse(bottom: -101, left: -146);
   }
 
-  Positioned getTopEllipse() {
-    return Positioned(
-      top: -213,
-      right: -76,
-      child: Container(
-        width: 326,
-        height: 266,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.elliptical(326, 266)),
-          color: Color(0xfffb4236),
-        ),
-      ),
-    );
+  Widget getTopEllipse() {
+    return getEllipse(top: -213, right: -76);
   }
+
+  Widget getEllipse(
+          {double? top, double? right, double? bottom, double? left}) =>
+      Positioned(
+        top: top,
+        right: right,
+        bottom: bottom,
+        left: left,
+        child: Container(
+          width: 326,
+          height: 266,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.elliptical(326, 266)),
+            color: Color(0xfffb4236),
+          ),
+        ),
+      );
 }

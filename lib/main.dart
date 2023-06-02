@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:realm_roller/pages/general/generators.dart';
+import 'package:realm_roller/pages/general/main_page/main_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Realm Roller',
       theme: themeData,
-      home: const GeneratorsPage(),
+      home: const MainPage(),
     );
   }
 }
