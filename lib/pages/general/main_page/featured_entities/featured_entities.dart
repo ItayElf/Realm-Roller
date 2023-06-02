@@ -38,18 +38,15 @@ class _FeaturedEntitiesState extends State<FeaturedEntities> {
           const SizedBox(height: 12),
           SizedBox(
             height: cardSize,
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemBuilder: (context, i) => i < entities.length
-                      ? getCardFromEntity(entities[i], cardSize)
-                      : Container(),
-                  separatorBuilder: (context, i) => const SizedBox(width: 16),
-                  itemCount: entities.length + 1,
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, i) => i < entities.length
+                    ? getCardFromEntity(entities[i], cardSize)
+                    : Container(),
+                separatorBuilder: (context, i) => const SizedBox(width: 16),
+                itemCount: entities.length + 1,
               ),
             ),
           )
