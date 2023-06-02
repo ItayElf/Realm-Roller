@@ -6,8 +6,10 @@ import 'package:realm_roller/pages/general/generators_page/generators_page.dart'
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key});
 
-  void onGenerators(BuildContext context) =>
-      Navigator.of(context).push(buildRoute(const GeneratorsPage()));
+  void onGenerators(BuildContext context) {
+    Scaffold.of(context).closeDrawer();
+    Navigator.of(context).push(buildRoute(const GeneratorsPage()));
+  }
 
   void onDiceRoller(BuildContext context) {}
   void onOracle(BuildContext context) {}
