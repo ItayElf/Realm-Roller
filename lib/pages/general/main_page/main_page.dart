@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/pages/general/main_page/background/main_page_background.dart';
+import 'package:realm_roller/pages/general/main_page/favorite_generators/favorite_generators.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -9,6 +10,8 @@ class MainPage extends StatelessWidget {
     return MainPageBackground(
       children: [
         getPageTitle(context),
+        const SizedBox(height: 36),
+        const FavoriteGenerators(),
       ],
     );
   }

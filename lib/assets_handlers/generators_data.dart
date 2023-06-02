@@ -23,58 +23,58 @@ class GeneratorData {
   final IconData icon;
 }
 
-final Map<String, GeneratorData> generatorsData = {
-  "Npc": const GeneratorData(
-    title: "Npc",
+const Map<String, GeneratorData> generatorsData = {
+  "Npcs": GeneratorData(
+    title: "Npcs",
     icon: Icons.person,
     generatorPage: NpcGenerationPage(),
   ),
-  "Names": const GeneratorData(
+  "Names": GeneratorData(
     title: "Names",
     icon: Icons.badge,
     generatorPage: NpcNamesGenerationPage(),
   ),
-  "Locations": const GeneratorData(
+  "Locations": GeneratorData(
     title: "Locations",
     icon: Icons.location_on,
     generatorPage: LocationGenerationPage(),
   ),
-  "Settlements": const GeneratorData(
+  "Settlements": GeneratorData(
     title: "Settlements",
     icon: Icons.location_city,
     generatorPage: SettlementGenerationPage(),
   ),
-  "Settlement Names": const GeneratorData(
+  "Settlement Names": GeneratorData(
     title: "Settlement Names",
     icon: Icons.directions,
     generatorPage: SettlementNamesGenerationPage(),
   ),
-  "Landscapes": const GeneratorData(
+  "Landscapes": GeneratorData(
     title: "Landscapes",
     icon: Icons.landscape,
     generatorPage: LandscapeGenerationPage(),
   ),
-  "Deities": const GeneratorData(
+  "Deities": GeneratorData(
     title: "Deities",
     icon: Icons.self_improvement,
     generatorPage: DeityGenerationPage(),
   ),
-  "Guilds": const GeneratorData(
+  "Guilds": GeneratorData(
     title: "Guilds",
     icon: Icons.diversity_3,
     generatorPage: GuildGenerationPage(),
   ),
-  "Kingdoms": const GeneratorData(
+  "Kingdoms": GeneratorData(
     title: "Kingdoms",
     icon: Icons.gavel,
     generatorPage: KingdomGenerationPage(),
   ),
-  "Emblems": const GeneratorData(
+  "Emblems": GeneratorData(
     title: "Emblems",
     icon: Icons.shield,
     generatorPage: EmblemGenerationPage(),
   ),
-  "Worlds": const GeneratorData(
+  "Worlds": GeneratorData(
     title: "Worlds",
     icon: Icons.public,
     generatorPage: WorldGenerationPage(),
