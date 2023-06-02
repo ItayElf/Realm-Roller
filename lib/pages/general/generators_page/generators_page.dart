@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/assets_handlers/generators_data.dart';
 import 'package:realm_roller/custom_widgets/generator_card/generator_card.dart';
+import 'package:realm_roller/custom_widgets/main_menu/menu_paged.dart';
 import 'package:realm_roller/pages/general/main_page/background/main_page_background.dart';
 
 /// A widget that lists all the available generators
@@ -15,6 +16,7 @@ class GeneratorsPage extends StatelessWidget {
     final right = titles.where((title) => !left.contains(title));
 
     return MainPageBackground(
+      currentPage: MenuPage.generators,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
