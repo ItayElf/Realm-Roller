@@ -4,6 +4,7 @@ import 'package:realm_roller/custom_widgets/main_menu/menu_paged.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/general/generators_page/generators_page.dart';
 import 'package:realm_roller/pages/general/main_page/main_page.dart';
+import 'package:realm_roller/pages/general/menu_pages/oracle/oracle_page.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key, this.currentPage});
@@ -21,7 +22,7 @@ class MainMenu extends StatelessWidget {
       navigate(context, const GeneratorsPage());
 
   void onDiceRoller(BuildContext context) {}
-  void onOracle(BuildContext context) {}
+  void onOracle(BuildContext context) => navigate(context, const OraclePage());
   void onSaved(BuildContext context) {}
   void onSettings(BuildContext context) {}
 
