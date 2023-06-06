@@ -9,6 +9,21 @@ class OraclePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainPageBackground(
       currentPage: MenuPage.oracle,
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Center(
+            child: Text(
+              "Oracle",
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium!
+                  .copyWith(color: Colors.black),
+            ),
+          ),
+        ),
+        const SizedBox(height: 36),
+      ],
     );
   }
 }
