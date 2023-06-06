@@ -10,22 +10,27 @@ class OracleAnswer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (answer == null) {
-      return const SizedBox(
+      return Container(
+        alignment: Alignment.topCenter,
         width: circularProgressSize,
         height: circularProgressSize,
-        child: CircularProgressIndicator(),
+        child: const SizedBox(
+            width: circularProgressSize,
+            height: circularProgressSize,
+            child: CircularProgressIndicator()),
       );
     }
     return Center(
-        child: FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Text(
-        answer!,
-        style: Theme.of(context)
-            .textTheme
-            .displayMedium!
-            .copyWith(color: Colors.black),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          answer!,
+          style: Theme.of(context)
+              .textTheme
+              .displayMedium!
+              .copyWith(color: Colors.black),
+        ),
       ),
-    ));
+    );
   }
 }
