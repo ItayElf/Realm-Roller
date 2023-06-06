@@ -34,7 +34,7 @@ class OracleGenerator implements IGenerator<String> {
 
     String result = diceResult > threshold ? "yes" : "no";
 
-    if (diceResult / 10 == diceResult % 10) {
+    if (diceResult ~/ 10 == diceResult % 10) {
       result = "exceptional $result";
     }
 
