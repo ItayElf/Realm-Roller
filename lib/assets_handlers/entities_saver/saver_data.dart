@@ -7,13 +7,14 @@ import 'package:randpg/entities/npcs.dart';
 import 'package:randpg/entities/settlements.dart';
 import 'package:randpg/entities/worlds.dart';
 import 'package:realm_roller/assets_handlers/entities_saver/saveable.dart';
+import 'package:realm_roller/extensions/entities/names_data.dart';
 
 const Map<Type, String> entitiesToPaths = {
   Npc: "npcs",
-  // TODO: add names
+  NamesData: "names",
   Location: "locations",
   Settlement: "settlements",
-  // TODO: add settlement names
+  SettlementNamesData: "settlement names",
   Landscape: "landscapes",
   Deity: "deities",
   Guild: "guilds",
@@ -27,7 +28,10 @@ final Map<Type, Saveable> entitiesToSaveables = {
     fromJson: Npc.fromJson,
     toJson: (e) => ((e as Npc).toJson()),
   ),
-  // TODO: add names
+  NamesData: Saveable(
+    fromJson: NamesData.fromJson,
+    toJson: (e) => ((e as NamesData).toJson()),
+  ),
   Location: Saveable(
     fromJson: Location.fromJson,
     toJson: (e) => ((e as Location).toJson()),
@@ -36,7 +40,10 @@ final Map<Type, Saveable> entitiesToSaveables = {
     fromJson: Settlement.fromJson,
     toJson: (e) => ((e as Settlement).toJson()),
   ),
-  // TODO: add settlement names
+  SettlementNamesData: Saveable(
+    fromJson: NamesData.fromJson,
+    toJson: (e) => ((e as SettlementNamesData).toJson()),
+  ),
   Landscape: Saveable(
     fromJson: Landscape.fromJson,
     toJson: (e) => ((e as Landscape).toJson()),
