@@ -28,7 +28,7 @@ class SavedEntitiesPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            "Saved",
+            "Saved $title",
             style: Theme.of(context)
                 .textTheme
                 .displayMedium!
@@ -57,6 +57,10 @@ class SavedEntitiesPage extends StatelessWidget {
   }
 
   Widget getEntitiesColumn(Iterable entities, double size) {
+    if (entities.isEmpty) {
+      return SizedBox(width: size);
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
