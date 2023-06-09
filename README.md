@@ -22,6 +22,8 @@ An android app for generating random rpg entities like npcs, settlements and wor
 - [x] Generate emblems
 - [x] Generate worlds
 
+<br/>
+
 - [x] Ask the oracle
 - [x] Roll dices
 
