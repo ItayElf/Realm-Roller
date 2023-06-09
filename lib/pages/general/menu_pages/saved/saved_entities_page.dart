@@ -69,11 +69,7 @@ class _SavedEntitiesPageState extends State<SavedEntitiesPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: entities
-          .map(
-            (e) => getCardFromEntity(e, size),
-          )
-          .toList(),
+      children: entities.map((e) => getCardFromEntity(e, size)).toList(),
     );
   }
 }

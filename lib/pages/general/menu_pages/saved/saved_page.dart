@@ -14,8 +14,6 @@ class SavedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final types = entitiesToPaths.keys.toList();
 
-    final entities = getAllEntities(types);
-
     final left = types.where((type) => types.indexOf(type) % 2 == 0);
     final right = types.where((type) => !left.contains(type));
 
