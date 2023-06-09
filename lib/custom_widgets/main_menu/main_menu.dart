@@ -6,6 +6,7 @@ import 'package:realm_roller/pages/general/generators_page/generators_page.dart'
 import 'package:realm_roller/pages/general/main_page/main_page.dart';
 import 'package:realm_roller/pages/general/menu_pages/dice_roller/dice_rollder.dart';
 import 'package:realm_roller/pages/general/menu_pages/oracle/oracle_page.dart';
+import 'package:realm_roller/pages/general/menu_pages/saved/saved_page.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key, this.currentPage});
@@ -25,7 +26,7 @@ class MainMenu extends StatelessWidget {
   void onDiceRoller(BuildContext context) =>
       navigate(context, const DiceRoller());
   void onOracle(BuildContext context) => navigate(context, const OraclePage());
-  void onSaved(BuildContext context) {}
+  void onSaved(BuildContext context) => navigate(context, const SavedPage());
   void onSettings(BuildContext context) {}
 
   @override

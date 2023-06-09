@@ -10,17 +10,17 @@ import 'package:realm_roller/assets_handlers/entities_saver/saveable.dart';
 import 'package:realm_roller/extensions/entities/names_data.dart';
 
 const Map<Type, String> entitiesToPaths = {
-  Npc: "npcs",
-  NamesData: "names",
-  Location: "locations",
-  Settlement: "settlements",
-  SettlementNamesData: "settlement names",
-  Landscape: "landscapes",
-  Deity: "deities",
-  Guild: "guilds",
-  Kingdom: "kingdoms",
-  Emblem: "emblems",
-  World: "worlds"
+  Npc: "Npcs",
+  NamesData: "Names",
+  Location: "Locations",
+  Settlement: "Settlements",
+  SettlementNamesData: "Settlement Names",
+  Landscape: "Landscapes",
+  Deity: "Deities",
+  Guild: "Guilds",
+  Kingdom: "Kingdoms",
+  Emblem: "Emblems",
+  World: "Worlds"
 };
 
 final Map<Type, Saveable> entitiesToSaveables = {

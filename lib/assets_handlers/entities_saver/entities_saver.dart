@@ -8,16 +8,17 @@ abstract class LocalStorage {
     localStorage = await SharedPreferences.getInstance();
   }
 
-  static List<T> getEntities<T>() {
-    if (!entitiesToPaths.containsKey(T)) {
-      throw Exception("No entities of type $T");
+  static List getEntities(Type type) {
+    if (!entitiesToPaths.containsKey(type)) {
+      throw Exception("No entities of type $type");
     }
-    final entities = localStorage.getStringList(entitiesToPaths[T]!);
+    final entities = localStorage.getStringList(entitiesToPaths[type]!);
+
     if (entities == null) {
       return [];
     }
-    final saveable = entitiesToSaveables[T]!;
-    return entities.map(saveable.fromJson).toList() as List<T>;
+    final saveable = entitiesToSaveables[type]!;
+    return entities.map(saveable.fromJson).toList();
   }
 
   static void saveEntity(dynamic entity) {
@@ -26,7 +27,7 @@ abstract class LocalStorage {
       throw Exception("No entities of type $type");
     }
 
-    final entities = getEntities()..add(entity);
+    final entities = getEntities(type)..add(entity);
     final saveable = entitiesToSaveables[type]!;
 
     localStorage.setStringList(
@@ -41,7 +42,7 @@ abstract class LocalStorage {
       throw Exception("No entities of type $type");
     }
 
-    final entities = getEntities()..remove(entity);
+    final entities = getEntities(type)..remove(entity);
     final saveable = entitiesToSaveables[type]!;
 
     localStorage.setStringList(

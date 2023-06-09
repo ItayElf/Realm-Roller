@@ -7,10 +7,12 @@ class GeneratorCard extends StatelessWidget {
     super.key,
     required this.generatorData,
     this.shrink = true,
+    this.disabled = false,
   });
 
   final GeneratorData generatorData;
   final bool shrink;
+  final bool disabled;
 
   void onClick(BuildContext context, GeneratorData generatorData) =>
       Navigator.of(context).push(buildRoute(generatorData.generatorPage));
@@ -18,11 +20,11 @@ class GeneratorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onClick(context, generatorData),
+      onTap: disabled ? null : () => onClick(context, generatorData),
       child: Ink(
         padding: const EdgeInsets.fromLTRB(8, 12, 8, 12),
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
+          color: disabled ? Colors.grey : Theme.of(context).primaryColor,
           borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         child: Row(

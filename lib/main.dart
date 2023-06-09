@@ -4,14 +4,14 @@ import 'package:realm_roller/assets_handlers/entities_saver/entities_saver.dart'
 import 'package:realm_roller/pages/general/main_page/main_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  LocalStorage.init();
+  await LocalStorage.init();
 
   runApp(const MyApp());
 }
