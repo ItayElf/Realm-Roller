@@ -23,9 +23,6 @@ abstract class LocalStorage {
 
   static void saveEntity(dynamic entity) {
     final type = entity.runtimeType;
-    if (!entitiesToPaths.containsKey(type)) {
-      throw Exception("No entities of type $type");
-    }
 
     final entities = getEntities(type)..add(entity);
     final saveable = entitiesToSaveables[type]!;
@@ -38,9 +35,6 @@ abstract class LocalStorage {
 
   static void deleteEntity(dynamic entity) {
     final type = entity.runtimeType;
-    if (!entitiesToPaths.containsKey(type)) {
-      throw Exception("No entities of type $type");
-    }
 
     final entities = getEntities(type)..remove(entity);
     final saveable = entitiesToSaveables[type]!;
@@ -49,5 +43,11 @@ abstract class LocalStorage {
       entitiesToPaths[type]!,
       entities.map<String>(saveable.toJson).toList(),
     );
+  }
+
+  static bool isEntitySaved(dynamic entity) {
+    final type = entity.runtimeType;
+    final entities = getEntities(type);
+    return entities.contains(entity);
   }
 }

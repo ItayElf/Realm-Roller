@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/cards/card_factory.dart';
-import 'package:realm_roller/custom_widgets/cards/entity_card.dart';
 
 import '../../main_page/background/main_page_background.dart';
 
