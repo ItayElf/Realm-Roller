@@ -24,8 +24,12 @@ abstract class LocalStorage {
   static void saveEntity(dynamic entity) {
     final type = entity.runtimeType;
 
-    final entities = getEntities(type)..add(entity);
+    final entities = getEntities(type);
     final saveable = entitiesToSaveables[type]!;
+
+    if (!entities.contains(entity)) {
+      entities.add(entity);
+    }
 
     localStorage.setStringList(
       entitiesToPaths[type]!,
