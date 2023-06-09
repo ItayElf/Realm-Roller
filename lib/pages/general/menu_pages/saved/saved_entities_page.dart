@@ -94,7 +94,14 @@ class _SavedEntitiesPageState extends State<SavedEntitiesPage> with RouteAware {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: entities.map((e) => getCardFromEntity(e, size)).toList(),
+      children: entities
+          .map((e) => Column(
+                children: [
+                  getCardFromEntity(e, size),
+                  const SizedBox(height: 20),
+                ],
+              ))
+          .toList(),
     );
   }
 }
