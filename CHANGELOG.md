@@ -1,5 +1,10 @@
 # Changelog 
 
+## 0.12.0
+
+- Added oracle page
+- Added dice roller
+
 ## 0.11.0
 
 - Added main page
