@@ -5,6 +5,7 @@ import 'package:realm_roller/assets_handlers/generators_data.dart';
 import 'package:realm_roller/custom_widgets/generator_card/generator_card.dart';
 import 'package:realm_roller/custom_widgets/main_menu/menu_paged.dart';
 import 'package:realm_roller/pages/general/main_page/background/main_page_background.dart';
+import 'package:realm_roller/pages/general/menu_pages/saved/saved_entities_page.dart';
 
 class SavedPage extends StatelessWidget {
   const SavedPage({super.key});
@@ -15,7 +16,6 @@ class SavedPage extends StatelessWidget {
     final titles = generatorsData.keys.toList();
 
     final entities = getAllEntities(types);
-    debugPrint(entities.toString());
 
     final left = titles.where((title) => titles.indexOf(title) % 2 == 0);
     final right = titles.where((title) => !left.contains(title));
@@ -67,18 +67,31 @@ class SavedPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: titles
           .map(
-            (e) => Column(
-              children: [
-                GeneratorCard(
-                  generatorData: generatorsData[e]!,
-                  shrink: false,
-                  disabled: entities[e]?.isEmpty ?? true,
-                ),
-                const SizedBox(height: 20)
-              ],
-            ),
+            (e) => getGeneratorCard(e, entities),
           )
           .toList(),
+    );
+  }
+
+  Column getGeneratorCard(String title, Map<String, List<dynamic>> entities) {
+    final generatorData = generatorsData[title]!;
+
+    return Column(
+      children: [
+        GeneratorCard(
+          generatorData: GeneratorData(
+            generatorPage: SavedEntitiesPage(
+              entities: entities[title]!,
+              title: title,
+            ),
+            title: generatorData.title,
+            icon: generatorData.icon,
+          ),
+          shrink: false,
+          disabled: entities[title]?.isEmpty ?? true,
+        ),
+        const SizedBox(height: 20)
+      ],
     );
   }
 }
