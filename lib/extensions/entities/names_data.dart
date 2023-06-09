@@ -42,9 +42,9 @@ class NamesData {
 
   factory NamesData.fromMap(Map<String, dynamic> map) {
     return NamesData(
-      names: List<String>.from((map['names'] as List<String>)),
-      imagePath: map['imagePath'] as String,
-      description: map['description'] as String,
+      names: List<String>.from((map['names'])),
+      imagePath: map['imagePath'],
+      description: map['description'],
     );
   }
 
