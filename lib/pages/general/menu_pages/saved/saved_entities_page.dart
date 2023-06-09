@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:realm_roller/assets_handlers/entities_saver/entities_saver.dart';
 import 'package:realm_roller/custom_widgets/cards/card_factory.dart';
 
 import '../../main_page/background/main_page_background.dart';
 
-class SavedEntitiesPage extends StatelessWidget {
+class SavedEntitiesPage extends StatefulWidget {
   const SavedEntitiesPage({
     super.key,
     required this.title,
-    required this.entities,
+    required this.entityType,
   });
 
   final String title;
-  final List entities;
+  final Type entityType;
 
+  @override
+  State<SavedEntitiesPage> createState() => _SavedEntitiesPageState();
+}
+
+class _SavedEntitiesPageState extends State<SavedEntitiesPage> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final entities = LocalStorage.getEntities(widget.entityType);
 
     final left = entities.where((entity) => entities.indexOf(entity) % 2 == 0);
     final right = entities.where((entity) => !left.contains(entity));
@@ -27,7 +34,7 @@ class SavedEntitiesPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            "Saved $title",
+            "Saved ${widget.title}",
             style: Theme.of(context)
                 .textTheme
                 .displayMedium!

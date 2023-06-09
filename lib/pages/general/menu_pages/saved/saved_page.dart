@@ -13,12 +13,11 @@ class SavedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final types = entitiesToPaths.keys.toList();
-    final titles = generatorsData.keys.toList();
 
     final entities = getAllEntities(types);
 
-    final left = titles.where((title) => titles.indexOf(title) % 2 == 0);
-    final right = titles.where((title) => !left.contains(title));
+    final left = types.where((type) => types.indexOf(type) % 2 == 0);
+    final right = types.where((type) => !left.contains(type));
 
     return MainPageBackground(
       currentPage: MenuPage.saved,
@@ -42,9 +41,9 @@ class SavedPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Flexible(child: getGeneratorsColumn(left, entities)),
+                Flexible(child: getGeneratorsColumn(left)),
                 const SizedBox(width: 20),
-                Flexible(child: getGeneratorsColumn(right, entities))
+                Flexible(child: getGeneratorsColumn(right))
               ],
             ),
           ),
@@ -53,42 +52,39 @@ class SavedPage extends StatelessWidget {
     );
   }
 
-  Map<String, List> getAllEntities(List<Type> types) {
+  Map<String, List> getAllEntities(Iterable<Type> types) {
     return {
       for (final type in types)
         entitiesToPaths[type]!: LocalStorage.getEntities(type)
     };
   }
 
-  Column getGeneratorsColumn(
-      Iterable<String> titles, Map<String, List> entities) {
+  Column getGeneratorsColumn(Iterable<Type> types) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: titles
-          .map(
-            (e) => getGeneratorCard(e, entities),
-          )
-          .toList(),
+      children: types.map(getGeneratorCard).toList(),
     );
   }
 
-  Column getGeneratorCard(String title, Map<String, List<dynamic>> entities) {
+  Column getGeneratorCard(Type entityType) {
+    final title = entitiesToPaths[entityType]!;
     final generatorData = generatorsData[title]!;
+    final entities = LocalStorage.getEntities(entityType);
 
     return Column(
       children: [
         GeneratorCard(
           generatorData: GeneratorData(
             generatorPage: SavedEntitiesPage(
-              entities: entities[title]!,
+              entityType: entityType,
               title: title,
             ),
             title: generatorData.title,
             icon: generatorData.icon,
           ),
           shrink: false,
-          disabled: entities[title]?.isEmpty ?? true,
+          disabled: entities.isEmpty,
         ),
         const SizedBox(height: 20)
       ],
