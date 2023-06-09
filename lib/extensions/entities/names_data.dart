@@ -7,6 +7,17 @@ class SettlementNamesData extends NamesData {
       {required super.names,
       required super.imagePath,
       required super.description});
+
+  factory SettlementNamesData.fromMap(Map<String, dynamic> map) {
+    return SettlementNamesData(
+      names: List<String>.from((map['names'])),
+      imagePath: map['imagePath'],
+      description: map['description'],
+    );
+  }
+
+  factory SettlementNamesData.fromJson(String source) =>
+      SettlementNamesData.fromMap(json.decode(source));
 }
 
 class NamesData {
@@ -51,7 +62,7 @@ class NamesData {
   String toJson() => json.encode(toMap());
 
   factory NamesData.fromJson(String source) =>
-      NamesData.fromMap(json.decode(source) as Map<String, dynamic>);
+      NamesData.fromMap(json.decode(source));
 
   @override
   String toString() =>

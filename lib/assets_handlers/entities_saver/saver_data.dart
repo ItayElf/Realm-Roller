@@ -41,7 +41,7 @@ final Map<Type, Saveable> entitiesToSaveables = {
     toJson: (e) => ((e as Settlement).toJson()),
   ),
   SettlementNamesData: Saveable(
-    fromJson: NamesData.fromJson,
+    fromJson: SettlementNamesData.fromJson,
     toJson: (e) => ((e as SettlementNamesData).toJson()),
   ),
   Landscape: Saveable(

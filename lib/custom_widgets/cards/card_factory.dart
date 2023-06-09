@@ -14,7 +14,6 @@ import 'package:realm_roller/custom_widgets/cards/kingdoms/kingdom_card.dart';
 import 'package:realm_roller/custom_widgets/cards/landscapes/landscape_card.dart';
 import 'package:realm_roller/custom_widgets/cards/locations/location_card.dart';
 import 'package:realm_roller/custom_widgets/cards/names/name_data_card.dart';
-import 'package:realm_roller/custom_widgets/cards/names/settlement_names_card.dart';
 import 'package:realm_roller/custom_widgets/cards/npcs/npc_card.dart';
 import 'package:realm_roller/custom_widgets/cards/settlements/settlement_card.dart';
 import 'package:realm_roller/custom_widgets/cards/worlds/world_card.dart';
@@ -39,8 +38,6 @@ EntityCard getCardFromEntity(dynamic entity, double size) {
     return EmblemCard(size: size, emblem: entity);
   } else if (entity is World) {
     return WorldCard(size: size, world: entity);
-  } else if (entity is SettlementNamesData) {
-    return SettlementNamesCard(size: size, namesData: entity);
   } else if (entity is NamesData) {
     return NamesCard(size: size, namesData: entity);
   }

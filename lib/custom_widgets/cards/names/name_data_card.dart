@@ -11,7 +11,8 @@ class NamesCard extends EntityCard {
     required super.size,
     required NamesData namesData,
   }) : super(
-          title: "Names",
+          title:
+              namesData is SettlementNamesData ? "Settlement Names" : "Names",
           subtitle: titled(namesData.description),
           imagePath: namesData.imagePath,
           onClick: (BuildContext context) => Navigator.of(context)
