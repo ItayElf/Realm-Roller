@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:realm_roller/assets_handlers/entities_saver.dart';
 import 'package:realm_roller/pages/general/main_page/main_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
@@ -9,6 +10,8 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  LocalStorage.init();
 
   runApp(const MyApp());
 }
