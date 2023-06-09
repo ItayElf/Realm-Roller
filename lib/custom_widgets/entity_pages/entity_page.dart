@@ -11,7 +11,6 @@ class EntityPage extends StatefulWidget {
     required this.subtitle,
     required this.imagePath,
     required this.entity,
-    this.isSaved = false,
     this.children,
   });
 
@@ -19,7 +18,6 @@ class EntityPage extends StatefulWidget {
   final String subtitle;
   final String imagePath;
   final dynamic entity;
-  final bool isSaved;
   final List<Widget>? children;
 
   @override
@@ -29,6 +27,7 @@ class EntityPage extends StatefulWidget {
 class _EntityPageState extends State<EntityPage> {
   bool isHidden = false;
   late final ScrollController _scrollController;
+  late bool isSaved;
 
   static const _cardGap = 96.0;
   static const _scrollOffsetThreshold = 7.0;
@@ -50,6 +49,8 @@ class _EntityPageState extends State<EntityPage> {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
+
+    isSaved = LocalStorage.isEntitySaved(widget.entity);
   }
 
   @override
@@ -72,7 +73,7 @@ class _EntityPageState extends State<EntityPage> {
     return EntityPageBackground(
       imagePath: widget.imagePath,
       hideButtons: isHidden,
-      isSaved: widget.isSaved,
+      isSaved: isSaved,
       onSave: onSave,
       children: [
         SingleChildScrollView(
