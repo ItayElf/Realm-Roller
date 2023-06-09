@@ -25,6 +25,7 @@ class KingdomView extends StatelessWidget {
           title: kingdom.name,
           subtitle: subtitle,
           imagePath: getKingdomImage(kingdom.governmentType),
+          entity: kingdom,
           children: [
             const SizedBox(height: 18),
             Text(

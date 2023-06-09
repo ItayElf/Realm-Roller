@@ -24,6 +24,7 @@ class GuildView extends StatelessWidget {
             title: guild.name,
             subtitle: titled(guild.guildType.getGuildType()),
             imagePath: getGuildImage(guild.guildType),
+            entity: guild,
             children: [
               const SizedBox(height: 18),
               Text(

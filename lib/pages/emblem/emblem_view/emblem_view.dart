@@ -23,6 +23,7 @@ class EmblemView extends StatelessWidget {
           title: "Emblem",
           subtitle: "",
           imagePath: getEmblemImage(emblem),
+          entity: emblem,
           children: [
             EmblemViewer(
               emblem: emblem,

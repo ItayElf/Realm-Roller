@@ -30,8 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  randpg: ^0.9.2
+  randpg: ^0.9.3
   google_fonts: ^4.0.4
+  shared_preferences: ^2.1.2
+  collection: ^1.16.0
 
   # Emblem
   flutter_svg: ^2.0.5
