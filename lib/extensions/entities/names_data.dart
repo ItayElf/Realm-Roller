@@ -2,10 +2,18 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 
+class SettlementNamesData extends NamesData {
+  SettlementNamesData(
+      {required super.names,
+      required super.imagePath,
+      required super.description});
+}
+
 class NamesData {
   final List<String> names;
   final String imagePath;
   final String description;
+
   NamesData({
     required this.names,
     required this.imagePath,

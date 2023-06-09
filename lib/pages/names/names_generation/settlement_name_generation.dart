@@ -43,7 +43,7 @@ class _SettlementNamesGenerationPageState
         UniqueGenerator(settlementType.getNameGenerator(race), _numberOfNames)
             .generate();
 
-    final nameData = NamesData(
+    final nameData = SettlementNamesData(
       names: names,
       imagePath: getSettlementImage(settlementType),
       description: titled(
