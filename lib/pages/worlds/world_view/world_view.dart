@@ -27,6 +27,7 @@ class WorldView extends StatelessWidget {
           title: world.name,
           subtitle: "",
           imagePath: getWorldImage(world),
+          entity: world,
           children: [
             const SizedBox(height: 18),
             WorldLoreView(

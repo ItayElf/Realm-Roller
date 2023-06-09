@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realm_roller/assets_handlers/entities_saver/entities_saver.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page_background.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page_card.dart';
 
@@ -9,12 +10,16 @@ class EntityPage extends StatefulWidget {
     required this.title,
     required this.subtitle,
     required this.imagePath,
+    required this.entity,
+    this.isSaved = false,
     this.children,
   });
 
   final String title;
   final String subtitle;
   final String imagePath;
+  final dynamic entity;
+  final bool isSaved;
   final List<Widget>? children;
 
   @override
@@ -54,11 +59,21 @@ class _EntityPageState extends State<EntityPage> {
     super.dispose();
   }
 
+  void onSave(bool shouldSave) {
+    if (shouldSave) {
+      LocalStorage.saveEntity(widget.entity);
+    } else {
+      LocalStorage.deleteEntity(widget.entity);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return EntityPageBackground(
       imagePath: widget.imagePath,
       hideButtons: isHidden,
+      isSaved: widget.isSaved,
+      onSave: onSave,
       children: [
         SingleChildScrollView(
           controller: _scrollController,

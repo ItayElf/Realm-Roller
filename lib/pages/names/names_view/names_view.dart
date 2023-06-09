@@ -19,6 +19,7 @@ class NamesView extends StatelessWidget {
           title: "Names",
           subtitle: namesData.description,
           imagePath: namesData.imagePath,
+          entity: namesData,
           children: [
             const SizedBox(height: 28),
             ListView.separated(

@@ -21,6 +21,7 @@ class NpcView extends StatelessWidget {
           title: titledEach(npc.name),
           subtitle: titled(subtitle),
           imagePath: getRaceImage(npc.race),
+          entity: npc,
           children: [
             const SizedBox(height: 18),
             Text(

@@ -7,15 +7,15 @@ class EntityPageMenu extends StatefulWidget {
     required this.buttonSize,
     required this.iconSize,
     this.onEdit,
-    this.onLike,
-    this.isLiked = false,
+    this.onSave,
+    this.isSaved = false,
   });
 
   final double buttonSize;
   final double iconSize;
   final void Function()? onEdit;
-  final void Function(bool isLiked)? onLike;
-  final bool isLiked;
+  final void Function(bool isSaved)? onSave;
+  final bool isSaved;
 
   @override
   State<EntityPageMenu> createState() => _EntityPageMenuState();
@@ -32,8 +32,8 @@ class _EntityPageMenuState extends State<EntityPageMenu> {
       });
 
   void onLikeClick() {
-    if (widget.onLike != null) {
-      widget.onLike!(!isLiked);
+    if (widget.onSave != null) {
+      widget.onSave!(!isLiked);
     }
     setState(() {
       isLiked = !isLiked;
@@ -43,7 +43,7 @@ class _EntityPageMenuState extends State<EntityPageMenu> {
   @override
   void initState() {
     super.initState();
-    isLiked = widget.isLiked;
+    isLiked = widget.isSaved;
   }
 
   @override

@@ -21,6 +21,7 @@ class SettlementView extends StatelessWidget {
           title: settlement.name,
           subtitle: subtitle,
           imagePath: getSettlementImage(settlement.settlementType),
+          entity: settlement,
           children: [
             const SizedBox(height: 18),
             Text(

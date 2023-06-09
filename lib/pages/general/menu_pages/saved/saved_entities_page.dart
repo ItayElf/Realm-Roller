@@ -52,7 +52,6 @@ class SavedEntitiesPage extends StatelessWidget {
         )
       ],
     );
-    ;
   }
 
   Widget getEntitiesColumn(Iterable entities, double size) {
