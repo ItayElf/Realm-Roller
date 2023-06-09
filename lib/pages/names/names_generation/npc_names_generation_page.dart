@@ -7,6 +7,7 @@ import 'package:realm_roller/assets_handlers/custom_icons.dart';
 import 'package:realm_roller/assets_handlers/image_path_finders.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/extensions/entities/names_data.dart';
 import 'package:realm_roller/pages/names/names_view/names_view.dart';
 
 import '../../../custom_widgets/dropdowns/dropdown.dart';
@@ -37,12 +38,16 @@ class _NpcNamesGenerationPageState extends State<NpcNamesGenerationPage> {
 
     final gender = currentGender == "Random" ? null : getGender();
 
+    final nameData = NamesData(
+      names: names,
+      imagePath: getRaceImage(race),
+      description:
+          titled("${gender?.name ?? "mixed"} ${race.getAdjective()} names"),
+    );
+
     Navigator.of(context).push(buildRoute(
       NamesView(
-        imagePath: getRaceImage(race),
-        subtitle:
-            titled("${gender?.name ?? "mixed"} ${race.getAdjective()} names"),
-        names: names,
+        namesData: nameData,
       ),
     ));
   }

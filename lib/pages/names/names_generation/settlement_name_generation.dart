@@ -6,6 +6,7 @@ import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/image_path_finders.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/extensions/entities/names_data.dart';
 import 'package:realm_roller/pages/names/names_view/names_view.dart';
 
 import '../../../custom_widgets/dropdowns/dropdown.dart';
@@ -42,12 +43,16 @@ class _SettlementNamesGenerationPageState
         UniqueGenerator(settlementType.getNameGenerator(race), _numberOfNames)
             .generate();
 
+    final nameData = NamesData(
+      names: names,
+      imagePath: getSettlementImage(settlementType),
+      description: titled(
+          "${race?.getAdjective() ?? "mixed"} ${settlementType.getSettlementType()} names"),
+    );
+
     Navigator.of(context).push(buildRoute(
       NamesView(
-        imagePath: getSettlementImage(settlementType),
-        subtitle: titled(
-            "${race?.getAdjective() ?? "mixed"} ${settlementType.getSettlementType()} names"),
-        names: names,
+        namesData: nameData,
       ),
     ));
   }

@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page.dart';
+import 'package:realm_roller/extensions/entities/names_data.dart';
 
 /// A view for generated names
 class NamesView extends StatelessWidget {
   const NamesView({
     super.key,
-    required this.imagePath,
-    required this.subtitle,
-    required this.names,
+    required this.namesData,
   });
 
-  final String imagePath;
-  final String subtitle;
-  final List<String> names;
+  final NamesData namesData;
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +17,17 @@ class NamesView extends StatelessWidget {
       child: Material(
         child: EntityPage(
           title: "Names",
-          subtitle: subtitle,
-          imagePath: imagePath,
+          subtitle: namesData.description,
+          imagePath: namesData.imagePath,
           children: [
             const SizedBox(height: 28),
             ListView.separated(
-              itemBuilder: (context, i) => getNameText(context, names[i]),
+              itemBuilder: (context, i) => getNameText(
+                context,
+                namesData.names[i],
+              ),
               separatorBuilder: (_, __) => const SizedBox(height: 28),
-              itemCount: names.length,
+              itemCount: namesData.names.length,
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
             ),
