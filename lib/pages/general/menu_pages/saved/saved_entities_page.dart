@@ -50,19 +50,25 @@ class _SavedEntitiesPageState extends State<SavedEntitiesPage> with RouteAware {
 
     return MainPageBackground(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            "Saved ${widget.title}",
-            style: Theme.of(context)
-                .textTheme
-                .displayMedium!
-                .copyWith(color: Colors.black),
+        SizedBox(
+          width: width,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                "Saved ${widget.title}",
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium!
+                    .copyWith(color: Colors.black),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 36),
         SizedBox(
-          width: MediaQuery.of(context).size.width,
+          width: width,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
