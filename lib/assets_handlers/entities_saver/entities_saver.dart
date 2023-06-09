@@ -26,7 +26,22 @@ abstract class LocalStorage {
       throw Exception("No entities of type $type");
     }
 
-    final entities = getEntities();
+    final entities = getEntities()..add(entity);
+    final saveable = entitiesToSaveables[type]!;
+
+    localStorage.setStringList(
+      entitiesToPaths[type]!,
+      entities.map<String>(saveable.toJson).toList(),
+    );
+  }
+
+  static void deleteEntity(dynamic entity) {
+    final type = entity.runtimeType;
+    if (!entitiesToPaths.containsKey(type)) {
+      throw Exception("No entities of type $type");
+    }
+
+    final entities = getEntities()..remove(entity);
     final saveable = entitiesToSaveables[type]!;
 
     localStorage.setStringList(
