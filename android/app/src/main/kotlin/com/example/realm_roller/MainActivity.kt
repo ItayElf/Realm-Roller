@@ -1,4 +1,4 @@
-package com.example.realm_roller
+package com.itaybenhaim.realm_roller
 
 import io.flutter.embedding.android.FlutterActivity
 
