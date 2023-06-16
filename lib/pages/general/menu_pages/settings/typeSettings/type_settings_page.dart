@@ -19,8 +19,11 @@ class TypeSettingsPage extends StatelessWidget {
           (e) => SizedBox(
             width: MediaQuery.of(context).size.width,
             child: ExpansionTile(
-              title: Text(titledEach(camelCaseToText(
-                  e.runtimeType.toString().replaceAll("Manager", "")))),
+              title: Text(
+                titledEach(camelCaseToText(
+                    e.runtimeType.toString().replaceAll("Manager", ""))),
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               children: e.allTypes.map((e) => TypeTile(type: e)).toList(),
             ),
           ),
