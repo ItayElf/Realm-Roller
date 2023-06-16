@@ -4,7 +4,7 @@ import 'package:realm_roller/custom_widgets/main_menu/menu_paged.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/general/generators_page/generators_page.dart';
 import 'package:realm_roller/pages/general/main_page/main_page.dart';
-import 'package:realm_roller/pages/general/menu_pages/dice_roller/dice_rollder.dart';
+import 'package:realm_roller/pages/general/menu_pages/dice_roller/dice_roller.dart';
 import 'package:realm_roller/pages/general/menu_pages/oracle/oracle_page.dart';
 import 'package:realm_roller/pages/general/menu_pages/saved/saved_page.dart';
 import 'package:realm_roller/pages/general/menu_pages/settings/settings_page.dart';

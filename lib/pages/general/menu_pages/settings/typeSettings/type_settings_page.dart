@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:randpg/general.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/local_storage/saver_data.dart';
-import 'package:realm_roller/custom_widgets/main_menu/menu_paged.dart';
 import 'package:realm_roller/pages/general/main_page/background/main_page_background.dart';
 import 'package:realm_roller/pages/general/menu_pages/settings/typeSettings/type_tile.dart';
 
@@ -13,7 +12,6 @@ class TypeSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainPageBackground(
-      currentPage: MenuPage.settings,
       children: [
         getTitle(context),
         const SizedBox(height: 24),
@@ -36,7 +34,7 @@ class TypeSettingsPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Center(
         child: Text(
-          "Settings",
+          "Type Settings",
           style: Theme.of(context)
               .textTheme
               .displayMedium!
