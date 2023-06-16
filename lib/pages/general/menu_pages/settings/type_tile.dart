@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:randpg/entities/emblems.dart';
 import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/local_storage/local_storage.dart';
+import 'package:realm_roller/assets_handlers/local_storage/saver_data.dart';
 
 class TypeTile extends StatefulWidget {
   const TypeTile({super.key, required this.type});
@@ -19,7 +20,7 @@ class _TypeTileState extends State<TypeTile> {
   @override
   void initState() {
     super.initState();
-    value = false;
+    value = LocalStorage.isRegistered(widget.type);
   }
 
   void onChanged(bool value) {
@@ -43,7 +44,7 @@ class _TypeTileState extends State<TypeTile> {
             )
           : null,
       title: Text(
-        titled(LocalStorage.getTypeKey(widget.type)),
+        titled(getTypeKey(widget.type)),
         style: Theme.of(context).textTheme.bodyLarge,
       ),
     );

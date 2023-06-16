@@ -103,3 +103,89 @@ const Map<Type, Manager> typesToManagers = {
   WorldSettings: WorldSettingsManager(),
   WorldLoreType: WorldLoreManager(),
 };
+
+Manager getManager(dynamic type) {
+  if (const EmblemShapesManager().allTypes.contains(type)) {
+    return const EmblemShapesManager();
+  }
+  if (const EmblemPatternsManager().allTypes.contains(type)) {
+    return const EmblemPatternsManager();
+  }
+  if (const EmblemIconsManager().allTypes.contains(type)) {
+    return const EmblemIconsManager();
+  }
+  if (type is DeityType) {
+    return const DeityManager();
+  }
+  if (type is EmblemType) {
+    return const EmblemTypeManager();
+  }
+  if (type is GuildType) {
+    return const GuildManager();
+  }
+  if (type is KingdomType) {
+    return const KingdomTypeManager();
+  }
+  if (type is GovernmentType) {
+    return const GovernmentTypeManager();
+  }
+  if (type is LandscapeType) {
+    return const LandscapeManager();
+  }
+  if (type is LocationType) {
+    return const LocationManager();
+  }
+  if (type is Race) {
+    return const RaceManager();
+  }
+  if (type is SettlementType) {
+    return const SettlementManager();
+  }
+  if (type is WorldSettings) {
+    return const WorldSettingsManager();
+  }
+  if (type is WorldLoreType) {
+    return const WorldLoreManager();
+  }
+  throw Exception("Cannot get key of type ${type.runtimeType}");
+}
+
+String getTypeKey(dynamic type) {
+  if (type is DeityType) {
+    return type.getDeityType();
+  }
+  if (type is EmblemType) {
+    return type.getEmblemType();
+  }
+  if (type is GuildType) {
+    return type.getGuildType();
+  }
+  if (type is KingdomType) {
+    return type.getKingdomType();
+  }
+  if (type is GovernmentType) {
+    return type.getGovernmentType();
+  }
+  if (type is LandscapeType) {
+    return type.getLandscapeType();
+  }
+  if (type is LocationType) {
+    return type.getLocationType();
+  }
+  if (type is Race) {
+    return type.getName();
+  }
+  if (type is SettlementType) {
+    return type.getSettlementType();
+  }
+  if (type is WorldSettings) {
+    return type.getSettingName();
+  }
+  if (type is WorldLoreType) {
+    return type.getLoreType();
+  }
+  if (type is SvgWrapper) {
+    return type.name;
+  }
+  throw Exception("Cannot get key of type ${type.runtimeType}");
+}
