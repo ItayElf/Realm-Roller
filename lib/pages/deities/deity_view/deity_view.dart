@@ -20,6 +20,7 @@ class DeityView extends StatelessWidget {
           title: deity.name,
           subtitle: subtitle,
           imagePath: getDeityImage(deity.deityType),
+          entity: deity,
           children: [
             const SizedBox(height: 18),
             Text(

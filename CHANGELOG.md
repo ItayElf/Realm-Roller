@@ -1,5 +1,17 @@
 # Changelog 
 
+## 0.12.0
+
+- Added the feature to save entities
+- Added settings
+
+- Added oracle page
+- Added dice roller
+- Added saved page
+- Added settings pages
+  - Added favorite generators settings
+  - Added used types settings
+
 ## 0.11.0
 
 - Added main page

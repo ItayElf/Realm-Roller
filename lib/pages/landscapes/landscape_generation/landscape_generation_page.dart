@@ -27,9 +27,8 @@ class _LandscapeGenerationPageState extends State<LandscapeGenerationPage> {
 
   void onGenerate(BuildContext context) {
     final landscapeType = currentLandscape == "Random"
-        ? ListItemGenerator(LandscapeManager.activeLandscapeTypes).generate()
-        : LandscapeManager.getLandscapeTypeByType(
-            currentLandscape.toLowerCase());
+        ? ListItemGenerator(const LandscapeManager().activeTypes).generate()
+        : const LandscapeManager().getType(currentLandscape.toLowerCase());
 
     final landscape = LandscapeGenerator(landscapeType).generate();
 
@@ -51,7 +50,8 @@ class _LandscapeGenerationPageState extends State<LandscapeGenerationPage> {
               onChanged: onLandscapeChange,
               options: [
                 "Random",
-                ...LandscapeManager.activeLandscapeTypes
+                ...const LandscapeManager()
+                    .activeTypes
                     .map((e) => titledEach(e.getLandscapeType()))
               ],
             ),

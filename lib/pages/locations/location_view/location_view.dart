@@ -24,6 +24,7 @@ class LocationView extends StatelessWidget {
         title: location.name,
         subtitle: titled(location.type.getLocationType()),
         imagePath: getLocationImage(location.type),
+        entity: location,
         children: [
           const SizedBox(height: 18),
           Text(

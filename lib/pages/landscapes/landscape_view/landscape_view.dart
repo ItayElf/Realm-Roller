@@ -20,6 +20,7 @@ class LandscapeView extends StatelessWidget {
           title: titledEach(landscape.name),
           subtitle: titled(landscape.landscapeType.getLandscapeType()),
           imagePath: getLandscapeImage(landscape.landscapeType),
+          entity: landscape,
           children: [
             const SizedBox(height: 18),
             Text(

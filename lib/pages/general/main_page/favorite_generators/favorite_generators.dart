@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:realm_roller/assets_handlers/generators_data.dart';
+import 'package:realm_roller/assets_handlers/local_storage/local_storage.dart';
 import 'package:realm_roller/custom_widgets/generator_card/generator_card.dart';
 import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
 import 'package:realm_roller/pages/general/generators_page/generators_page.dart';
+import 'package:realm_roller/pages/general/menu_pages/settings/favorite_generators/favorite_generators_settings.dart';
 
-class FavoriteGenerators extends StatelessWidget {
+class FavoriteGenerators extends StatefulWidget {
   const FavoriteGenerators({super.key});
 
-  void onSettings(BuildContext context) {}
+  @override
+  State<FavoriteGenerators> createState() => _FavoriteGeneratorsState();
+}
+
+class _FavoriteGeneratorsState extends State<FavoriteGenerators> {
+  List<String> favoriteGenerators = LocalStorage.getFavoriteGenerators();
+
+  void onSettings(BuildContext context) => Navigator.of(context)
+      .push(buildRoute(const FavoriteGeneratorsSettings()))
+      .then((_) => setState(() {
+            favoriteGenerators = LocalStorage.getFavoriteGenerators();
+          }));
+
   void onAllGenerators(BuildContext context) =>
       Navigator.of(context).push(buildRoute(const GeneratorsPage()));
 
   @override
   Widget build(BuildContext context) {
-    final favoriteGenerators = [
-      "Names",
-      "Npcs",
-      "Locations",
-      "Settlement Names"
-    ];
     final favoriteGeneratorsData = getGeneratorsData(favoriteGenerators);
 
     return SizedBox(
@@ -35,8 +43,26 @@ class FavoriteGenerators extends StatelessWidget {
     );
   }
 
-  SizedBox getGeneratorCards(
+  Widget getGeneratorCards(
       BuildContext context, List<GeneratorData> favoriteGeneratorsData) {
+    if (favoriteGenerators.isEmpty) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.search_off,
+            color: Colors.grey,
+          ),
+          Text(
+            "No favorite Generators",
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.grey),
+          ),
+        ],
+      );
+    }
     return SizedBox(
       height: Theme.of(context).textTheme.titleMedium!.fontSize! + 26,
       child: Center(

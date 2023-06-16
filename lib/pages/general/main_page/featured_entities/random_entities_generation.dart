@@ -13,36 +13,35 @@ import 'package:randpg/generators.dart';
 
 final List<IGenerator Function()> _entitiesGenerationFunctions = [
   () => NpcGenerator(
-        ListItemGenerator(RaceManager.activeRaces).generate(),
+        ListItemGenerator(const RaceManager().activeTypes).generate(),
       ),
   () => LocationGenerator(
-        ListItemGenerator(LocationManager.activeLocationTypes).generate(),
-        ListItemGenerator(RaceManager.activeRaces).generate(),
+        ListItemGenerator(const LocationManager().activeTypes).generate(),
+        ListItemGenerator(const RaceManager().activeTypes).generate(),
       ),
   () => SettlementGenerator(
-        ListItemGenerator(SettlementManager.activeSettlementTypes).generate(),
-        ListItemGenerator(RaceManager.activeRaces).generate(),
+        ListItemGenerator(const SettlementManager().activeTypes).generate(),
+        ListItemGenerator(const RaceManager().activeTypes).generate(),
       ),
   () => LandscapeGenerator(
-        ListItemGenerator(LandscapeManager.activeLandscapeTypes).generate(),
+        ListItemGenerator(const LandscapeManager().activeTypes).generate(),
       ),
   () => DeityGenerator(
-        ListItemGenerator(DeityManager.activeDeityTypes).generate(),
+        ListItemGenerator(const DeityManager().activeTypes).generate(),
         BaseAlignmentGenerator().generate(),
       ),
   () => GuildGenerator(
-      ListItemGenerator(GuildManager.activeGuildTypes).generate()),
+      ListItemGenerator(const GuildManager().activeTypes).generate()),
   () => KingdomGenerator(
-        ListItemGenerator(KingdomTypeManager.activeKingdomTypes).generate(),
-        ListItemGenerator(RaceManager.activeRaces).generate(),
-        ListItemGenerator(GovernmentTypeManager.activeGovernmentTypes)
-            .generate(),
+        ListItemGenerator(const KingdomTypeManager().activeTypes).generate(),
+        ListItemGenerator(const RaceManager().activeTypes).generate(),
+        ListItemGenerator(const GovernmentTypeManager().activeTypes).generate(),
       ),
   () => EmblemGenerator(
-        ListItemGenerator(EmblemTypeManager.activeEmblemTypes).generate(),
+        ListItemGenerator(const EmblemTypeManager().activeTypes).generate(),
       ),
   () => WorldGenerator(
-        ListItemGenerator(WorldSettingsManager.activeWorldSettings).generate(),
+        ListItemGenerator(const WorldSettingsManager().activeTypes).generate(),
       ),
 ];
 

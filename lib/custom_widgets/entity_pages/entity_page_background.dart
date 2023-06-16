@@ -7,11 +7,15 @@ class EntityPageBackground extends StatelessWidget {
     super.key,
     required this.imagePath,
     required this.hideButtons,
+    this.isSaved = false,
+    this.onSave,
     this.children,
   });
 
   final String imagePath;
   final bool hideButtons;
+  final bool isSaved;
+  final void Function(bool)? onSave;
   final List<Widget>? children;
 
   static const _buttonSizeMultiplier = 0.12;
@@ -19,6 +23,19 @@ class EntityPageBackground extends StatelessWidget {
   static const _animationDuration = Duration(milliseconds: 200);
 
   void onBack(BuildContext context) => Navigator.pop(context);
+
+  void onEdit(BuildContext context) => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Sorry!"),
+          content: const Text("This feature is not supported yet..."),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("Ok"))
+          ],
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +67,9 @@ class EntityPageBackground extends StatelessWidget {
             widget: EntityPageMenu(
               buttonSize: width * _buttonSizeMultiplier,
               iconSize: width * _buttonIconMultiplier,
+              isSaved: isSaved,
+              onSave: onSave,
+              onEdit: () => onEdit(context),
             ),
           ),
         ),

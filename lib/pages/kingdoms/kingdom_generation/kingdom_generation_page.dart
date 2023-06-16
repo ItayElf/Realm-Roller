@@ -23,14 +23,14 @@ class _KingdomGenerationPageState extends State<KingdomGenerationPage> {
 
   void onGenerate(BuildContext context) {
     final governmentType = currentGovernment == "Random"
-        ? ListItemGenerator(GovernmentTypeManager.activeGovernmentTypes)
+        ? ListItemGenerator(const GovernmentTypeManager().activeTypes)
             .generate()
-        : GovernmentTypeManager.getGovernmentTypeByType(
-            currentGovernment.toLowerCase());
+        : const GovernmentTypeManager()
+            .getType(currentGovernment.toLowerCase());
 
     final race = currentRace == "Random"
-        ? ListItemGenerator(RaceManager.activeRaces).generate()
-        : RaceManager.getRaceByName(currentRace.toLowerCase());
+        ? ListItemGenerator(const RaceManager().activeTypes).generate()
+        : const RaceManager().getType(currentRace.toLowerCase());
 
     final kingdom =
         KingdomGenerator(const DefaultKingdomType(), race, governmentType)
@@ -66,7 +66,9 @@ class _KingdomGenerationPageState extends State<KingdomGenerationPage> {
               onChanged: onRaceChange,
               options: [
                 "Random",
-                ...RaceManager.activeRaces.map((e) => titledEach(e.getName()))
+                ...const RaceManager()
+                    .activeTypes
+                    .map((e) => titledEach(e.getName()))
               ],
             ),
             const SizedBox(height: 28),
@@ -77,7 +79,8 @@ class _KingdomGenerationPageState extends State<KingdomGenerationPage> {
               onChanged: onSettlementChange,
               options: [
                 "Random",
-                ...GovernmentTypeManager.activeGovernmentTypes
+                ...const GovernmentTypeManager()
+                    .activeTypes
                     .map((e) => titledEach(e.getGovernmentType()))
               ],
             ),
