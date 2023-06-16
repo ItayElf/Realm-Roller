@@ -16,6 +16,8 @@ abstract class LocalStorage {
 
   static Future init() async {
     localStorage = await SharedPreferences.getInstance();
+
+    _setupTypes();
   }
 
   static List getEntities(Type type) {
@@ -65,7 +67,7 @@ abstract class LocalStorage {
     return entities.contains(entity);
   }
 
-  static getAvailableTypes(Manager manager) {
+  static List<T> getAvailableTypes<T>(Manager<T> manager) {
     if (!managersToPaths.containsKey(manager)) {
       throw Exception("No path to manager ${manager.runtimeType}");
     }
@@ -75,38 +77,58 @@ abstract class LocalStorage {
     if (available == null) {
       final list = manager.allTypes.map(_getTypeKey).toList();
       localStorage.setStringList(key, list);
-      return list;
+      return manager.allTypes;
     }
 
-    return available;
+    return available.map(manager.getType).toList();
+  }
+
+  static void _setupTypes() {
+    for (final manager in managersToPaths.keys) {
+      final availableTypes = getAvailableTypes(manager);
+
+      manager.activeTypes.forEach(manager.unregisterType);
+
+      availableTypes.forEach(manager.registerType);
+    }
   }
 
   static String _getTypeKey(dynamic type) {
-    switch (type.runtimeType) {
-      case DeityType:
-        return (type as DeityType).getDeityType();
-      case EmblemType:
-        return (type as EmblemType).getEmblemType();
-      case GuildType:
-        return (type as GuildType).getGuildType();
-      case KingdomType:
-        return (type as KingdomType).getKingdomType();
-      case GovernmentType:
-        return (type as GovernmentType).getGovernmentType();
-      case LandscapeType:
-        return (type as LandscapeType).getLandscapeType();
-      case LocationType:
-        return (type as LocationType).getLocationType();
-      case Race:
-        return (type as Race).getName();
-      case SettlementType:
-        return (type as SettlementType).getSettlementType();
-      case WorldSettings:
-        return (type as WorldSettings).getSettingName();
-      case WorldLoreType:
-        return (type as WorldLoreType).getLoreType();
-      case SvgWrapper:
-        return (type as SvgWrapper).name;
+    if (type is DeityType) {
+      return type.getDeityType();
+    }
+    if (type is EmblemType) {
+      return type.getEmblemType();
+    }
+    if (type is GuildType) {
+      return type.getGuildType();
+    }
+    if (type is KingdomType) {
+      return type.getKingdomType();
+    }
+    if (type is GovernmentType) {
+      return type.getGovernmentType();
+    }
+    if (type is LandscapeType) {
+      return type.getLandscapeType();
+    }
+    if (type is LocationType) {
+      return type.getLocationType();
+    }
+    if (type is Race) {
+      return type.getName();
+    }
+    if (type is SettlementType) {
+      return type.getSettlementType();
+    }
+    if (type is WorldSettings) {
+      return type.getSettingName();
+    }
+    if (type is WorldLoreType) {
+      return type.getLoreType();
+    }
+    if (type is SvgWrapper) {
+      return type.name;
     }
     throw Exception("Cannot get key of type ${type.runtimeType}");
   }
