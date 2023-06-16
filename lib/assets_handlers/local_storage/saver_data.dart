@@ -6,7 +6,7 @@ import 'package:randpg/entities/landscapes.dart';
 import 'package:randpg/entities/npcs.dart';
 import 'package:randpg/entities/settlements.dart';
 import 'package:randpg/entities/worlds.dart';
-import 'package:realm_roller/assets_handlers/entities_saver/saveable.dart';
+import 'package:realm_roller/assets_handlers/local_storage/saveable.dart';
 import 'package:realm_roller/extensions/entities/names_data.dart';
 
 const Map<Type, String> entitiesToPaths = {

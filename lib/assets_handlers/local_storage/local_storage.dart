@@ -1,4 +1,4 @@
-import 'package:realm_roller/assets_handlers/entities_saver/saver_data.dart';
+import 'package:realm_roller/assets_handlers/local_storage/saver_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LocalStorage {

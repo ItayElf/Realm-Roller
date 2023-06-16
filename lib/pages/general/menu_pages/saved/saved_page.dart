@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:realm_roller/assets_handlers/entities_saver/entities_saver.dart';
-import 'package:realm_roller/assets_handlers/entities_saver/saver_data.dart';
+import 'package:realm_roller/assets_handlers/local_storage/local_storage.dart';
+import 'package:realm_roller/assets_handlers/local_storage/saver_data.dart';
 import 'package:realm_roller/assets_handlers/generators_data.dart';
 import 'package:realm_roller/custom_widgets/generator_card/generator_card.dart';
 import 'package:realm_roller/custom_widgets/main_menu/menu_paged.dart';
