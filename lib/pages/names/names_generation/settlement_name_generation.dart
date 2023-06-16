@@ -29,15 +29,15 @@ class _SettlementNamesGenerationPageState
 
   void onGenerate(BuildContext context) {
     final settlementType = currentSettlement == "Random"
-        ? ListItemGenerator(SettlementManager.activeSettlementTypes).generate()
-        : SettlementManager.getSettlementTypeByType(
-            currentSettlement.toLowerCase());
+        ? ListItemGenerator(const SettlementManager().activeTypes).generate()
+        : const SettlementManager().getType(currentSettlement.toLowerCase());
 
     final race = currentRace == "Random"
-        ? ListItemGenerator([...RaceManager.activeRaces, null]).generate()
+        ? ListItemGenerator([...const RaceManager().activeTypes, null])
+            .generate()
         : currentRace == "None"
             ? null
-            : RaceManager.getRaceByName(currentRace.toLowerCase());
+            : const RaceManager().getType(currentRace.toLowerCase());
 
     final names =
         UniqueGenerator(settlementType.getNameGenerator(race), _numberOfNames)
@@ -84,7 +84,8 @@ class _SettlementNamesGenerationPageState
               onChanged: onSettlementChange,
               options: [
                 "Random",
-                ...SettlementManager.activeSettlementTypes
+                ...const SettlementManager()
+                    .activeTypes
                     .map((e) => titledEach(e.getSettlementType()))
               ],
             ),
@@ -97,7 +98,9 @@ class _SettlementNamesGenerationPageState
               options: [
                 "Random",
                 "None",
-                ...RaceManager.activeRaces.map((e) => titledEach(e.getName()))
+                ...const RaceManager()
+                    .activeTypes
+                    .map((e) => titledEach(e.getName()))
               ],
             ),
           ],

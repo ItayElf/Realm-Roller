@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  randpg: ^0.9.3
+  randpg: ^0.9.4
   google_fonts: ^4.0.4
   shared_preferences: ^2.1.2
   collection: ^1.16.0

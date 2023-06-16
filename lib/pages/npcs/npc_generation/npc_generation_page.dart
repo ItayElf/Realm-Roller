@@ -27,8 +27,8 @@ class _NpcGenerationPageState extends State<NpcGenerationPage> {
 
   void onGenerate(BuildContext context) {
     final race = currentRace == "Random"
-        ? ListItemGenerator(RaceManager.activeRaces).generate()
-        : RaceManager.getRaceByName(currentRace.toLowerCase());
+        ? ListItemGenerator(const RaceManager().activeTypes).generate()
+        : const RaceManager().getType(currentRace.toLowerCase());
 
     final npc = NpcGenerator(race).generate();
 
@@ -52,7 +52,9 @@ class _NpcGenerationPageState extends State<NpcGenerationPage> {
               onChanged: onRaceChange,
               options: [
                 "Random",
-                ...RaceManager.activeRaces.map((e) => titledEach(e.getName()))
+                ...const RaceManager()
+                    .activeTypes
+                    .map((e) => titledEach(e.getName()))
               ],
             ),
           ],

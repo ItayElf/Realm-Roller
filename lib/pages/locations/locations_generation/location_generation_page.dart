@@ -24,12 +24,12 @@ class _LocationGenerationPageState extends State<LocationGenerationPage> {
 
   void onGenerate(BuildContext context) {
     final locationType = currentLocation == "Random"
-        ? ListItemGenerator(LocationManager.activeLocationTypes).generate()
-        : LocationManager.getLocationTypeByType(currentLocation.toLowerCase());
+        ? ListItemGenerator(const LocationManager().activeTypes).generate()
+        : const LocationManager().getType(currentLocation.toLowerCase());
 
     final race = currentRace == "Random"
-        ? ListItemGenerator(RaceManager.activeRaces).generate()
-        : RaceManager.getRaceByName(currentRace.toLowerCase());
+        ? ListItemGenerator(const RaceManager().activeTypes).generate()
+        : const RaceManager().getType(currentRace.toLowerCase());
 
     final location = LocationGenerator(locationType, race).generate();
 
@@ -67,7 +67,8 @@ class _LocationGenerationPageState extends State<LocationGenerationPage> {
               onChanged: onLocationChange,
               options: [
                 "Random",
-                ...LocationManager.activeLocationTypes
+                ...const LocationManager()
+                    .activeTypes
                     .map((e) => titledEach(e.getLocationType()))
               ],
             ),
@@ -79,7 +80,9 @@ class _LocationGenerationPageState extends State<LocationGenerationPage> {
               onChanged: onRaceChange,
               options: [
                 "Random",
-                ...RaceManager.activeRaces.map((e) => titledEach(e.getName()))
+                ...const RaceManager()
+                    .activeTypes
+                    .map((e) => titledEach(e.getName()))
               ],
             ),
           ],

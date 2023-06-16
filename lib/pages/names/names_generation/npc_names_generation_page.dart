@@ -28,8 +28,8 @@ class _NpcNamesGenerationPageState extends State<NpcNamesGenerationPage> {
 
   void onGenerate(BuildContext context) {
     final race = currentRace == "Random"
-        ? ListItemGenerator(RaceManager.activeRaces).generate()
-        : RaceManager.getRaceByName(currentRace.toLowerCase());
+        ? ListItemGenerator(const RaceManager().activeTypes).generate()
+        : const RaceManager().getType(currentRace.toLowerCase());
 
     final names = List.generate(
       _numberOfNames,
@@ -83,7 +83,9 @@ class _NpcNamesGenerationPageState extends State<NpcNamesGenerationPage> {
               onChanged: onRaceChange,
               options: [
                 "Random",
-                ...RaceManager.activeRaces.map((e) => titledEach(e.getName()))
+                ...const RaceManager()
+                    .activeTypes
+                    .map((e) => titledEach(e.getName()))
               ],
             ),
             const SizedBox(height: 28),
