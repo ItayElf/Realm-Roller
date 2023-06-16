@@ -29,16 +29,20 @@ class TypeSettingsPage extends StatelessWidget {
     );
   }
 
-  SizedBox getTitle(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Center(
-        child: Text(
-          "Type Settings",
-          style: Theme.of(context)
-              .textTheme
-              .displayMedium!
-              .copyWith(color: Colors.black),
+  Widget getTitle(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width - 40,
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            "Used Types",
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium!
+                .copyWith(color: Colors.black),
+          ),
         ),
       ),
     );
