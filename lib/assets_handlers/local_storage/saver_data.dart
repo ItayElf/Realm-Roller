@@ -73,6 +73,23 @@ final Map<Type, Saveable> entitiesToSaveables = {
   )
 };
 
+const Map<Manager, String> managersToPaths = {
+  DeityManager(): "availableDeities",
+  EmblemTypeManager(): "availableEmblems",
+  EmblemShapesManager(): "availableEmblemsShapes",
+  EmblemPatternsManager(): "availableEmblemPatterns",
+  EmblemIconsManager(): "availableEmblemIcons",
+  GuildManager(): "availableGuilds",
+  KingdomTypeManager(): "availableKingdoms",
+  GovernmentTypeManager(): "availableGovernments",
+  LandscapeManager(): "availableLandscapes",
+  LocationManager(): "availableLocations",
+  RaceManager(): "availableRaces",
+  SettlementManager(): "availableSettlements",
+  WorldSettingsManager(): "availableWorldSettings",
+  WorldLoreManager(): "availableWorldLores"
+};
+
 const Map<Type, Manager> typesToManagers = {
   DeityType: DeityManager(),
   EmblemType: EmblemTypeManager(),
