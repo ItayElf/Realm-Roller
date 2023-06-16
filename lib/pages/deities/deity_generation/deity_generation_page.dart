@@ -36,8 +36,8 @@ class _DeityGenerationPageState extends State<DeityGenerationPage> {
 
   void onGenerate(BuildContext context) {
     final deityType = currentDeity == "Random"
-        ? ListItemGenerator(DeityManager.activeDeityTypes).generate()
-        : DeityManager.getDeityTypeByType(currentDeity.toLowerCase());
+        ? ListItemGenerator(const DeityManager().activeTypes).generate()
+        : const DeityManager().getType(currentDeity.toLowerCase());
 
     final alignment = currentAlignment == "Random"
         ? BaseAlignmentGenerator().generate()
@@ -94,7 +94,8 @@ class _DeityGenerationPageState extends State<DeityGenerationPage> {
               onChanged: onDeityChange,
               options: [
                 "Random",
-                ...DeityManager.activeDeityTypes
+                ...const DeityManager()
+                    .activeTypes
                     .map((e) => titledEach(e.getDeityType()))
               ],
             ),

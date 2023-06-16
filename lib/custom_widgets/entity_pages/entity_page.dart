@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realm_roller/assets_handlers/entities_saver/entities_saver.dart';
+import 'package:realm_roller/assets_handlers/local_storage/local_storage.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page_background.dart';
 import 'package:realm_roller/custom_widgets/entity_pages/entity_page_card.dart';
 

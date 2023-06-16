@@ -26,8 +26,8 @@ class _GuildGenerationPageState extends State<GuildGenerationPage> {
 
   void onGenerate(BuildContext context) {
     final guildType = currentGuild == "Random"
-        ? ListItemGenerator(GuildManager.activeGuildTypes).generate()
-        : GuildManager.getGuildTypeByType(currentGuild.toLowerCase());
+        ? ListItemGenerator(const GuildManager().activeTypes).generate()
+        : const GuildManager().getType(currentGuild.toLowerCase());
 
     final guild = GuildGenerator(guildType).generate();
 
@@ -49,7 +49,8 @@ class _GuildGenerationPageState extends State<GuildGenerationPage> {
               onChanged: onGuildChange,
               options: [
                 "Random",
-                ...GuildManager.activeGuildTypes
+                ...const GuildManager()
+                    .activeTypes
                     .map((e) => titledEach(e.getGuildType()))
               ],
             ),
