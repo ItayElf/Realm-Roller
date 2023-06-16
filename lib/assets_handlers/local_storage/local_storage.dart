@@ -83,6 +83,55 @@ abstract class LocalStorage {
     return available.map(manager.getType).toList();
   }
 
+  static void registerType(dynamic type) {
+    Manager manager;
+    if (type is SvgWrapper) {
+      manager = _getSvgManager(type);
+    } else {
+      if (!typesToManagers.containsKey(type.runtimeType)) {
+        throw Exception("Cannot register type ${type.runtimeType}");
+      }
+      manager = typesToManagers[type.runtimeType]!;
+    }
+    final key = managersToPaths[manager]!;
+    final types = getAvailableTypes(manager);
+
+    manager.registerType(type);
+    types.add(type);
+
+    localStorage.setStringList(key, types.map(_getTypeKey).toList());
+  }
+
+  static unregisterType(dynamic type) {
+    Manager manager;
+    if (type is SvgWrapper) {
+      manager = _getSvgManager(type);
+    } else {
+      if (!typesToManagers.containsKey(type.runtimeType)) {
+        throw Exception("Cannot register type ${type.runtimeType}");
+      }
+      manager = typesToManagers[type.runtimeType]!;
+    }
+    final key = managersToPaths[manager]!;
+    final types = getAvailableTypes(manager);
+
+    manager.unregisterType(type);
+    types.remove(type);
+
+    localStorage.setStringList(key, types.map(_getTypeKey).toList());
+  }
+
+  static Manager<SvgWrapper> _getSvgManager(SvgWrapper type) {
+    if (const EmblemShapesManager().allTypes.contains(type)) {
+      return const EmblemShapesManager();
+    } else if (const EmblemPatternsManager().allTypes.contains(type)) {
+      return const EmblemPatternsManager();
+    } else if (const EmblemIconsManager().allTypes.contains(type)) {
+      return const EmblemIconsManager();
+    }
+    throw Exception("No manager for svgWrapper $type");
+  }
+
   static void _setupTypes() {
     for (final manager in managersToPaths.keys) {
       final availableTypes = getAvailableTypes(manager);
