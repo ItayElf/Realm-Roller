@@ -24,6 +24,19 @@ class EntityPageBackground extends StatelessWidget {
 
   void onBack(BuildContext context) => Navigator.pop(context);
 
+  void onEdit(BuildContext context) => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Sorry!"),
+          content: const Text("This feature is not supported yet..."),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("Ok"))
+          ],
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -56,6 +69,7 @@ class EntityPageBackground extends StatelessWidget {
               iconSize: width * _buttonIconMultiplier,
               isSaved: isSaved,
               onSave: onSave,
+              onEdit: () => onEdit(context),
             ),
           ),
         ),
