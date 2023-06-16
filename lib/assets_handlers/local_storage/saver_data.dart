@@ -3,9 +3,12 @@ import 'package:randpg/entities/emblems.dart';
 import 'package:randpg/entities/guilds.dart';
 import 'package:randpg/entities/kingdoms.dart';
 import 'package:randpg/entities/landscapes.dart';
+import 'package:randpg/entities/locations.dart';
 import 'package:randpg/entities/npcs.dart';
+import 'package:randpg/entities/races.dart';
 import 'package:randpg/entities/settlements.dart';
 import 'package:randpg/entities/worlds.dart';
+import 'package:randpg/general.dart';
 import 'package:realm_roller/assets_handlers/local_storage/saveable.dart';
 import 'package:realm_roller/extensions/entities/names_data.dart';
 
@@ -68,4 +71,18 @@ final Map<Type, Saveable> entitiesToSaveables = {
     fromJson: World.fromJson,
     toJson: (e) => ((e as World).toJson()),
   )
+};
+
+const Map<Type, Manager> typesToManagers = {
+  DeityType: DeityManager(),
+  EmblemType: EmblemTypeManager(),
+  GuildType: GuildManager(),
+  KingdomType: KingdomTypeManager(),
+  GovernmentType: GovernmentTypeManager(),
+  LandscapeType: LandscapeManager(),
+  LocationType: LocationManager(),
+  Race: RaceManager(),
+  SettlementType: SettlementManager(),
+  WorldSettings: WorldSettingsManager(),
+  WorldLoreType: WorldLoreManager(),
 };

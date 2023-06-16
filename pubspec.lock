@@ -332,10 +332,10 @@ packages:
     dependency: "direct main"
     description:
       name: randpg
-      sha256: "00d635573c33b99f6ba2c1a96868d3408a38f35b7e591bb3a2ef96045613754c"
+      sha256: "1f55380fe057b39f3f0da40397d635e4b0b6516ebe66c4900648cb432ce25108"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.4"
+    version: "0.9.5"
   shared_preferences:
     dependency: "direct main"
     description:
