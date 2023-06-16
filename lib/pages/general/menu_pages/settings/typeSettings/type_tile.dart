@@ -25,7 +25,9 @@ class _TypeTileState extends State<TypeTile> {
 
   void onChanged(bool newValue) {
     if (!newValue) {
-      LocalStorage.unregisterType(widget.type);
+      if (!LocalStorage.unregisterType(widget.type)) {
+        return;
+      }
     } else {
       LocalStorage.registerType(widget.type);
     }

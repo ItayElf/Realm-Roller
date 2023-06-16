@@ -92,15 +92,19 @@ abstract class LocalStorage {
     localStorage.setStringList(key, types.map(getTypeKey).toList());
   }
 
-  static unregisterType(dynamic type) {
+  static bool unregisterType(dynamic type) {
     final manager = getManager(type);
     final key = managersToPaths[manager]!;
     final types = getAvailableTypes(manager);
 
+    if (types.length <= 1) {
+      return false;
+    }
     manager.unregisterType(type);
     types.remove(type);
 
     localStorage.setStringList(key, types.map(getTypeKey).toList());
+    return true;
   }
 
   static bool isRegistered(dynamic type) =>
