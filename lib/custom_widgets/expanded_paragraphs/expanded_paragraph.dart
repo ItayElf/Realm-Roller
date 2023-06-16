@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realm_roller/custom_widgets/expanded_paragraphs/expanded_paragraph_title.dart';
 
 /// A paragraph that expands and shrink on tap
-class ExpandedParagraph extends StatefulWidget {
+class ExpandedParagraph extends StatelessWidget {
   const ExpandedParagraph({
     super.key,
     required this.title,
@@ -15,48 +15,19 @@ class ExpandedParagraph extends StatefulWidget {
   final Widget? child;
 
   @override
-  State<ExpandedParagraph> createState() => _ExpandedParagraphState();
-}
-
-class _ExpandedParagraphState extends State<ExpandedParagraph> {
-  bool isExpanded = true;
-
-  static const _animationDuration = Duration(milliseconds: 150);
-
-  void onClick() => setState(() {
-        isExpanded = !isExpanded;
-      });
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        InkWell(
-          onTap: onClick,
-          child: ExpandedParagraphTitle(
-            title: widget.title,
-            icon: widget.icon,
-            isExpanded: isExpanded,
-          ),
+    return Theme(
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        initiallyExpanded: true,
+        tilePadding: const EdgeInsets.all(0),
+        expandedAlignment: Alignment.centerLeft,
+        title: ExpandedParagraphTitle(
+          title: title,
+          icon: icon,
         ),
-        const SizedBox(height: 12),
-        if (widget.child != null) getExpandedChild(widget.child!),
-      ],
+        children: child != null ? [child!] : [],
+      ),
     );
   }
-
-  Widget getExpandedChild(Widget child) => AnimatedSwitcher(
-        duration: _animationDuration,
-        transitionBuilder: (child, animation) => ScaleTransition(
-          alignment: Alignment.topCenter,
-          scale: animation,
-          child: child,
-        ),
-        child: isExpanded
-            ? child
-            : const SizedBox(
-                height: 1,
-              ),
-      );
 }
