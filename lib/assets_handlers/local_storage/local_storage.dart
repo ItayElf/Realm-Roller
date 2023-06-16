@@ -5,6 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class LocalStorage {
   static late SharedPreferences localStorage;
 
+  static const _favoriteGeneratorsKey = "favoriteGenerators";
+  static const _defaultFavoriteGenerators = [
+    "Names",
+    "Npcs",
+    "Locations",
+  ];
+
   static Future init() async {
     localStorage = await SharedPreferences.getInstance();
 
@@ -107,5 +114,31 @@ abstract class LocalStorage {
 
       availableTypes.forEach(manager.registerType);
     }
+  }
+
+  static List<String> getFavoriteGenerators() {
+    final favorites = localStorage.getStringList(_favoriteGeneratorsKey);
+
+    if (favorites == null) {
+      localStorage.setStringList(
+        _favoriteGeneratorsKey,
+        _defaultFavoriteGenerators,
+      );
+      return List.from(_defaultFavoriteGenerators);
+    }
+
+    return favorites;
+  }
+
+  static addFavoriteGenerator(String generatorName) {
+    final favorites = getFavoriteGenerators();
+    favorites.add(generatorName);
+    localStorage.setStringList(_favoriteGeneratorsKey, favorites);
+  }
+
+  static removeFavoriteGenerators(String generatorName) {
+    final favorites = getFavoriteGenerators();
+    favorites.remove(generatorName);
+    localStorage.setStringList(_favoriteGeneratorsKey, favorites);
   }
 }
