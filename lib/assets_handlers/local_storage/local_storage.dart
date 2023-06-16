@@ -75,7 +75,7 @@ abstract class LocalStorage {
     final available = localStorage.getStringList(key);
 
     if (available == null) {
-      final list = manager.allTypes.map(_getTypeKey).toList();
+      final list = manager.allTypes.map(getTypeKey).toList();
       localStorage.setStringList(key, list);
       return manager.allTypes;
     }
@@ -99,7 +99,7 @@ abstract class LocalStorage {
     manager.registerType(type);
     types.add(type);
 
-    localStorage.setStringList(key, types.map(_getTypeKey).toList());
+    localStorage.setStringList(key, types.map(getTypeKey).toList());
   }
 
   static unregisterType(dynamic type) {
@@ -118,7 +118,7 @@ abstract class LocalStorage {
     manager.unregisterType(type);
     types.remove(type);
 
-    localStorage.setStringList(key, types.map(_getTypeKey).toList());
+    localStorage.setStringList(key, types.map(getTypeKey).toList());
   }
 
   static Manager<SvgWrapper> _getSvgManager(SvgWrapper type) {
@@ -142,7 +142,7 @@ abstract class LocalStorage {
     }
   }
 
-  static String _getTypeKey(dynamic type) {
+  static String getTypeKey(dynamic type) {
     if (type is DeityType) {
       return type.getDeityType();
     }
