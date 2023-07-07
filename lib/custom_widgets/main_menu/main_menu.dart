@@ -34,10 +34,10 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+    final height =
+        MediaQuery.of(context).size.height + View.of(context).padding.top;
     final imageHeight = height * 0.1875;
     final drawerWidth = width * 4 / 5;
-
     return Drawer(
       backgroundColor: const Color(0xFFFB4236),
       width: drawerWidth,
