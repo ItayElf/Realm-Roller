@@ -84,7 +84,7 @@ class _DeityGenerationPageState extends State<DeityGenerationPage> {
     return SafeArea(
       child: Material(
         child: GeneratorPage(
-          title: "Npc Name Generator",
+          title: "Deity Generator",
           onGenerate: () => onGenerate(context),
           children: [
             Dropdown(
