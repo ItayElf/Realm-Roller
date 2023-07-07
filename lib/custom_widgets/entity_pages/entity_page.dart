@@ -70,29 +70,33 @@ class _EntityPageState extends State<EntityPage> {
 
   @override
   Widget build(BuildContext context) {
-    return EntityPageBackground(
-      imagePath: widget.imagePath,
-      hideButtons: isHidden,
-      isSaved: isSaved,
-      onSave: onSave,
-      children: [
-        SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: _cardGap,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constrains) {
+        return EntityPageBackground(
+          imagePath: widget.imagePath,
+          hideButtons: isHidden,
+          isSaved: isSaved,
+          onSave: onSave,
+          children: [
+            SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: _cardGap,
+                  ),
+                  EntityPageCard(
+                    title: widget.title,
+                    subtitle: widget.subtitle,
+                    minHeight: constrains.maxHeight - _cardGap,
+                    children: widget.children,
+                  ),
+                ],
               ),
-              EntityPageCard(
-                title: widget.title,
-                subtitle: widget.subtitle,
-                minHeight: MediaQuery.of(context).size.height - _cardGap * 1.39,
-                children: widget.children,
-              ),
-            ],
-          ),
-        )
-      ],
+            )
+          ],
+        );
+      },
     );
   }
 }
