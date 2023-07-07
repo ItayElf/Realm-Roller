@@ -51,6 +51,7 @@ class _EntityPageState extends State<EntityPage> {
     _scrollController.addListener(_scrollListener);
 
     isSaved = LocalStorage.isEntitySaved(widget.entity);
+    debugPrint(isSaved.toString());
   }
 
   @override
