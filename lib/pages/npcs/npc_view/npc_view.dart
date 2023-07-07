@@ -53,6 +53,7 @@ class NpcView extends StatelessWidget {
                 textAlign: TextAlign.justify,
               ),
             ),
+            const SizedBox(height: 24),
           ],
         ),
       ),

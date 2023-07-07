@@ -1,4 +1,8 @@
-# Changelog 
+# Changelog
+
+## 0.12.1
+
+- Fix bugs and layouts
 
 ## 0.12.0
 

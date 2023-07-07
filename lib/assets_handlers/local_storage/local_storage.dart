@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:randpg/general.dart';
 import 'package:realm_roller/assets_handlers/local_storage/saver_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,35 +35,38 @@ abstract class LocalStorage {
   static void saveEntity(dynamic entity) {
     final type = entity.runtimeType;
 
-    final entities = getEntities(type);
     final saveable = entitiesToSaveables[type]!;
+    final entities = getEntities(type).map(saveable.toJson).toList();
 
-    if (!entities.contains(entity)) {
-      entities.add(entity);
+    if (!entities.contains(entity.toJson())) {
+      entities.add(entity.toJson());
     }
 
     localStorage.setStringList(
       entitiesToPaths[type]!,
-      entities.map<String>(saveable.toJson).toList(),
+      entities,
     );
   }
 
   static void deleteEntity(dynamic entity) {
     final type = entity.runtimeType;
 
-    final entities = getEntities(type)..remove(entity);
     final saveable = entitiesToSaveables[type]!;
+    final entities = getEntities(type).map(saveable.toJson).toList()
+      ..remove(entity.toJson());
 
     localStorage.setStringList(
       entitiesToPaths[type]!,
-      entities.map<String>(saveable.toJson).toList(),
+      entities,
     );
   }
 
   static bool isEntitySaved(dynamic entity) {
     final type = entity.runtimeType;
     final entities = getEntities(type);
-    return entities.contains(entity);
+    final result = entities.map((e) => e.toJson()).contains(entity.toJson());
+    debugPrint(result.toString());
+    return result;
   }
 
   static List<T> getAvailableTypes<T>(Manager<T> manager) {
