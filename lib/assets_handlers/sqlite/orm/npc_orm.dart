@@ -58,10 +58,17 @@ class NpcOrm {
   }
 
   static Future<List<SavedEntity<Npc>>> getSavedNpcs() async {
+    return queryNpcs("isSaved = ?", whereArgs: [1]);
+  }
+
+  static Future<List<SavedEntity<Npc>>> queryNpcs(
+    String where, {
+    List<Object?>? whereArgs,
+  }) async {
     final result = await DBManager.database.query(
       _tableName,
-      where: "isSaved = ?",
-      whereArgs: [1],
+      where: where,
+      whereArgs: whereArgs,
     );
 
     return List.generate(

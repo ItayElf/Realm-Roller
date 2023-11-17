@@ -48,10 +48,17 @@ class LocationOrm {
   }
 
   static Future<List<SavedEntity<Location>>> getSavedLocations() async {
+    return queryLocations("isSaved = ?", whereArgs: [1]);
+  }
+
+  static Future<List<SavedEntity<Location>>> queryLocations(
+    String where, {
+    List<Object?>? whereArgs,
+  }) async {
     final result = await DBManager.database.query(
       _tableName,
-      where: "isSaved = ?",
-      whereArgs: [1],
+      where: where,
+      whereArgs: whereArgs,
     );
 
     final List<SavedEntity<Location>> list = [];
@@ -92,7 +99,7 @@ class LocationOrm {
   static Future<Location> _getLocationEntity(Map<String, dynamic> dbMap) async {
     final map = Map<String, dynamic>.from(dbMap);
     map["owner"] = (await NpcOrm.getNpcById(map["ownerId"])).entity.toMap();
-    map["goods"] = jsonDecode(map["goods"]).map((g) => jsonDecode(g)).toList();
+    map["goods"] = jsonDecode(map["goods"])?.map((g) => jsonDecode(g)).toList();
     map["outsideDescription"] = jsonDecode(map["outsideDescription"]);
     return Location.fromMap(map);
   }
