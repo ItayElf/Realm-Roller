@@ -61,7 +61,7 @@ class NpcOrm {
     final result = await DBManager.database.query(
       _tableName,
       where: "isSaved = ?",
-      whereArgs: [true],
+      whereArgs: [1],
     );
 
     return List.generate(
@@ -71,8 +71,8 @@ class NpcOrm {
 
         return SavedEntity(
           entity: _getNpcEntity(map),
-          isSaved: map["isSaved"] as bool,
-          isSavedByParent: map["isSavedByParent"] as bool,
+          isSaved: map["isSaved"] != 0,
+          isSavedByParent: map["isSavedByParent"] != 0,
           id: map["id"] as int,
         );
       },
@@ -87,8 +87,8 @@ class NpcOrm {
     int? importantInWorld,
   }) =>
       {
-        "isSaved": npc.isSaved,
-        "isSavedByParent": npc.isSavedByParent,
+        "isSaved": npc.isSaved ? 1 : 0,
+        "isSavedByParent": npc.isSavedByParent ? 1 : 0,
         "name": npc.entity.name,
         "age": npc.entity.age,
         "gender": npc.entity.gender.name,
@@ -119,28 +119,33 @@ class NpcOrm {
         "importantInWorld": importantInWorld,
       };
 
-  static Npc _getNpcEntity(Map<String, dynamic> map) {
-    map["hairstyle"] = Hair(
-      type: map["hairstyleType"],
-      length: map["hairstyleLength"],
-      color: map["hairstyleColor"],
-    );
+  static Npc _getNpcEntity(Map<String, dynamic> dbMap) {
+    final map = Map<String, dynamic>.from(dbMap);
+    map["hairStyle"] = {
+      "type": map["hairstyleType"],
+      "length": map["hairstyleLength"],
+      "color": map["hairstyleColor"],
+    };
 
     if (map["beardLength"] == null) {
       map["beard"] = null;
     } else {
-      map["beard"] = Hair(
-        type: map["beardType"],
-        length: map["beardLength"],
-        color: map["beardColor"],
-      );
+      map["beard"] = {
+        "type": map["beardType"],
+        "length": map["beardLength"],
+        "color": map["beardColor"],
+      };
     }
     map["ethical"] = map["alignmentEthical"];
     map["moral"] = map["alignmentMoral"];
-    map["alignment"] = Alignment.fromMap(map);
+    map["alignment"] = Alignment.fromMap(map).toMap();
+    map["specialFeatures"] = jsonDecode(map["specialFeatures"]);
+    map["traits"] = jsonDecode(map["traits"]);
+    map["quirks"] = jsonDecode(map["quirks"]);
+    map["descriptors"] = jsonDecode(map["descriptors"]);
 
-    map["physicalDescription"] = PhysicalDescription.fromMap(map);
-    map["personality"] = Personality.fromMap(map);
+    map["physicalDescription"] = PhysicalDescription.fromMap(map).toMap();
+    map["personality"] = Personality.fromMap(map).toMap();
     return Npc.fromMap(map);
   }
 }

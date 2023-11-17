@@ -38,23 +38,23 @@ class EmblemOrm {
     final result = await DBManager.database.query(
       _tableName,
       where: "isSaved = ?",
-      whereArgs: [true],
+      whereArgs: [1],
     );
 
     return List.generate(
       result.length,
       (i) => SavedEntity(
         entity: Emblem.fromJson(result[i]["emblemData"] as String),
-        isSaved: result[i]["isSaved"] as bool,
-        isSavedByParent: result[i]["isSavedByParent"] as bool,
+        isSaved: result[i]["isSaved"] != 0,
+        isSavedByParent: result[i]["isSavedByParent"] != 0,
         id: result[i]["id"] as int,
       ),
     );
   }
 
   static Map<String, dynamic> _getEmblemMap(SavedEntity<Emblem> emblem) => {
-        "isSaved": emblem.isSaved,
-        "isSavedByParent": emblem.isSavedByParent,
+        "isSaved": emblem.isSaved ? 1 : 0,
+        "isSavedByParent": emblem.isSavedByParent ? 1 : 0,
         "emblemData": emblem.entity.toJson(),
       };
 }

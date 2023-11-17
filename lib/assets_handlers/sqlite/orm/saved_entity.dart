@@ -4,13 +4,13 @@ class SavedEntity<T> {
     required this.entity,
     required this.isSaved,
     required this.isSavedByParent,
-    required this.id,
+    this.id,
   });
 
   final T entity;
   final bool isSaved;
   final bool isSavedByParent;
-  final int id;
+  final int? id;
 
   SavedEntity<T> copyWith({
     T? entity,

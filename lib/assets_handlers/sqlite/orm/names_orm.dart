@@ -66,17 +66,17 @@ class NamesOrm {
     final result = await DBManager.database.query(
       table,
       where: "isSaved = ?",
-      whereArgs: [true],
+      whereArgs: [1],
     );
 
     return List.generate(
       result.length,
       (i) {
-        final map = result[i];
+        final map = Map<String, dynamic>.from(result[i]);
         map["names"] = jsonDecode(map["names"] as String);
         return SavedEntity(
           entity: NamesData.fromMap(map),
-          isSaved: map["isSaved"] as bool,
+          isSaved: map["isSaved"] != 0,
           isSavedByParent: false,
           id: map["id"] as int,
         );
@@ -86,7 +86,7 @@ class NamesOrm {
 
   static Map<String, dynamic> _getNamesMap(SavedEntity<NamesData> names) {
     final map = names.entity.toMap();
-    map["isSaved"] = names.isSaved;
+    map["isSaved"] = names.isSaved ? 1 : 0;
     map["names"] = jsonEncode(names.entity.names);
     return map;
   }
