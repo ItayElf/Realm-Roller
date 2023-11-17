@@ -5,10 +5,12 @@ import 'package:sqflite/sqflite.dart';
 class DBManager {
   static const String _databaseName = "saved_assets.db";
 
-  static late Database database;
+  static late Database _database;
+
+  static Database get database => _database;
 
   static Future<void> initDatabase() async {
-    database = await openDatabase(
+    _database = await openDatabase(
       join(await getDatabasesPath(), _databaseName),
       onCreate: _createDatabaseTables,
       version: 1,
