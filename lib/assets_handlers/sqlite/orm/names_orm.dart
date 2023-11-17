@@ -9,14 +9,15 @@ class NamesOrm {
   static const _nameTable = "names";
   static const _settlementNamesTable = "settlement_names";
 
-  static Future<void> insertNames(SavedEntity<NamesData> names) async {
-    await DBManager.database.insert(_nameTable, _getNamesMap(names));
+  static Future<int> insertNames(SavedEntity<NamesData> names) async {
+    return await DBManager.database.insert(_nameTable, _getNamesMap(names));
   }
 
-  static Future<void> insertSettlementNames(
+  static Future<int> insertSettlementNames(
     SavedEntity<SettlementNamesData> names,
   ) async {
-    await DBManager.database.insert(_settlementNamesTable, _getNamesMap(names));
+    return await DBManager.database
+        .insert(_settlementNamesTable, _getNamesMap(names));
   }
 
   static Future<void> updateNames(

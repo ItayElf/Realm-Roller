@@ -7,8 +7,8 @@ class EmblemOrm {
   static const _tableName = "emblems";
 
   /// Inserts an emblem into the db
-  static Future<void> insertEmblem(SavedEntity<Emblem> emblem) async {
-    await DBManager.database.insert(_tableName, _getEmblemMap(emblem));
+  static Future<int> insertEmblem(SavedEntity<Emblem> emblem) async {
+    return await DBManager.database.insert(_tableName, _getEmblemMap(emblem));
   }
 
   /// Updates an emblem with [id] to [newEmblem]

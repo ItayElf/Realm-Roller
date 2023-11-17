@@ -8,14 +8,14 @@ import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
 class NpcOrm {
   static const _tableName = "npcs";
 
-  static Future<void> insertNpc(
+  static Future<int> insertNpc(
     SavedEntity<Npc> npc, {
     int? importantIn,
     int? notableMemberOf,
     int? rulerOf,
     int? importantInWorld,
   }) async {
-    await DBManager.database.insert(
+    return await DBManager.database.insert(
       _tableName,
       _getNpcMap(
         npc,
