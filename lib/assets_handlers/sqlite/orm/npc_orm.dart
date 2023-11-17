@@ -79,6 +79,21 @@ class NpcOrm {
     );
   }
 
+  static Future<SavedEntity<Npc>> getNpcById(int id) async {
+    final result = (await DBManager.database.query(
+      _tableName,
+      where: "id = ?",
+      whereArgs: [id],
+    ))[0];
+
+    return SavedEntity(
+      entity: _getNpcEntity(result),
+      isSaved: result["isSaved"] != 0,
+      isSavedByParent: result["isSavedByParent"] != 0,
+      id: result["id"] as int,
+    );
+  }
+
   static Map<String, dynamic> _getNpcMap(
     SavedEntity<Npc> npc, {
     int? importantIn,

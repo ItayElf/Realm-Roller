@@ -106,7 +106,8 @@ CREATE TABLE IF NOT EXISTS locations (
     buildingDescription TEXT NOT NULL,
     goods TEXT NOT NULL,
     locatedIn INTEGER REFERENCES settlements(id) ON DELETE CASCADE,
-    isSaved INTEGER NOT NULL
+    isSaved INTEGER NOT NULL,
+    isSavedByParent INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS landscapes (
