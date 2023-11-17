@@ -28,26 +28,28 @@ class DBManager {
   static const _createTableInstructions =
       """CREATE TABLE IF NOT EXISTS emblems (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    emblem_data TEXT NOT NULL,
-    isSaved BOOLEAN NOT NULL,
-    isSavedByParent BOOLEAN NOT NULL
+    emblemData TEXT NOT NULL,
+    isSaved INTEGER NOT NULL,
+    isSavedByParent INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS settlements (
-    name TEXT PRIMARY KEY NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
     settlementType TEXT NOT NULL,
     dominantRace TEXT,
     description TEXT NOT NULL,
     dominantOccupation TEXT,
     population INTEGER NOT NULL,
     trouble TEXT NOT NULL,
-    importantIn TEXT REFERENCES kingdoms(name),
-    isSaved BOOLEAN NOT NULL,
-    isSavedByParent BOOLEAN NOT NULL
+    importantIn INTEGER REFERENCES kingdoms(id) ON DELETE CASCADE,
+    isSaved INTEGER NOT NULL,
+    isSavedByParent INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS npcs (
-    name TEXT PRIMARY KEY NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
     age INTEGER NOT NULL,
     gender TEXT NOT NULL,
     race TEXT NOT NULL,
@@ -70,12 +72,12 @@ CREATE TABLE IF NOT EXISTS npcs (
     quirks TEXT NOT NULL,
     descriptors TEXT NOT NULL,
     goal TEXT NOT NULL,
-    importantIn TEXT REFERENCES settlements(name),
-    notableMemberOf TEXT REFERENCES guilds(name),
-    rulerOf TEXT REFERENCES kingdoms(name),
-    importantInWorld TEXT REFERENCES worlds(name),
-    isSaved BOOLEAN NOT NULL,
-    isSavedByParent BOOLEAN NOT NULL
+    importantIn INTEGER REFERENCES settlements(id) ON DELETE CASCADE,
+    notableMemberOf INTEGER REFERENCES guilds(id) ON DELETE CASCADE,
+    rulerOf INTEGER REFERENCES kingdoms(id) ON DELETE CASCADE,
+    importantInWorld INTEGER REFERENCES worlds(id) ON DELETE CASCADE,
+    isSaved INTEGER NOT NULL,
+    isSavedByParent INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS names (
@@ -83,7 +85,7 @@ CREATE TABLE IF NOT EXISTS names (
     names TEXT NOT NULL,
     imagePath TEXT NOT NULL,
     description TEXT NOT NULL,
-    isSaved BOOLEAN NOT NULL
+    isSaved INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS settlement_names (
@@ -91,23 +93,25 @@ CREATE TABLE IF NOT EXISTS settlement_names (
     names TEXT NOT NULL,
     imagePath TEXT NOT NULL,
     description TEXT NOT NULL,
-    isSaved BOOLEAN NOT NULL
+    isSaved INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS locations (
-    name TEXT PRIMARY KEY NOT NULL,
-    owner_name TEXT NOT NULL REFERENCES npcs(name),
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    ownerId INTEGER NOT NULL REFERENCES npcs(id) ON DELETE CASCADE,
     type TEXT NOT NULL,
     zone TEXT NOT NULL,
     outsideDescription TEXT NOT NULL,
     buildingDescription TEXT NOT NULL,
     goods TEXT NOT NULL,
-    locatedIn TEXT REFERENCES settlements(name),
-    isSaved BOOLEAN NOT NULL
+    locatedIn INTEGER REFERENCES settlements(id) ON DELETE CASCADE,
+    isSaved INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS landscapes (
-    name TEXT PRIMARY KEY NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
     location TEXT NOT NULL,
     weather TEXT NOT NULL,
     landscapeType TEXT NOT NULL,
@@ -117,13 +121,14 @@ CREATE TABLE IF NOT EXISTS landscapes (
     knownFor TEXT NOT NULL,
     size TEXT NOT NULL,
     travelRate TEXT NOT NULL,
-    locatedIn TEXT REFERENCES worlds(name),
-    isSaved BOOLEAN NOT NULL,
-    isSavedByParent BOOLEAN NOT NULL
+    locatedIn INTEGER REFERENCES worlds(id) ON DELETE CASCADE,
+    isSaved INTEGER NOT NULL,
+    isSavedByParent INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS deities (
-    name TEXT PRIMARY KEY NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
     gender TEXT,
     deityType TEXT NOT NULL,
     domains TEXT NOT NULL,
@@ -135,50 +140,53 @@ CREATE TABLE IF NOT EXISTS deities (
     shrinesRarity TEXT NOT NULL,
     positiveAttribute TEXT NOT NULL,
     negativeAttribute TEXT NOT NULL,
-    deityIn TEXT REFERENCES worlds(name),
-    lesserDeityIn TEXT REFERENCES worlds(name),
-    higherDeityIn TEXT REFERENCES worlds(name),
-    isSaved BOOLEAN NOT NULL,
-    isSavedByParent BOOLEAN NOT NULL
+    deityIn INTEGER REFERENCES worlds(id) ON DELETE CASCADE,
+    lesserDeityIn INTEGER REFERENCES worlds(id) ON DELETE CASCADE,
+    higherDeityIn INTEGER REFERENCES worlds(id) ON DELETE CASCADE,
+    isSaved INTEGER NOT NULL,
+    isSavedByParent INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS guilds (
-    name TEXT PRIMARY KEY NOT NULL,
-    leader_name TEXT NOT NULL REFERENCES npcs(name),
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    leaderId INTEGER NOT NULL REFERENCES npcs(id) ON DELETE CASCADE,
     guildType TEXT NOT NULL,
     reputation TEXT NOT NULL,
     history TEXT NOT NULL,
-    emblem_id INTEGER NOT NULL REFERENCES emblems(id),
+    emblemId INTEGER NOT NULL REFERENCES emblems(id) ON DELETE CASCADE,
     motto TEXT NOT NULL,
     specialties TEXT NOT NULL,
     quests TEXT NOT NULL,
-    locatedIn TEXT REFERENCES kingdoms(name),
-    locatedInWorld TEXT REFERENCES worlds(name),
-    isSaved BOOLEAN NOT NULL,
-    isSavedByParent BOOLEAN NOT NULL
+    locatedIn INTEGER REFERENCES kingdoms(id) ON DELETE CASCADE,
+    locatedInWorld INTEGER REFERENCES worlds(id) ON DELETE CASCADE,
+    isSaved INTEGER NOT NULL,
+    isSavedByParent INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS kingdoms (
-    name TEXT PRIMARY KEY NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
     kingdomType TEXT NOT NULL,
     race TEXT NOT NULL,
     population INTEGER NOT NULL,
-    capitalName TEXT NOT NULL REFERENCES settlements(name),
+    capitalId INTEGER NOT NULL REFERENCES settlements(id) ON DELETE CASCADE,
     governmentType TEXT NOT NULL,
-    emblem_id INTEGER NOT NULL REFERENCES emblems(id),
+    emblemId INTEGER NOT NULL REFERENCES emblems(id) ON DELETE CASCADE,
     knownFor TEXT NOT NULL,
     history TEXT NOT NULL,
     trouble TEXT NOT NULL,
-    locatedIn TEXT REFERENCES worlds(name),
-    isSaved BOOLEAN NOT NULL,
-    isSavedByParent BOOLEAN NOT NULL
+    locatedIn TEXT REFERENCES worlds(name) ON DELETE CASCADE,
+    isSaved INTEGER NOT NULL,
+    isSavedByParent INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS worlds (
-    name TEXT PRIMARY KEY NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
     worldSettings TEXT NOT NULL,
     opinions TEXT NOT NULL,
     worldLore TEXT NOT NULL,
-    isSaved BOOLEAN NOT NULL
+    isSaved INTEGER NOT NULL
 );""";
 }

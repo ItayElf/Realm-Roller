@@ -44,7 +44,7 @@ class EmblemOrm {
     return List.generate(
       result.length,
       (i) => SavedEntity(
-        entity: Emblem.fromJson(result[i]["emblem_data"] as String),
+        entity: Emblem.fromJson(result[i]["emblemData"] as String),
         isSaved: result[i]["isSaved"] as bool,
         isSavedByParent: result[i]["isSavedByParent"] as bool,
         id: result[i]["id"] as int,
@@ -55,6 +55,6 @@ class EmblemOrm {
   static Map<String, dynamic> _getEmblemMap(SavedEntity<Emblem> emblem) => {
         "isSaved": emblem.isSaved,
         "isSavedByParent": emblem.isSavedByParent,
-        "emblem_data": emblem.entity.toJson(),
+        "emblemData": emblem.entity.toJson(),
       };
 }
