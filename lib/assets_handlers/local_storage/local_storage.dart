@@ -13,7 +13,7 @@ abstract class LocalStorage {
     "Locations",
   ];
 
-  static Future init() async {
+  static Future<void> init() async {
     localStorage = await SharedPreferences.getInstance();
 
     _setupTypes();

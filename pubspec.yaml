@@ -35,6 +35,7 @@ dependencies:
   shared_preferences: ^2.1.2
   collection: ^1.16.0
   sqflite: ^2.3.0
+  path: ^1.8.3
 
   # Emblem
   flutter_svg: ^2.0.5

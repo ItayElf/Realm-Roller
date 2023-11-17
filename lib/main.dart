@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path/path.dart';
 import 'package:realm_roller/assets_handlers/local_storage/local_storage.dart';
 import 'package:realm_roller/assets_handlers/route_observer.dart';
+import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
 import 'package:realm_roller/pages/general/main_page/main_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +16,7 @@ void main() async {
   ]);
 
   await LocalStorage.init();
+  await DBManager.initDatabase();
 
   runApp(const MyApp());
 }
