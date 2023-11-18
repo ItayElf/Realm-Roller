@@ -17,28 +17,33 @@ class SettlementOrm {
       _getSettlementMap(settlement, importantIn: importantIn),
     );
 
+    final List<Future> futures = [];
     for (final location in settlement.entity.locations) {
-      await LocationOrm.insertLocation(
-        SaveableEntity(
-          entity: location,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        LocationOrm.insertLocation(
+          SaveableEntity(
+            entity: location,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          locatedIn: id,
         ),
-        locatedIn: id,
       );
     }
 
     for (final npc in settlement.entity.importantCharacters) {
-      await NpcOrm.insertNpc(
-        SaveableEntity(
-          entity: npc,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        NpcOrm.insertNpc(
+          SaveableEntity(
+            entity: npc,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          importantIn: id,
         ),
-        importantIn: id,
       );
     }
-
+    await Future.wait(futures);
     return id;
   }
 
@@ -107,13 +112,19 @@ class SettlementOrm {
     SaveableEntity<Settlement> settlement, {
     int? importantIn,
   }) {
-    final map = settlement.entity.toMap();
-    map["isSaved"] = settlement.isSaved ? 1 : 0;
-    map["isSavedByParent"] = settlement.isSavedByParent ? 1 : 0;
-    map["importantIn"] = importantIn;
-    map.remove("locations");
-    map.remove("importantCharacters");
-    return map;
+    final entity = settlement.entity;
+    return {
+      "isSaved": settlement.isSaved ? 1 : 0,
+      "isSavedByParent": settlement.isSavedByParent ? 1 : 0,
+      "importantIn": importantIn,
+      "name": entity.name,
+      "settlementType": entity.settlementType.getSettlementType(),
+      "dominantRace": entity.dominantRace?.getName(),
+      "description": entity.description,
+      "dominantOccupation": entity.dominantOccupation,
+      "population": entity.population,
+      "trouble": entity.trouble,
+    };
   }
 
   static Future<Settlement> _getSettlementEntity(

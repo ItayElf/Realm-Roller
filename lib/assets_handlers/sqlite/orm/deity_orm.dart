@@ -14,7 +14,7 @@ class DeityOrm {
     int? lesserDeityIn,
     int? higherDeityIn,
   }) async {
-    return await DBManager.database.insert(
+    return DBManager.database.insert(
       _tableName,
       _getDeityMap(
         deity,

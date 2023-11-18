@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:randpg/entities/worlds.dart';
 import 'package:realm_roller/assets_handlers/local_storage/local_storage.dart';
 import 'package:realm_roller/assets_handlers/route_observer.dart';
 import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/world_orm.dart';
 import 'package:realm_roller/pages/general/main_page/main_page.dart';
 import 'package:realm_roller/theme/theme_data.dart';
 
@@ -24,6 +27,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final world = WorldGenerator(DefaultWorldSettings()).generate();
+
+    if (true) {
+      WorldOrm.insertWorld(
+          SaveableEntity(entity: world, isSaved: true, isSavedByParent: false));
+    }
+
     return MaterialApp(
       title: 'Realm Roller',
       theme: themeData,

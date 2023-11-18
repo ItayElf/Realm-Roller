@@ -12,7 +12,7 @@ class LandscapeOrm {
     SaveableEntity<Landscape> landscape, {
     int? locatedIn,
   }) async {
-    return await DBManager.database.insert(
+    return DBManager.database.insert(
       _tableName,
       _getLandscapeMap(landscape, locatedIn: locatedIn),
     );

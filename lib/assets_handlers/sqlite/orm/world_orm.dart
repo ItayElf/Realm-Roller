@@ -14,84 +14,103 @@ class WorldOrm {
   static const _tableName = "worlds";
 
   static Future<int> insertWorld(SaveableEntity<World> world) async {
+    final stopwatch2 = Stopwatch()..start();
     final id = await DBManager.database.insert(_tableName, _getWorldMap(world));
 
+    final List<Future> futures = [];
+
     for (final kingdom in world.entity.kingdoms) {
-      await KingdomOrm.insertKingdom(
+      futures.add(
+        KingdomOrm.insertKingdom(
           SaveableEntity(
             entity: kingdom,
             isSaved: false,
             isSavedByParent: true,
           ),
-          locatedIn: id);
-    }
-
-    for (final landscape in world.entity.landscapes) {
-      await LandscapeOrm.insertLandscape(
-        SaveableEntity(
-          entity: landscape,
-          isSaved: false,
-          isSavedByParent: true,
+          locatedIn: id,
         ),
-        locatedIn: id,
       );
     }
-
-    for (final npc in world.entity.importantPeople) {
-      await NpcOrm.insertNpc(
-        SaveableEntity(
-          entity: npc,
-          isSaved: false,
-          isSavedByParent: true,
+    for (final landscape in world.entity.landscapes) {
+      futures.add(
+        LandscapeOrm.insertLandscape(
+          SaveableEntity(
+            entity: landscape,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          locatedIn: id,
         ),
-        importantInWorld: id,
+      );
+    }
+    for (final npc in world.entity.importantPeople) {
+      futures.add(
+        NpcOrm.insertNpc(
+          SaveableEntity(
+            entity: npc,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          importantInWorld: id,
+        ),
       );
     }
 
     for (final guild in world.entity.guilds) {
-      await GuildOrm.insertGuild(
-        SaveableEntity(
-          entity: guild,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        GuildOrm.insertGuild(
+          SaveableEntity(
+            entity: guild,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          locatedInWorld: id,
         ),
-        locatedInWorld: id,
       );
     }
 
     for (final deity in world.entity.deities) {
-      await DeityOrm.insertDeity(
-        SaveableEntity(
-          entity: deity,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        DeityOrm.insertDeity(
+          SaveableEntity(
+            entity: deity,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          deityIn: id,
         ),
-        deityIn: id,
       );
     }
 
     for (final deity in world.entity.lesserDeities) {
-      await DeityOrm.insertDeity(
-        SaveableEntity(
-          entity: deity,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        DeityOrm.insertDeity(
+          SaveableEntity(
+            entity: deity,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          lesserDeityIn: id,
         ),
-        lesserDeityIn: id,
       );
     }
 
     for (final deity in world.entity.higherDeities) {
-      await DeityOrm.insertDeity(
-        SaveableEntity(
-          entity: deity,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        DeityOrm.insertDeity(
+          SaveableEntity(
+            entity: deity,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          higherDeityIn: id,
         ),
-        higherDeityIn: id,
       );
     }
 
+    await Future.wait(futures);
+    print(
+        "Total: ${stopwatch2.elapsedMilliseconds} MS, kingdoms: ${world.entity.kingdoms.length}");
     return id;
   }
 

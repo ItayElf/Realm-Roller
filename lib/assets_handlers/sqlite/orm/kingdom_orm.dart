@@ -22,38 +22,48 @@ class KingdomOrm {
       ),
     );
 
+    final List<Future> futures = [];
+
     for (final npc in kingdom.entity.rulers) {
-      await NpcOrm.insertNpc(
-        SaveableEntity(
-          entity: npc,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        NpcOrm.insertNpc(
+          SaveableEntity(
+            entity: npc,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          rulerOf: id,
         ),
-        rulerOf: id,
       );
     }
 
     for (final settlement in kingdom.entity.importantSettlements) {
-      await SettlementOrm.insertSettlement(
-        SaveableEntity(
-          entity: settlement,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        SettlementOrm.insertSettlement(
+          SaveableEntity(
+            entity: settlement,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          importantIn: id,
         ),
-        importantIn: id,
       );
     }
 
     for (final guild in kingdom.entity.guilds) {
-      await GuildOrm.insertGuild(
-        SaveableEntity(
-          entity: guild,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        GuildOrm.insertGuild(
+          SaveableEntity(
+            entity: guild,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          locatedIn: id,
         ),
-        locatedIn: id,
       );
     }
+
+    await Future.wait(futures);
 
     return id;
   }
@@ -126,34 +136,43 @@ class KingdomOrm {
   }
 
   static Future<Map<String, dynamic>> _getKingdomMap(
-    SaveableEntity<Kingdom> guild, {
+    SaveableEntity<Kingdom> kingdom, {
     int? locatedIn,
   }) async {
-    final map = guild.entity.toMap();
-    map["isSaved"] = guild.isSaved ? 1 : 0;
-    map["isSavedByParent"] = guild.isSavedByParent ? 1 : 0;
-    map["locatedIn"] = locatedIn;
-    map["capitalId"] = await SettlementOrm.insertSettlement(
-      SaveableEntity(
-        entity: guild.entity.capital,
-        isSaved: false,
-        isSavedByParent: true,
+    final entity = kingdom.entity;
+    final List<Future<int>> futures = [
+      SettlementOrm.insertSettlement(
+        SaveableEntity(
+          entity: entity.capital,
+          isSaved: false,
+          isSavedByParent: true,
+        ),
       ),
-    );
-    map["emblemId"] = await EmblemOrm.insertEmblem(
-      SaveableEntity(
-        entity: guild.entity.emblem,
-        isSaved: false,
-        isSavedByParent: true,
+      EmblemOrm.insertEmblem(
+        SaveableEntity(
+          entity: entity.emblem,
+          isSaved: false,
+          isSavedByParent: true,
+        ),
       ),
-    );
-    map.remove("capital");
-    map.remove("emblem");
-    map.remove("rulers");
-    map.remove("importantSettlements");
-    map.remove("guilds");
+    ];
+    final results = await Future.wait(futures);
 
-    return map;
+    return {
+      "isSaved": kingdom.isSaved ? 1 : 0,
+      "isSavedByParent": kingdom.isSavedByParent ? 1 : 0,
+      "locatedIn": locatedIn,
+      "name": entity.name,
+      "kingdomType": entity.kingdomType.getKingdomType(),
+      "race": entity.race.getName(),
+      "population": entity.population,
+      "capitalId": results.first,
+      "governmentType": entity.governmentType.getGovernmentType(),
+      "emblemId": results.last,
+      "knownFor": entity.knownFor,
+      "history": entity.history,
+      "trouble": entity.trouble
+    };
   }
 
   static Future<Kingdom> _getGuildEntity(Map<String, dynamic> dbMap) async {

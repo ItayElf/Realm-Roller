@@ -13,7 +13,7 @@ class LocationOrm {
     SaveableEntity<Location> location, {
     int? locatedIn,
   }) async {
-    return await DBManager.database.insert(
+    return DBManager.database.insert(
       _tableName,
       await _getLocationMap(
         location,
@@ -82,22 +82,26 @@ class LocationOrm {
     SaveableEntity<Location> location, {
     int? locatedIn,
   }) async {
-    final map = location.entity.toMap();
-    map["isSaved"] = location.isSaved ? 1 : 0;
-    map["isSavedByParent"] = location.isSavedByParent ? 1 : 0;
-    map["locatedIn"] = locatedIn;
-    map["goods"] = jsonEncode(location.entity.goods);
-    map["outsideDescription"] = jsonEncode(location.entity.outsideDescription);
-    map["ownerId"] = await NpcOrm.insertNpc(
+    final entity = location.entity;
+    final ownerId = await NpcOrm.insertNpc(
       SaveableEntity(
         entity: location.entity.owner,
         isSaved: false,
         isSavedByParent: true,
       ),
     );
-    map.remove("owner");
-
-    return map;
+    return {
+      "isSaved": location.isSaved ? 1 : 0,
+      "isSavedByParent": location.isSavedByParent ? 1 : 0,
+      "locatedIn": locatedIn,
+      "goods": jsonEncode(entity.goods),
+      'name': entity.name,
+      'type': entity.type.getLocationType(),
+      'zone': entity.zone,
+      'outsideDescription': jsonEncode(entity.outsideDescription),
+      'buildingDescription': entity.buildingDescription,
+      "ownerId": ownerId,
+    };
   }
 
   static Future<Location> _getLocationEntity(Map<String, dynamic> dbMap) async {

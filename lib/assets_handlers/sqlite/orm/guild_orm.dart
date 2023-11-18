@@ -24,17 +24,22 @@ class GuildOrm {
       ),
     );
 
+    final List<Future> futures = [];
+
     for (final npc in guild.entity.notableMembers) {
-      await NpcOrm.insertNpc(
-        SaveableEntity(
-          entity: npc,
-          isSaved: false,
-          isSavedByParent: true,
+      futures.add(
+        NpcOrm.insertNpc(
+          SaveableEntity(
+            entity: npc,
+            isSaved: false,
+            isSavedByParent: true,
+          ),
+          notableMemberOf: id,
         ),
-        notableMemberOf: id,
       );
     }
 
+    await Future.wait(futures);
     return id;
   }
 

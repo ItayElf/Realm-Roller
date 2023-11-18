@@ -15,7 +15,7 @@ class NpcOrm {
     int? rulerOf,
     int? importantInWorld,
   }) async {
-    return await DBManager.database.insert(
+    return DBManager.database.insert(
       _tableName,
       _getNpcMap(
         npc,
@@ -107,39 +107,40 @@ class NpcOrm {
     int? notableMemberOf,
     int? rulerOf,
     int? importantInWorld,
-  }) =>
-      {
-        "isSaved": npc.isSaved ? 1 : 0,
-        "isSavedByParent": npc.isSavedByParent ? 1 : 0,
-        "name": npc.entity.name,
-        "age": npc.entity.age,
-        "gender": npc.entity.gender.name,
-        "race": npc.entity.race.getName(),
-        "occupation": npc.entity.occupation,
-        "hairstyleLength": npc.entity.physicalDescription.hairStyle.length,
-        "hairstyleType": npc.entity.physicalDescription.hairStyle.type,
-        "hairstyleColor": npc.entity.physicalDescription.hairStyle.color,
-        "eyes": npc.entity.physicalDescription.eyes,
-        "skin": npc.entity.physicalDescription.skin,
-        "height": npc.entity.physicalDescription.height,
-        "build": npc.entity.physicalDescription.build,
-        "face": npc.entity.physicalDescription.face,
-        "beardLength": npc.entity.physicalDescription.beard?.length,
-        "beardType": npc.entity.physicalDescription.beard?.type,
-        "beardColor": npc.entity.physicalDescription.beard?.color,
-        "specialFeatures":
-            jsonEncode(npc.entity.physicalDescription.specialFeatures),
-        "alignmentEthical": npc.entity.personality.alignment.ethical.name,
-        "alignmentMoral": npc.entity.personality.alignment.moral.name,
-        "traits": jsonEncode(npc.entity.personality.traits),
-        "quirks": jsonEncode(npc.entity.personality.quirks),
-        "descriptors": jsonEncode(npc.entity.personality.descriptors),
-        "goal": npc.entity.goal,
-        "importantIn": importantIn,
-        "notableMemberOf": notableMemberOf,
-        "rulerOf": rulerOf,
-        "importantInWorld": importantInWorld,
-      };
+  }) {
+    final entity = npc.entity;
+    return {
+      "isSaved": npc.isSaved ? 1 : 0,
+      "isSavedByParent": npc.isSavedByParent ? 1 : 0,
+      "name": entity.name,
+      "age": entity.age,
+      "gender": entity.gender.name,
+      "race": entity.race.getName(),
+      "occupation": entity.occupation,
+      "hairstyleLength": entity.physicalDescription.hairStyle.length,
+      "hairstyleType": entity.physicalDescription.hairStyle.type,
+      "hairstyleColor": entity.physicalDescription.hairStyle.color,
+      "eyes": entity.physicalDescription.eyes,
+      "skin": entity.physicalDescription.skin,
+      "height": entity.physicalDescription.height,
+      "build": entity.physicalDescription.build,
+      "face": entity.physicalDescription.face,
+      "beardLength": entity.physicalDescription.beard?.length,
+      "beardType": entity.physicalDescription.beard?.type,
+      "beardColor": entity.physicalDescription.beard?.color,
+      "specialFeatures": jsonEncode(entity.physicalDescription.specialFeatures),
+      "alignmentEthical": entity.personality.alignment.ethical.name,
+      "alignmentMoral": entity.personality.alignment.moral.name,
+      "traits": jsonEncode(entity.personality.traits),
+      "quirks": jsonEncode(entity.personality.quirks),
+      "descriptors": jsonEncode(entity.personality.descriptors),
+      "goal": entity.goal,
+      "importantIn": importantIn,
+      "notableMemberOf": notableMemberOf,
+      "rulerOf": rulerOf,
+      "importantInWorld": importantInWorld,
+    };
+  }
 
   static Npc _getNpcEntity(Map<String, dynamic> dbMap) {
     final map = Map<String, dynamic>.from(dbMap);
