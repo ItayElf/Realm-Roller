@@ -54,10 +54,17 @@ class DeityOrm {
   }
 
   static Future<List<SavedEntity<Deity>>> getSavedDeities() async {
+    return queryDeities("isSaved = ?", whereArgs: [1]);
+  }
+
+  static Future<List<SavedEntity<Deity>>> queryDeities(
+    String where, {
+    List<Object?>? whereArgs,
+  }) async {
     final result = await DBManager.database.query(
       _tableName,
-      where: "isSaved = ?",
-      whereArgs: [1],
+      where: where,
+      whereArgs: whereArgs,
     );
 
     return List.generate(
