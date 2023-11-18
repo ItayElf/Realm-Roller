@@ -4,14 +4,14 @@ import 'package:randpg/entities/guilds.dart';
 import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/emblem_orm.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/npc_orm.dart';
-import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
 
 /// An orm for guilds
 class GuildOrm {
   static const _tableName = "guilds";
 
   static Future<int> insertGuild(
-    SavedEntity<Guild> guild, {
+    SaveableEntity<Guild> guild, {
     int? locatedIn,
     int? locatedInWorld,
   }) async {
@@ -26,7 +26,7 @@ class GuildOrm {
 
     for (final npc in guild.entity.notableMembers) {
       await NpcOrm.insertNpc(
-        SavedEntity(
+        SaveableEntity(
           entity: npc,
           isSaved: false,
           isSavedByParent: true,
@@ -40,7 +40,7 @@ class GuildOrm {
 
   static Future<void> updateGuild(
     int id,
-    SavedEntity<Guild> newGuild, {
+    SaveableEntity<Guild> newGuild, {
     int? locatedIn,
     int? locatedInWorld,
   }) async {
@@ -80,11 +80,11 @@ class GuildOrm {
     );
   }
 
-  static Future<List<SavedEntity<Guild>>> getSavedGuilds() async {
+  static Future<List<SaveableEntity<Guild>>> getSavedGuilds() async {
     return queryGuilds("isSaved = ?", whereArgs: [1]);
   }
 
-  static Future<List<SavedEntity<Guild>>> queryGuilds(
+  static Future<List<SaveableEntity<Guild>>> queryGuilds(
     String where, {
     List<Object?>? whereArgs,
   }) async {
@@ -94,9 +94,9 @@ class GuildOrm {
       whereArgs: whereArgs,
     );
 
-    final List<SavedEntity<Guild>> list = [];
+    final List<SaveableEntity<Guild>> list = [];
     for (final map in result) {
-      list.add(SavedEntity(
+      list.add(SaveableEntity(
         entity: await _getGuildEntity(map),
         isSaved: map["isSaved"] != 0,
         isSavedByParent: map["isSavedByParent"] != 0,
@@ -108,7 +108,7 @@ class GuildOrm {
   }
 
   static Future<Map<String, dynamic>> _getGuildMap(
-    SavedEntity<Guild> guild, {
+    SaveableEntity<Guild> guild, {
     int? locatedIn,
     int? locatedInWorld,
   }) async {
@@ -120,14 +120,14 @@ class GuildOrm {
     map["specialties"] = jsonEncode(map["specialties"]);
     map["quests"] = jsonEncode(map["quests"]);
     map["leaderId"] = await NpcOrm.insertNpc(
-      SavedEntity(
+      SaveableEntity(
         entity: guild.entity.leader,
         isSaved: false,
         isSavedByParent: true,
       ),
     );
     map["emblemId"] = await EmblemOrm.insertEmblem(
-      SavedEntity(
+      SaveableEntity(
         entity: guild.entity.emblem,
         isSaved: false,
         isSavedByParent: true,

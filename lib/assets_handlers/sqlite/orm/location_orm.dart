@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:randpg/entities/settlements.dart';
 import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/npc_orm.dart';
-import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
 
 /// An orm for locations
 class LocationOrm {
   static const _tableName = "locations";
 
   static Future<int> insertLocation(
-    SavedEntity<Location> location, {
+    SaveableEntity<Location> location, {
     int? locatedIn,
   }) async {
     return await DBManager.database.insert(
@@ -24,7 +24,7 @@ class LocationOrm {
 
   static Future<void> updateLocation(
     int id,
-    SavedEntity<Location> newLocation, {
+    SaveableEntity<Location> newLocation, {
     int? locatedIn,
   }) async {
     await DBManager.database.execute(
@@ -51,11 +51,11 @@ class LocationOrm {
     );
   }
 
-  static Future<List<SavedEntity<Location>>> getSavedLocations() async {
+  static Future<List<SaveableEntity<Location>>> getSavedLocations() async {
     return queryLocations("isSaved = ?", whereArgs: [1]);
   }
 
-  static Future<List<SavedEntity<Location>>> queryLocations(
+  static Future<List<SaveableEntity<Location>>> queryLocations(
     String where, {
     List<Object?>? whereArgs,
   }) async {
@@ -65,9 +65,9 @@ class LocationOrm {
       whereArgs: whereArgs,
     );
 
-    final List<SavedEntity<Location>> list = [];
+    final List<SaveableEntity<Location>> list = [];
     for (final map in result) {
-      list.add(SavedEntity(
+      list.add(SaveableEntity(
         entity: await _getLocationEntity(map),
         isSaved: map["isSaved"] != 0,
         isSavedByParent: map["isSavedByParent"] != 0,
@@ -79,7 +79,7 @@ class LocationOrm {
   }
 
   static Future<Map<String, dynamic>> _getLocationMap(
-    SavedEntity<Location> location, {
+    SaveableEntity<Location> location, {
     int? locatedIn,
   }) async {
     final map = location.entity.toMap();
@@ -89,7 +89,7 @@ class LocationOrm {
     map["goods"] = jsonEncode(location.entity.goods);
     map["outsideDescription"] = jsonEncode(location.entity.outsideDescription);
     map["ownerId"] = await NpcOrm.insertNpc(
-      SavedEntity(
+      SaveableEntity(
         entity: location.entity.owner,
         isSaved: false,
         isSavedByParent: true,

@@ -7,18 +7,18 @@ import 'package:realm_roller/assets_handlers/sqlite/orm/guild_orm.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/kingdom_orm.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/landscape_orm.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/npc_orm.dart';
-import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
 
 /// An orm for the world entity
 class WorldOrm {
   static const _tableName = "worlds";
 
-  static Future<int> insertWorld(SavedEntity<World> world) async {
+  static Future<int> insertWorld(SaveableEntity<World> world) async {
     final id = await DBManager.database.insert(_tableName, _getWorldMap(world));
 
     for (final kingdom in world.entity.kingdoms) {
       await KingdomOrm.insertKingdom(
-          SavedEntity(
+          SaveableEntity(
             entity: kingdom,
             isSaved: false,
             isSavedByParent: true,
@@ -28,7 +28,7 @@ class WorldOrm {
 
     for (final landscape in world.entity.landscapes) {
       await LandscapeOrm.insertLandscape(
-        SavedEntity(
+        SaveableEntity(
           entity: landscape,
           isSaved: false,
           isSavedByParent: true,
@@ -39,7 +39,7 @@ class WorldOrm {
 
     for (final npc in world.entity.importantPeople) {
       await NpcOrm.insertNpc(
-        SavedEntity(
+        SaveableEntity(
           entity: npc,
           isSaved: false,
           isSavedByParent: true,
@@ -50,7 +50,7 @@ class WorldOrm {
 
     for (final guild in world.entity.guilds) {
       await GuildOrm.insertGuild(
-        SavedEntity(
+        SaveableEntity(
           entity: guild,
           isSaved: false,
           isSavedByParent: true,
@@ -61,7 +61,7 @@ class WorldOrm {
 
     for (final deity in world.entity.deities) {
       await DeityOrm.insertDeity(
-        SavedEntity(
+        SaveableEntity(
           entity: deity,
           isSaved: false,
           isSavedByParent: true,
@@ -72,7 +72,7 @@ class WorldOrm {
 
     for (final deity in world.entity.lesserDeities) {
       await DeityOrm.insertDeity(
-        SavedEntity(
+        SaveableEntity(
           entity: deity,
           isSaved: false,
           isSavedByParent: true,
@@ -83,7 +83,7 @@ class WorldOrm {
 
     for (final deity in world.entity.higherDeities) {
       await DeityOrm.insertDeity(
-        SavedEntity(
+        SaveableEntity(
           entity: deity,
           isSaved: false,
           isSavedByParent: true,
@@ -97,7 +97,7 @@ class WorldOrm {
 
   static Future<void> updateWorld(
     int id,
-    SavedEntity<World> newWorld,
+    SaveableEntity<World> newWorld,
   ) async {
     await DBManager.database.update(
       _tableName,
@@ -107,11 +107,11 @@ class WorldOrm {
     );
   }
 
-  static Future<List<SavedEntity<World>>> getSavedWorlds() async {
+  static Future<List<SaveableEntity<World>>> getSavedWorlds() async {
     return queryWorlds("isSaved = ?", whereArgs: [1]);
   }
 
-  static Future<List<SavedEntity<World>>> queryWorlds(
+  static Future<List<SaveableEntity<World>>> queryWorlds(
     String where, {
     List<Object?>? whereArgs,
   }) async {
@@ -121,9 +121,9 @@ class WorldOrm {
       whereArgs: whereArgs,
     );
 
-    final List<SavedEntity<World>> list = [];
+    final List<SaveableEntity<World>> list = [];
     for (final map in result) {
-      list.add(SavedEntity(
+      list.add(SaveableEntity(
         entity: await _getGuildEntity(map),
         isSaved: map["isSaved"] != 0,
         isSavedByParent: map["isSavedByParent"] != 0,
@@ -142,7 +142,7 @@ class WorldOrm {
     );
   }
 
-  static Map<String, dynamic> _getWorldMap(SavedEntity<World> world) {
+  static Map<String, dynamic> _getWorldMap(SaveableEntity<World> world) {
     final map = world.entity.toMap();
     map["isSaved"] = world.isSaved ? 1 : 0;
     map["opinions"] = jsonEncode(map["opinions"]);

@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:randpg/entities/deities.dart';
 import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
-import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
 
 /// An orm for deities
 class DeityOrm {
   static const _tableName = "deities";
 
   static Future<int> insertDeity(
-    SavedEntity<Deity> deity, {
+    SaveableEntity<Deity> deity, {
     int? deityIn,
     int? lesserDeityIn,
     int? higherDeityIn,
@@ -27,7 +27,7 @@ class DeityOrm {
 
   static Future<void> updateDeity(
     int id,
-    SavedEntity<Deity> newDeity, {
+    SaveableEntity<Deity> newDeity, {
     int? deityIn,
     int? lesserDeityIn,
     int? higherDeityIn,
@@ -53,11 +53,11 @@ class DeityOrm {
     );
   }
 
-  static Future<List<SavedEntity<Deity>>> getSavedDeities() async {
+  static Future<List<SaveableEntity<Deity>>> getSavedDeities() async {
     return queryDeities("isSaved = ?", whereArgs: [1]);
   }
 
-  static Future<List<SavedEntity<Deity>>> queryDeities(
+  static Future<List<SaveableEntity<Deity>>> queryDeities(
     String where, {
     List<Object?>? whereArgs,
   }) async {
@@ -72,7 +72,7 @@ class DeityOrm {
       (i) {
         final map = result[i];
 
-        return SavedEntity(
+        return SaveableEntity(
           entity: _getDeityEntity(map),
           isSaved: map["isSaved"] != 0,
           isSavedByParent: map["isSavedByParent"] != 0,
@@ -83,7 +83,7 @@ class DeityOrm {
   }
 
   static Map<String, dynamic> _getDeityMap(
-    SavedEntity<Deity> deity, {
+    SaveableEntity<Deity> deity, {
     int? deityIn,
     int? lesserDeityIn,
     int? higherDeityIn,

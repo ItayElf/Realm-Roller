@@ -3,7 +3,7 @@ import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/emblem_orm.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/guild_orm.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/npc_orm.dart';
-import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/settlement_orm.dart';
 
 /// An orm for kingdoms
@@ -11,7 +11,7 @@ class KingdomOrm {
   static const _tableName = "kingdoms";
 
   static Future<int> insertKingdom(
-    SavedEntity<Kingdom> kingdom, {
+    SaveableEntity<Kingdom> kingdom, {
     int? locatedIn,
   }) async {
     final id = await DBManager.database.insert(
@@ -24,7 +24,7 @@ class KingdomOrm {
 
     for (final npc in kingdom.entity.rulers) {
       await NpcOrm.insertNpc(
-        SavedEntity(
+        SaveableEntity(
           entity: npc,
           isSaved: false,
           isSavedByParent: true,
@@ -35,7 +35,7 @@ class KingdomOrm {
 
     for (final settlement in kingdom.entity.importantSettlements) {
       await SettlementOrm.insertSettlement(
-        SavedEntity(
+        SaveableEntity(
           entity: settlement,
           isSaved: false,
           isSavedByParent: true,
@@ -46,7 +46,7 @@ class KingdomOrm {
 
     for (final guild in kingdom.entity.guilds) {
       await GuildOrm.insertGuild(
-        SavedEntity(
+        SaveableEntity(
           entity: guild,
           isSaved: false,
           isSavedByParent: true,
@@ -60,7 +60,7 @@ class KingdomOrm {
 
   static Future<void> updateKingdom(
     int id,
-    SavedEntity<Kingdom> newKingdom, {
+    SaveableEntity<Kingdom> newKingdom, {
     int? locatedIn,
   }) async {
     await DBManager.database.execute(
@@ -98,11 +98,11 @@ class KingdomOrm {
     );
   }
 
-  static Future<List<SavedEntity<Kingdom>>> getSavedKingdoms() async {
+  static Future<List<SaveableEntity<Kingdom>>> getSavedKingdoms() async {
     return queryKingdoms("isSaved = ?", whereArgs: [1]);
   }
 
-  static Future<List<SavedEntity<Kingdom>>> queryKingdoms(
+  static Future<List<SaveableEntity<Kingdom>>> queryKingdoms(
     String where, {
     List<Object?>? whereArgs,
   }) async {
@@ -112,9 +112,9 @@ class KingdomOrm {
       whereArgs: whereArgs,
     );
 
-    final List<SavedEntity<Kingdom>> list = [];
+    final List<SaveableEntity<Kingdom>> list = [];
     for (final map in result) {
-      list.add(SavedEntity(
+      list.add(SaveableEntity(
         entity: await _getGuildEntity(map),
         isSaved: map["isSaved"] != 0,
         isSavedByParent: map["isSavedByParent"] != 0,
@@ -126,7 +126,7 @@ class KingdomOrm {
   }
 
   static Future<Map<String, dynamic>> _getKingdomMap(
-    SavedEntity<Kingdom> guild, {
+    SaveableEntity<Kingdom> guild, {
     int? locatedIn,
   }) async {
     final map = guild.entity.toMap();
@@ -134,14 +134,14 @@ class KingdomOrm {
     map["isSavedByParent"] = guild.isSavedByParent ? 1 : 0;
     map["locatedIn"] = locatedIn;
     map["capitalId"] = await SettlementOrm.insertSettlement(
-      SavedEntity(
+      SaveableEntity(
         entity: guild.entity.capital,
         isSaved: false,
         isSavedByParent: true,
       ),
     );
     map["emblemId"] = await EmblemOrm.insertEmblem(
-      SavedEntity(
+      SaveableEntity(
         entity: guild.entity.emblem,
         isSaved: false,
         isSavedByParent: true,

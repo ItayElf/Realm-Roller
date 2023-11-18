@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:randpg/entities/npcs.dart';
 import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
-import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
 
 /// Orm for npcs
 class NpcOrm {
   static const _tableName = "npcs";
 
   static Future<int> insertNpc(
-    SavedEntity<Npc> npc, {
+    SaveableEntity<Npc> npc, {
     int? importantIn,
     int? notableMemberOf,
     int? rulerOf,
@@ -29,7 +29,7 @@ class NpcOrm {
 
   static Future<void> updateNpc(
     int id,
-    SavedEntity<Npc> newNpc, {
+    SaveableEntity<Npc> newNpc, {
     int? importantIn,
     int? notableMemberOf,
     int? rulerOf,
@@ -57,11 +57,11 @@ class NpcOrm {
     );
   }
 
-  static Future<List<SavedEntity<Npc>>> getSavedNpcs() async {
+  static Future<List<SaveableEntity<Npc>>> getSavedNpcs() async {
     return queryNpcs("isSaved = ?", whereArgs: [1]);
   }
 
-  static Future<List<SavedEntity<Npc>>> queryNpcs(
+  static Future<List<SaveableEntity<Npc>>> queryNpcs(
     String where, {
     List<Object?>? whereArgs,
   }) async {
@@ -76,7 +76,7 @@ class NpcOrm {
       (i) {
         final map = result[i];
 
-        return SavedEntity(
+        return SaveableEntity(
           entity: _getNpcEntity(map),
           isSaved: map["isSaved"] != 0,
           isSavedByParent: map["isSavedByParent"] != 0,
@@ -86,14 +86,14 @@ class NpcOrm {
     );
   }
 
-  static Future<SavedEntity<Npc>> getNpcById(int id) async {
+  static Future<SaveableEntity<Npc>> getNpcById(int id) async {
     final result = (await DBManager.database.query(
       _tableName,
       where: "id = ?",
       whereArgs: [id],
     ))[0];
 
-    return SavedEntity(
+    return SaveableEntity(
       entity: _getNpcEntity(result),
       isSaved: result["isSaved"] != 0,
       isSavedByParent: result["isSavedByParent"] != 0,
@@ -102,7 +102,7 @@ class NpcOrm {
   }
 
   static Map<String, dynamic> _getNpcMap(
-    SavedEntity<Npc> npc, {
+    SaveableEntity<Npc> npc, {
     int? importantIn,
     int? notableMemberOf,
     int? rulerOf,

@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:randpg/entities/landscapes.dart';
 import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
-import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
 
 /// Orm for landscapes
 class LandscapeOrm {
   static const _tableName = "landscapes";
 
   static Future<int> insertLandscape(
-    SavedEntity<Landscape> landscape, {
+    SaveableEntity<Landscape> landscape, {
     int? locatedIn,
   }) async {
     return await DBManager.database.insert(
@@ -20,7 +20,7 @@ class LandscapeOrm {
 
   static Future<void> updateLandscape(
     int id,
-    SavedEntity<Landscape> newLandscape, {
+    SaveableEntity<Landscape> newLandscape, {
     int? locatedIn,
   }) async {
     await DBManager.database.update(
@@ -39,11 +39,11 @@ class LandscapeOrm {
     );
   }
 
-  static Future<List<SavedEntity<Landscape>>> getSavedLandscapes() async {
+  static Future<List<SaveableEntity<Landscape>>> getSavedLandscapes() async {
     return queryLandscapes("isSaved = ?", whereArgs: [1]);
   }
 
-  static Future<List<SavedEntity<Landscape>>> queryLandscapes(String where,
+  static Future<List<SaveableEntity<Landscape>>> queryLandscapes(String where,
       {List<Object?>? whereArgs}) async {
     final result = await DBManager.database.query(
       _tableName,
@@ -56,7 +56,7 @@ class LandscapeOrm {
       (i) {
         final map = result[i];
 
-        return SavedEntity(
+        return SaveableEntity(
           entity: _getLandscapeEntity(map),
           isSaved: map["isSaved"] != 0,
           isSavedByParent: map["isSavedByParent"] != 0,
@@ -66,7 +66,8 @@ class LandscapeOrm {
     );
   }
 
-  static Map<String, dynamic> _getLandscapeMap(SavedEntity<Landscape> landscape,
+  static Map<String, dynamic> _getLandscapeMap(
+      SaveableEntity<Landscape> landscape,
       {int? locatedIn}) {
     final map = landscape.entity.toMap();
     map["isSaved"] = landscape.isSaved ? 1 : 0;

@@ -1,20 +1,20 @@
 import 'package:randpg/entities/emblems.dart';
 import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
-import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
 
 /// ORM of the emblem entity
 class EmblemOrm {
   static const _tableName = "emblems";
 
   /// Inserts an emblem into the db
-  static Future<int> insertEmblem(SavedEntity<Emblem> emblem) async {
+  static Future<int> insertEmblem(SaveableEntity<Emblem> emblem) async {
     return await DBManager.database.insert(_tableName, _getEmblemMap(emblem));
   }
 
   /// Updates an emblem with [id] to [newEmblem]
   static Future<void> updateEmblem(
     int id,
-    SavedEntity<Emblem> newEmblem,
+    SaveableEntity<Emblem> newEmblem,
   ) async {
     await DBManager.database.update(
       _tableName,
@@ -34,7 +34,7 @@ class EmblemOrm {
   }
 
   /// Gets all emblems where isSaved is true
-  static Future<List<SavedEntity<Emblem>>> getSavedEmblems() async {
+  static Future<List<SaveableEntity<Emblem>>> getSavedEmblems() async {
     final result = await DBManager.database.query(
       _tableName,
       where: "isSaved = ?",
@@ -43,7 +43,7 @@ class EmblemOrm {
 
     return List.generate(
       result.length,
-      (i) => SavedEntity(
+      (i) => SaveableEntity(
         entity: Emblem.fromJson(result[i]["emblemData"] as String),
         isSaved: result[i]["isSaved"] != 0,
         isSavedByParent: result[i]["isSavedByParent"] != 0,
@@ -52,14 +52,14 @@ class EmblemOrm {
     );
   }
 
-  static Future<SavedEntity<Emblem>> getEmblemById(int id) async {
+  static Future<SaveableEntity<Emblem>> getEmblemById(int id) async {
     final result = (await DBManager.database.query(
       _tableName,
       where: "id = ?",
       whereArgs: [id],
     ))[0];
 
-    return SavedEntity(
+    return SaveableEntity(
       entity: Emblem.fromJson(result["emblemData"] as String),
       isSaved: result["isSaved"] != 0,
       isSavedByParent: result["isSavedByParent"] != 0,
@@ -67,7 +67,7 @@ class EmblemOrm {
     );
   }
 
-  static Map<String, dynamic> _getEmblemMap(SavedEntity<Emblem> emblem) => {
+  static Map<String, dynamic> _getEmblemMap(SaveableEntity<Emblem> emblem) => {
         "isSaved": emblem.isSaved ? 1 : 0,
         "isSavedByParent": emblem.isSavedByParent ? 1 : 0,
         "emblemData": emblem.entity.toJson(),

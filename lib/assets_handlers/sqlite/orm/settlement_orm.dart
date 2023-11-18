@@ -2,14 +2,14 @@ import 'package:randpg/entities/settlements.dart';
 import 'package:realm_roller/assets_handlers/sqlite/db_manager.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/location_orm.dart';
 import 'package:realm_roller/assets_handlers/sqlite/orm/npc_orm.dart';
-import 'package:realm_roller/assets_handlers/sqlite/orm/saved_entity.dart';
+import 'package:realm_roller/assets_handlers/sqlite/orm/saveable_entity.dart';
 
 /// An orm for settlements
 class SettlementOrm {
   static const _tableName = "settlements";
 
   static Future<int> insertSettlement(
-    SavedEntity<Settlement> settlement, {
+    SaveableEntity<Settlement> settlement, {
     int? importantIn,
   }) async {
     final id = await DBManager.database.insert(
@@ -19,7 +19,7 @@ class SettlementOrm {
 
     for (final location in settlement.entity.locations) {
       await LocationOrm.insertLocation(
-        SavedEntity(
+        SaveableEntity(
           entity: location,
           isSaved: false,
           isSavedByParent: true,
@@ -30,7 +30,7 @@ class SettlementOrm {
 
     for (final npc in settlement.entity.importantCharacters) {
       await NpcOrm.insertNpc(
-        SavedEntity(
+        SaveableEntity(
           entity: npc,
           isSaved: false,
           isSavedByParent: true,
@@ -44,7 +44,7 @@ class SettlementOrm {
 
   static Future<void> updateSettlement(
     int id,
-    SavedEntity<Settlement> newSettlement, {
+    SaveableEntity<Settlement> newSettlement, {
     int? importantIn,
   }) async {
     await DBManager.database.update(
@@ -63,11 +63,11 @@ class SettlementOrm {
     );
   }
 
-  static Future<List<SavedEntity<Settlement>>> getSavedSettlements() async {
+  static Future<List<SaveableEntity<Settlement>>> getSavedSettlements() async {
     return querySettlements("isSaved = ?", whereArgs: [1]);
   }
 
-  static Future<List<SavedEntity<Settlement>>> querySettlements(String where,
+  static Future<List<SaveableEntity<Settlement>>> querySettlements(String where,
       {List<Object?>? whereArgs}) async {
     final result = await DBManager.database.query(
       _tableName,
@@ -75,9 +75,9 @@ class SettlementOrm {
       whereArgs: whereArgs,
     );
 
-    final List<SavedEntity<Settlement>> list = [];
+    final List<SaveableEntity<Settlement>> list = [];
     for (final map in result) {
-      list.add(SavedEntity(
+      list.add(SaveableEntity(
         entity: await _getSettlementEntity(map),
         isSaved: map["isSaved"] != 0,
         isSavedByParent: map["isSavedByParent"] != 0,
@@ -88,14 +88,14 @@ class SettlementOrm {
     return list;
   }
 
-  static Future<SavedEntity<Settlement>> getSettlementById(int id) async {
+  static Future<SaveableEntity<Settlement>> getSettlementById(int id) async {
     final result = (await DBManager.database.query(
       _tableName,
       where: "id = ?",
       whereArgs: [id],
     ))[0];
 
-    return SavedEntity(
+    return SaveableEntity(
       entity: await _getSettlementEntity(result),
       isSaved: result["isSaved"] != 0,
       isSavedByParent: result["isSavedByParent"] != 0,
@@ -104,7 +104,7 @@ class SettlementOrm {
   }
 
   static Map<String, dynamic> _getSettlementMap(
-    SavedEntity<Settlement> settlement, {
+    SaveableEntity<Settlement> settlement, {
     int? importantIn,
   }) {
     final map = settlement.entity.toMap();
