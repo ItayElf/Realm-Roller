@@ -40,6 +40,10 @@ class LocationOrm {
   }
 
   static Future<void> deleteLocation(int id) async {
+    await DBManager.database.execute(
+      "DELETE FROM npcs WHERE id IN (SELECT ownerId FROM location WHERE id = ?)",
+      [id],
+    );
     await DBManager.database.delete(
       _tableName,
       where: "id = ?",

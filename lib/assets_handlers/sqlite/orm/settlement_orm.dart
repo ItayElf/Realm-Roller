@@ -64,10 +64,15 @@ class SettlementOrm {
   }
 
   static Future<List<SavedEntity<Settlement>>> getSavedSettlements() async {
+    return querySettlements("isSaved = ?", whereArgs: [1]);
+  }
+
+  static Future<List<SavedEntity<Settlement>>> querySettlements(String where,
+      {List<Object?>? whereArgs}) async {
     final result = await DBManager.database.query(
       _tableName,
-      where: "isSaved = ?",
-      whereArgs: [1],
+      where: where,
+      whereArgs: whereArgs,
     );
 
     final List<SavedEntity<Settlement>> list = [];
@@ -81,6 +86,21 @@ class SettlementOrm {
     }
 
     return list;
+  }
+
+  static Future<SavedEntity<Settlement>> getSettlementById(int id) async {
+    final result = (await DBManager.database.query(
+      _tableName,
+      where: "id = ?",
+      whereArgs: [id],
+    ))[0];
+
+    return SavedEntity(
+      entity: await _getSettlementEntity(result),
+      isSaved: result["isSaved"] != 0,
+      isSavedByParent: result["isSavedByParent"] != 0,
+      id: result["id"] as int,
+    );
   }
 
   static Map<String, dynamic> _getSettlementMap(

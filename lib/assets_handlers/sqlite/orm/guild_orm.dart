@@ -65,6 +65,14 @@ class GuildOrm {
   }
 
   static Future<void> deleteGuild(int id) async {
+    await DBManager.database.execute(
+      "DELETE FROM npcs WHERE id IN (SELECT leaderId FROM guilds WHERE id = ?)",
+      [id],
+    );
+    await DBManager.database.execute(
+      "DELETE FROM emblems WHERE id IN (SELECT emblemId FROM guilds WHERE id = ?)",
+      [id],
+    );
     await DBManager.database.delete(
       _tableName,
       where: "id = ?",
