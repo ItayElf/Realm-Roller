@@ -52,6 +52,21 @@ class EmblemOrm {
     );
   }
 
+  static Future<SavedEntity<Emblem>> getEmblemById(int id) async {
+    final result = (await DBManager.database.query(
+      _tableName,
+      where: "id = ?",
+      whereArgs: [id],
+    ))[0];
+
+    return SavedEntity(
+      entity: Emblem.fromJson(result["emblemData"] as String),
+      isSaved: result["isSaved"] != 0,
+      isSavedByParent: result["isSavedByParent"] != 0,
+      id: result["id"] as int,
+    );
+  }
+
   static Map<String, dynamic> _getEmblemMap(SavedEntity<Emblem> emblem) => {
         "isSaved": emblem.isSaved ? 1 : 0,
         "isSavedByParent": emblem.isSavedByParent ? 1 : 0,
