@@ -2,6 +2,24 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 
+class CompanionNamesData extends NamesData {
+  CompanionNamesData(
+      {required super.names,
+      required super.imagePath,
+      required super.description});
+
+  factory CompanionNamesData.fromMap(Map<String, dynamic> map) {
+    return CompanionNamesData(
+      names: List<String>.from((map['names'])),
+      imagePath: map['imagePath'],
+      description: map['description'],
+    );
+  }
+
+  factory CompanionNamesData.fromJson(String source) =>
+      CompanionNamesData.fromMap(json.decode(source));
+}
+
 class SettlementNamesData extends NamesData {
   SettlementNamesData(
       {required super.names,

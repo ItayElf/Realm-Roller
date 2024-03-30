@@ -26,6 +26,7 @@ const Map<Type, String> entitiesToPaths = {
   Emblem: "Emblems",
   World: "Worlds",
   Companion: "Companions",
+  CompanionNamesData: "Companion Names",
 };
 
 final Map<Type, Saveable> entitiesToSaveables = {
@@ -72,7 +73,15 @@ final Map<Type, Saveable> entitiesToSaveables = {
   World: Saveable(
     fromJson: World.fromJson,
     toJson: (e) => ((e as World).toJson()),
-  )
+  ),
+  Companion: Saveable(
+    fromJson: Companion.fromJson,
+    toJson: (e) => ((e as Companion)).toJson(),
+  ),
+  CompanionNamesData: Saveable(
+    fromJson: CompanionNamesData.fromJson,
+    toJson: (e) => ((e as CompanionNamesData)).toJson(),
+  ),
 };
 
 const Map<Manager, String> managersToPaths = {
@@ -89,7 +98,8 @@ const Map<Manager, String> managersToPaths = {
   RaceManager(): "availableRaces",
   SettlementManager(): "availableSettlements",
   WorldSettingsManager(): "availableWorldSettings",
-  WorldLoreManager(): "availableWorldLores"
+  WorldLoreManager(): "availableWorldLores",
+  CompanionManager(): "availableCompanions"
 };
 
 const Map<Type, Manager> typesToManagers = {
@@ -104,6 +114,7 @@ const Map<Type, Manager> typesToManagers = {
   SettlementType: SettlementManager(),
   WorldSettings: WorldSettingsManager(),
   WorldLoreType: WorldLoreManager(),
+  Companion: CompanionManager(),
 };
 
 Manager getManager(dynamic type) {
@@ -149,6 +160,9 @@ Manager getManager(dynamic type) {
   if (type is WorldLoreType) {
     return const WorldLoreManager();
   }
+  if (type is CompanionType) {
+    return const CompanionManager();
+  }
   throw Exception("Cannot get key of type ${type.runtimeType}");
 }
 
@@ -188,6 +202,9 @@ String getTypeKey(dynamic type) {
   }
   if (type is SvgWrapper) {
     return type.name;
+  }
+  if (type is CompanionType) {
+    return type.getCompanionType();
   }
   throw Exception("Cannot get key of type ${type.runtimeType}");
 }

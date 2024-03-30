@@ -1,3 +1,4 @@
+import 'package:randpg/entities/companions.dart';
 import 'package:randpg/entities/deities.dart';
 import 'package:randpg/entities/emblems.dart';
 import 'package:randpg/entities/guilds.dart';
@@ -6,6 +7,7 @@ import 'package:randpg/entities/landscapes.dart';
 import 'package:randpg/entities/npcs.dart';
 import 'package:randpg/entities/settlements.dart';
 import 'package:randpg/entities/worlds.dart';
+import 'package:realm_roller/custom_widgets/cards/companions/companion_card.dart';
 import 'package:realm_roller/custom_widgets/cards/deities/deity_card.dart';
 import 'package:realm_roller/custom_widgets/cards/emblems/emblem_card.dart';
 import 'package:realm_roller/custom_widgets/cards/entity_card.dart';
@@ -40,6 +42,8 @@ EntityCard getCardFromEntity(dynamic entity, double size) {
     return WorldCard(size: size, world: entity);
   } else if (entity is NamesData) {
     return NamesCard(size: size, namesData: entity);
+  } else if (entity is Companion) {
+    return CompanionCard(size: size, companion: entity);
   }
   throw Exception("No entity card from type ${entity.runtimeType}");
 }

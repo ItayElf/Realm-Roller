@@ -38,7 +38,7 @@ class _CompanionNameGenerationPageState
 
     final gender = currentGender == "Random" ? null : getGender();
 
-    final nameData = NamesData(
+    final nameData = CompanionNamesData(
       names: names,
       imagePath: getCompanionImage(companionType),
       description: titled(
