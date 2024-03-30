@@ -69,6 +69,11 @@ const Map<String, GeneratorData> generatorsData = {
     icon: Icons.gavel,
     generatorPage: KingdomGenerationPage(),
   ),
+  "Companions": GeneratorData(
+    title: "Companions",
+    icon: Icons.pets,
+    generatorPage: Placeholder(),
+  ),
   "Emblems": GeneratorData(
     title: "Emblems",
     icon: Icons.shield,
