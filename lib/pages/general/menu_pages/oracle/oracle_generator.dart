@@ -8,7 +8,7 @@ enum OracleOdds {
   smallChance,
 }
 
-class OracleGenerator implements IGenerator<String> {
+class OracleGenerator implements Generator<String> {
   late int _seed;
   final OracleOdds odds;
 
