@@ -1,3 +1,4 @@
+import 'package:randpg/entities/companions.dart';
 import 'package:randpg/entities/deities.dart';
 import 'package:randpg/entities/emblems.dart';
 import 'package:randpg/entities/guilds.dart';
@@ -31,3 +32,6 @@ String getKingdomImage(GovernmentType government) =>
 String getEmblemImage(Emblem emblem) => "assets/emblems/background.webp";
 
 String getWorldImage(World world) => "assets/worlds/world.webp";
+
+String getCompanionImage(CompanionType companion) =>
+    "assets/companions/${companion.getCompanionType()}.webp";
