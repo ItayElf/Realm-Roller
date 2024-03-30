@@ -30,3 +30,7 @@ An android app for generating random rpg entities like npcs, settlements and wor
 - [x] Save entities
 
 ## Screenshots
+
+![first screenshot](.screenshots/first.png)
+![second screenshot](.screenshots/second.png)
+![third screenshot](.screenshots/third.png)
