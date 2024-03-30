@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realm_roller/pages/companions/companion_generation/companion_generation_page.dart';
 import 'package:realm_roller/pages/deities/deity_generation/deity_generation_page.dart';
 import 'package:realm_roller/pages/emblem/emblem_generation/emblem_generation_page.dart';
 import 'package:realm_roller/pages/guilds/guild_generation/guild_generation_page.dart';
@@ -72,7 +73,7 @@ const Map<String, GeneratorData> generatorsData = {
   "Companions": GeneratorData(
     title: "Companions",
     icon: Icons.pets,
-    generatorPage: Placeholder(),
+    generatorPage: CompanionGenerationPage(),
   ),
   "Emblems": GeneratorData(
     title: "Emblems",
