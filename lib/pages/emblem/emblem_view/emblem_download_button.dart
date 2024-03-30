@@ -34,6 +34,10 @@ class _EmblemDownloadButtonState extends State<EmblemDownloadButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: isActive ? () => onClick(context) : null,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
