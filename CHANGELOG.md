@@ -3,6 +3,7 @@
 ## 0.13.0
 
 - Added companion generator
+- Added companion names generator
 
 - Added companions to npc page
 
