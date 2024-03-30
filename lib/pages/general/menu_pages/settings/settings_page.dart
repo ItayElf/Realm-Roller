@@ -29,6 +29,10 @@ class SettingsPage extends StatelessWidget {
         width: MediaQuery.of(context).size.width - 40,
         child: ElevatedButton(
           onPressed: () => Navigator.of(context).push(buildRoute(onClick)),
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
           child: Center(child: Text(title)),
         ),
       );

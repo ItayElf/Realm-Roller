@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.13.0
+
+- Added companion generator
+- Added companion names generator
+
+- Added companions to npc page
+
 ## 0.12.1
 
 - Fix bugs and layouts

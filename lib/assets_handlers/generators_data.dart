@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:realm_roller/pages/companions/companion_generation/companion_generation_page.dart';
 import 'package:realm_roller/pages/deities/deity_generation/deity_generation_page.dart';
 import 'package:realm_roller/pages/emblem/emblem_generation/emblem_generation_page.dart';
 import 'package:realm_roller/pages/guilds/guild_generation/guild_generation_page.dart';
 import 'package:realm_roller/pages/kingdoms/kingdom_generation/kingdom_generation_page.dart';
 import 'package:realm_roller/pages/landscapes/landscape_generation/landscape_generation_page.dart';
 import 'package:realm_roller/pages/locations/locations_generation/location_generation_page.dart';
+import 'package:realm_roller/pages/names/names_generation/companion_names_generator.dart';
 import 'package:realm_roller/pages/names/names_generation/npc_names_generation_page.dart';
 import 'package:realm_roller/pages/names/names_generation/settlement_name_generation.dart';
 import 'package:realm_roller/pages/npcs/npc_generation/npc_generation_page.dart';
@@ -68,6 +70,16 @@ const Map<String, GeneratorData> generatorsData = {
     title: "Kingdoms",
     icon: Icons.gavel,
     generatorPage: KingdomGenerationPage(),
+  ),
+  "Companions": GeneratorData(
+    title: "Companions",
+    icon: Icons.pets,
+    generatorPage: CompanionGenerationPage(),
+  ),
+  "Companion Names": GeneratorData(
+    title: "Companion Names",
+    icon: Icons.cruelty_free,
+    generatorPage: CompanionNameGenerationPage(),
   ),
   "Emblems": GeneratorData(
     title: "Emblems",

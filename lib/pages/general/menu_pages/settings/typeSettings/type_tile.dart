@@ -41,6 +41,7 @@ class _TypeTileState extends State<TypeTile> {
     return SwitchListTile(
       value: value,
       onChanged: onChanged,
+      activeColor: Theme.of(context).primaryColor,
       secondary: widget.type is SvgWrapper
           ? SvgPicture.string(
               (widget.type as SvgWrapper).content,

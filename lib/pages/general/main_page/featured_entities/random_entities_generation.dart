@@ -11,7 +11,7 @@ import 'package:randpg/entities/settlements.dart';
 import 'package:randpg/entities/worlds.dart';
 import 'package:randpg/generators.dart';
 
-final List<IGenerator Function()> _entitiesGenerationFunctions = [
+final List<Generator Function()> _entitiesGenerationFunctions = [
   () => NpcGenerator(
         ListItemGenerator(const RaceManager().activeTypes).generate(),
       ),
