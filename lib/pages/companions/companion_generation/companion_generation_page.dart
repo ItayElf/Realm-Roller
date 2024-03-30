@@ -6,6 +6,8 @@ import 'package:randpg/string_manipulations.dart';
 import 'package:realm_roller/assets_handlers/custom_icons.dart';
 import 'package:realm_roller/custom_widgets/dropdowns/dropdown.dart';
 import 'package:realm_roller/custom_widgets/generator_pages/generator_page.dart';
+import 'package:realm_roller/custom_widgets/route_builder/route_builder.dart';
+import 'package:realm_roller/pages/companions/companion_view/companion_view.dart';
 
 class CompanionGenerationPage extends StatefulWidget {
   const CompanionGenerationPage({super.key});
@@ -28,7 +30,7 @@ class _CompanionGenerationPageState extends State<CompanionGenerationPage> {
         : Gender.values.byName(currentGender.toLowerCase());
 
     final companion = CompanionGenerator(companionType, gender).generate();
-    print(companion);
+    Navigator.of(context).push(buildRoute(CompanionView(companion: companion)));
   }
 
   void onCompanionChange(String? value) {

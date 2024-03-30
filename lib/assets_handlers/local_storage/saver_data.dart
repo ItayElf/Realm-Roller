@@ -1,3 +1,4 @@
+import 'package:randpg/entities/companions.dart';
 import 'package:randpg/entities/deities.dart';
 import 'package:randpg/entities/emblems.dart';
 import 'package:randpg/entities/guilds.dart';
@@ -23,7 +24,8 @@ const Map<Type, String> entitiesToPaths = {
   Guild: "Guilds",
   Kingdom: "Kingdoms",
   Emblem: "Emblems",
-  World: "Worlds"
+  World: "Worlds",
+  Companion: "Companions",
 };
 
 final Map<Type, Saveable> entitiesToSaveables = {
