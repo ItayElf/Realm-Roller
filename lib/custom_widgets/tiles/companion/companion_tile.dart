@@ -9,7 +9,7 @@ import 'package:realm_roller/pages/companions/companion_view/companion_view.dart
 class CompanionTile extends Tile {
   CompanionTile({super.key, required Companion companion})
       : super(
-          title: companion.name,
+          title: titled(companion.name),
           imagePath: getCompanionImage(companion.companionType),
           subtitle:
               "${titled(companion.gender.name)} ${companion.companionType.getCompanionType()}",
