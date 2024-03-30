@@ -48,6 +48,7 @@ class _FavoriteGeneratorTileState extends State<FavoriteGeneratorTile> {
           widget.generatorName,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+        activeColor: Theme.of(context).primaryColor,
       ),
     );
   }
