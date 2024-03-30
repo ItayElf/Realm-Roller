@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       theme: themeData,
       home: const MainPage(),
       navigatorObservers: [routeObserver],
+      debugShowCheckedModeBanner: false,
     );
   }
 }
